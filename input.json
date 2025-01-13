@@ -1,95 +1,92 @@
 {
-  "id": 9,
-  "jabatan": {
-    "nama_jabatan": "KTU ESTATE",
-    "tujuan_jabatan": "Melaksanakan dan mengelola seluruh administrasi perkebunan estate untuk memastikan seluruh administrasi perkebunan estate dilakukan sesuai dengan prosedur untuk mendukung pencapaian target perusahaan",
-    "uraian_tugas": "Membuat permohonan biaya / permintaan dana bulanan berdasarkan rencana kerja bulanan Afdeling; Melakukan verifikasi dan konsolidasi budget tahunan kebun hasil evaluasi; Mengelola dana kas kecil (petty cash) dan biaya umum; Memeriksa penjurnalan setiap transaksi agar seluruh transaksi estate tersedia di sistem; Memeriksa verifikasi rekap gaji, lembur dan tunjangan karyawan untuk memastikan seluruh gaji karyawan dibayarkan sesuai dengan ketentuan yang berlaku; Dll",
-    "umur": null,
-    "jenis_kelamin": null,
-    "tinggi_badan": null,
-    "berat_badan": null,
-    "pendidikan": "S1",
-    "jurusan": "Akuntansi, Perpajakan",
-    "pengalaman": "2 tahun sebagai KTU Estate",
-    "bahasa": "Bahasa Inggris",
-    "keterampilan": null,
-    "lainnya_requirement": "Pelatihan Administrasi Perkebunan Kelapa Sawit",
-    "gaji_maksimal": "5.000.000",
-    "pertanyaan_skrining": {
-      "operasional": {
-        "1": "Apa jabatan saat ini?",
-        "2": "Apa level jabatan pada tempat kerja terakhir?",
-        "3": "Posisi jabatan apa yang menjadi atasan langsung?",
-        "4": "Berapa jumlah Karyawan yang menjadi anak buah/bawahan?",
-        "5": "Berapa total jumlah Karyawan di Perusahaan terakhir?",
-        "6": "Berapa ha luas area kerja saat ini?",
-        "7": "Berapa ha luas area kerja terbesar yang pernah ditangani?",
-        "8": "Apa saja jenis area yang pernah ditangani?",
-        "9": "Jenis area apa yang paling dikuasai?",
-        "10": "Apakah memiliki pengalaman menangani Mekanisasi atau Water Management System?",
-        "11": "Berapa lama pengalaman menangani Mekanisasi atau Water Management System?",
-        "16": "Tuliskan paling banyak 3 (tiga) masalah/konflik sosial yang dihadapi di lingkungan kerja saat ini.",
-        "17": "Apa yang dilakukan untuk menghadapi permasalahan sosial tersebut?",
-        "18": "Apakah disediakan kendaraan operasional?",
-        "19": "Tuliskan jenis kendaraannya. (Isi '-' jika tidak disediakan)"
-      },
-      "general": {
-        "26": "Dimana lokasi kerja saat ini?",
-        "27": "Berapa jauh jarak tempuh dari lokasi kerja ke kota terdekat?",
-        "28": "Transportasi apa yang dipergunakan menuju kota terdekat (darat/air/udara)?",
-        "29": "Dimana lokasi asal domisili?",
-        "30": "Silakan pilih salah satu metode kerja administrasi yang digunakan saat ini.",
-        "31": "System apa yang dipergunakan?",
-        "32": "Berapa nominal gaji pokok yang diterima?",
-        "33": "Berapa nominal Take Home Pay (Nett total gaji dan benefit) yang diterima?",
-        "34": "Silakan pilih salah satu pada bentuk tunjangan cuti yang diberikan saat ini dan cantumkan jumlahnya untuk tiap item sesuai plafon yang diterima.",
-        "35": "Berapa jumlah hari cuti per tahun?",
-        "36": "Tuliskan benefit/tunjangan lainnya yang diterima di tempat kerja terakhir dan besarannya.",
-        "37": "Siapakah yang menanggung pajak penghasilan pribadi?",
-        "38": "Apa saja jenis asuransi kesehatan yang diterima?"
-      },
-      "pernyataan": {
-        "39": "Apakah bersedia penempatan di Kalimantan Tengah?",
-        "40": "Apakah bersedia penempatan sesuai kebutuhan Organisasi?",
-        "41": "Apakah bersedia Bapak/Ibu dilakukan background and financial checking?",
-        "42": "Apakah bersedia melanjutkan proses seleksi jika penawaran pendapatan bersifat gross?",
-        "43": "Apakah bersedia melanjutkan proses seleksi jika paket benefit tidak sesuai dengan permintaan dan atau benefit yang sudah diterima?"
+  "lowongan_pekerjaan": [
+    {
+      "id": 9,
+      "jabatan": {
+        "nama_jabatan": "KTU ESTATE",
+        "deskripsi_jabatan": "Melaksanakan dan mengelola seluruh administrasi perkebunan estate untuk memastikan seluruh administrasi perkebunan estate dilakukan sesuai dengan prosedur untuk mendukung pencapaian target perusahaan",
+        "uraian_tugas_tanggung_jawab": "Membuat permohonan biaya / permintaan dana bulanan berdasarkan rencana kerja bulanan Afdeling; Melakukan verifikasi dan konsolidasi budget tahunan kebun hasil evaluasi; Mengelola dana kas kecil (petty cash) dan biaya umum; Memeriksa penjurnalan setiap transaksi agar seluruh transaksi estate tersedia di sistem; Memeriksa verifikasi rekap gaji, lembur dan tunjangan karyawan untuk memastikan seluruh gaji karyawan dibayarkan sesuai dengan ketentuan yang berlaku; Dll",
+        "pendidikan": {
+          "formal": [
+            {
+              "tingkat_pendidikan": "S1/D4",
+              "jurusan": "PERBANKAN SYARIAH"
+            }
+          ]
+        },
+        "pengalaman_pekerjaan": "2 tahun sebagai KTU Estate",
+        "lainnya_requirement": "Pelatihan Administrasi Perkebunan Kelapa Sawit",
+        "sertifikat_keahlian": null,
+        "keterampilan": {
+          "teknis": "Microsoft office",
+          "non_teknis": "Memiliki daya analisa yang baik, detail, teliti, terbiasa memimpin tim kerja & berorientasi pada target."
+        },
+        "pertanyaan_skrining": {
+          "operasional": {
+            "1": "Apa jabatan saat ini?",
+            "2": "Apa level jabatan pada tempat kerja terakhir?",
+            "3": "Posisi jabatan apa yang menjadi atasan langsung?",
+            "4": "Berapa jumlah Karyawan yang menjadi anak buah/bawahan?",
+            "5": "Berapa total jumlah Karyawan di Perusahaan terakhir?",
+            "6": "Berapa ha luas area kerja saat ini?",
+            "7": "Berapa ha luas area kerja terbesar yang pernah ditangani?",
+            "8": "Apa saja jenis area yang pernah ditangani?",
+            "9": "Jenis area apa yang paling dikuasai?",
+            "10": "Apakah memiliki pengalaman menangani Mekanisasi atau Water Management System?",
+            "11": "Berapa lama pengalaman menangani Mekanisasi atau Water Management System?",
+            "16": "Tuliskan paling banyak 3 (tiga) masalah/konflik sosial yang dihadapi di lingkungan kerja saat ini.",
+            "17": "Apa yang dilakukan untuk menghadapi permasalahan sosial tersebut?",
+            "18": "Apakah disediakan kendaraan operasional?",
+            "19": "Tuliskan jenis kendaraannya. (Isi '-' jika tidak disediakan)"
+          },
+          "general": {
+            "26": "Dimana lokasi kerja saat ini?",
+            "27": "Berapa jauh jarak tempuh dari lokasi kerja ke kota terdekat?",
+            "28": "Transportasi apa yang dipergunakan menuju kota terdekat (darat/air/udara)?",
+            "29": "Dimana lokasi asal domisili?",
+            "30": "Silakan pilih salah satu metode kerja administrasi yang digunakan saat ini.",
+            "31": "System apa yang dipergunakan?",
+            "32": "Berapa nominal gaji pokok yang diterima?",
+            "33": "Berapa nominal Take Home Pay (Nett total gaji dan benefit) yang diterima?",
+            "34": "Silakan pilih salah satu pada bentuk tunjangan cuti yang diberikan saat ini dan cantumkan jumlahnya untuk tiap item sesuai plafon yang diterima.",
+            "35": "Berapa jumlah hari cuti per tahun?",
+            "36": "Tuliskan benefit/tunjangan lainnya yang diterima di tempat kerja terakhir dan besarannya.",
+            "37": "Siapakah yang menanggung pajak penghasilan pribadi?",
+            "38": "Apa saja jenis asuransi kesehatan yang diterima?"
+          },
+          "pernyataan": {
+            "39": "Apakah bersedia penempatan di Kalimantan Tengah?",
+            "40": "Apakah bersedia penempatan sesuai kebutuhan Organisasi?",
+            "41": "Apakah bersedia Bapak/Ibu dilakukan background and financial checking?",
+            "42": "Apakah bersedia melanjutkan proses seleksi jika penawaran pendapatan bersifat gross?",
+            "43": "Apakah bersedia melanjutkan proses seleksi jika paket benefit tidak sesuai dengan permintaan dan atau benefit yang sudah diterima?"
+          }
+        }
       }
     }
-  },
+  ],
   "kandidat": [
     {
       "id": 29,
       "nama_lengkap": "Hamdan",
-      "identitas_diri": {
-        "umur": 24,
-        "jenis_kelamin": "Laki-laki"
-      },
-      "kondisi_fisik": {
-        "tinggi_badan": 170,
-        "berat_badan": 50
-      },
-      "gaji_diharapkan": {
-        "gaji": "Rp 4.500.000",
-        "recruiter_dapat_nego": "Tidak"
-      },
-      "bahasa_asing": [
-        { "bahasa": "inggirs", "lisan": "Cukup", "tertulis": "Cukup" }
-      ],
-      "education": {
+      "pendidikan": {
         "non_formal": "",
         "formal": [
           {
-            "pendidikan": "S1",
-            "nama": "UIN ANTASARI BANJARMASIN",
+            "tingkat_pendidikan": "S1",
+            "nama_instansi": "UIN ANTASARI BANJARMASIN",
             "jurusan": "PERBANKAN SYARIAH"
           }
         ]
       },
-      "work_experience": {
-        "pengalaman_pekerjaan": [],
-        "pengalaman_pekerjaan_di_perusahaan_ini": [],
-        "tanggung_jawab": []
+      "pengalaman": {
+        "pengalaman_pekerjaan": null,
+        "tanggung_jawab_pada_pekerjaan_terakhir": null
+      },
+      "sertifikat_keahlian": null,
+      "keterampilan": {
+        "teknis": null,
+        "non_teknis": null
       },
       "jawaban_pertanyaan_skrining": {
         "1": "belum ada",
@@ -130,20 +127,7 @@
     {
       "id": 41,
       "nama_lengkap": "Khairul Fikri",
-      "identitas_diri": {
-        "umur": 39,
-        "jenis_kelamin": "Laki-laki"
-      },
-      "gaji_diharapkan": {
-        "gaji": "Rp 8.500.000",
-        "recruiter_dapat_nego": "Ya"
-      },
-      "kondisi_fisik": {
-        "tinggi_badan": 170,
-        "berat_badan": 69
-      },
-      "bahasa_asing": null,
-      "education": {
+      "pendidikan": {
         "non_formal": "",
         "formal": [
           {
@@ -153,7 +137,7 @@
           }
         ]
       },
-      "work_experience": {
+      "pengalaman": {
         "pengalaman_pekerjaan": [
           {
             "nama_perusahaan": "PT Harapan Sawit Sejahtera",
@@ -196,8 +180,7 @@
             "deskripsi_pekerjaan": "Mengelola dan Bertanggung jawab atas laporaan administrasi, gudang, keuangan, personalia dan aset perusahaan"
           }
         ],
-        "pengalaman_pekerjaan_di_perusahaan_ini": [],
-        "tanggung_jawab": []
+        "tanggung_jawab": null
       },
       "jawaban_pertanyaan_skrining": {
         "1": "KTU Estate",

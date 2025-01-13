@@ -1,0 +1,12 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"name": "gps-esp32",
+			"path": "../../OneDrive/Documents/PlatformIO/Projects/gps-esp32"
+		}
+	],
+	"settings": {}
+}

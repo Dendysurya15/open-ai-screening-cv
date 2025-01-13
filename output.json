@@ -1,0 +1,47 @@
+{
+  "candidates": [
+    {
+      "id_kandidat": 293,
+      "nama_kandidat": "Satria Orlando Pandiangan",
+      "penilaian": [
+        {
+          "kategori": "pendidikan",
+          "nilai": "4",
+          "uraian": "Satria memiliki pendidikan formal S1 dari Universitas Al-washliyah dengan jurusan Teknik Elektro. Penilaian pendidikan 4 karena Satria memiliki pendidikan formal yang sesuai dengan kebutuhan jabatan."
+        },
+        {
+          "kategori": "pengalaman",
+          "nilai": "3",
+          "uraian": "Satria memiliki pengalaman pekerjaan sebagai Leader Staff di PT Jalur Nugrah Ekakurir selama 5 tahun. Penilaian pengalaman 3 karena Satria memiliki pengalaman pekerjaan yang relevan dengan kebutuhan jabatan, tetapi tidak memiliki pengalaman audit atau kepatuhan."
+        },
+        {
+          "kategori": "sertifikat_keahlian",
+          "nilai": "1",
+          "uraian": "Satria tidak memiliki sertifikat keahlian yang relevan dengan kebutuhan jabatan. Penilaian sertifikat keahlian 1 karena Satria tidak memiliki sertifikat keahlian yang sesuai dengan kebutuhan jabatan."
+        },
+        {
+          "kategori": "keterampilan",
+          "nilai": "2",
+          "uraian": "Satria memiliki keterampilan teknis dan non-teknis yang relevan dengan kebutuhan jabatan, tetapi tidak memiliki keterampilan yang sangat spesifik seperti auditing atau kepatuhan. Penilaian keterampilan 2 karena Satria memiliki keterampilan yang relevan, tetapi tidak memiliki keterampilan yang sangat spesifik."
+        },
+        {
+          "kategori": "jawaban_pertanyaan_skrining_operasional_kebun",
+          "nilai": "3",
+          "uraian": "Satria memiliki jawaban pertanyaan skrining operasional kebun yang relevan dengan kebutuhan jabatan, tetapi tidak memiliki jawaban yang sangat spesifik. Penilaian jawaban pertanyaan skrining operasional kebun 3 karena Satria memiliki jawaban yang relevan, tetapi tidak memiliki jawaban yang sangat spesifik."
+        },
+        {
+          "kategori": "jawaban_pertanyaan_skrining_general",
+          "nilai": "4",
+          "uraian": "Satria memiliki jawaban pertanyaan skrining general yang relevan dengan kebutuhan jabatan, tetapi tidak memiliki jawaban yang sangat spesifik. Penilaian jawaban pertanyaan skrining general 4 karena Satria memiliki jawaban yang relevan, tetapi tidak memiliki jawaban yang sangat spesifik."
+        },
+        {
+          "kategori": "jawaban_pertanyaan_skrining_pernyataan",
+          "nilai": "5",
+          "uraian": "Satria memiliki jawaban pertanyaan skrining pernyataan yang relevan dengan kebutuhan jabatan dan memiliki jawaban yang sangat spesifik. Penilaian jawaban pertanyaan skrining pernyataan 5 karena Satria memiliki jawaban yang relevan dan sangat spesifik."
+        }
+      ],
+      "rekomendasi": "Tidak disarankan",
+      "ringkasan_penilaian": "Satria memiliki pendidikan formal yang sesuai dengan kebutuhan jabatan, pengalaman pekerjaan yang relevan, tetapi tidak memiliki sertifikat keahlian yang relevan dan keterampilan yang sangat spesifik. Satria juga memiliki jawaban pertanyaan skrining yang relevan, tetapi tidak memiliki jawaban yang sangat spesifik. Oleh karena itu, Satria tidak disarankan untuk posisi Staff Auditor."
+    }
+  ]
+}
