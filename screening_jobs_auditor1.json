@@ -1,0 +1,152 @@
+{
+  "lowongan_pekerjaan": {
+    "id": 18,
+    "jabatan": {
+      "nama_jabatan": "Staff Auditor",
+      "deskripsi_jabatan": "Melakukan pemeriksaan, membuat laporan audit dan follow up hasil temuan audit serta melaporkan hasil kerja kepada user.",
+      "uraian_tugas_tanggung_jawab": [
+        "Melakukan audit operasional pada unit kerja yang menjadi tanggung jawabnya.",
+        "Mengumpulkan data yang diperlukan untuk proses audit.",
+        "Melakukan analisa data dalam proses audit dan memastikan seluruh prosedur/instruksi kerja terlaksana.",
+        "Melakukan konfirmasi & verifikasi ke lapangan (jika diperlukan) dengan auditee untuk memastikan permasalahan temuan audit.",
+        "Melaporkan dan berdiskusi dengan ketua tim dan anggota lainnya untuk setiap temuan audit.",
+        "Memberikan rekomendasi atas temuan audit sebagai tindak lanjut unit kerja / manajemen.",
+        "Memastikan rekomendasi atas temuan audit dilakukan follow up oleh unit kerja.",
+        "Membuat tentative draft untuk setiap temuan dan dilaporkan kepada ketua tim.",
+        "Melakukan review terhadap item yang memiliki resiko tinggi pada kinerja laporan keuangan pada saat proses audit berjalan.",
+        "Memperbarui dan mengupdate informasi terkait dengan SOP/WI yang berlaku di unit kerja sebagai dasar dalam audit kepatuhan."
+      ],
+      "pendidikan": {
+        "formal": { "tingkat_pendidikan": "S1/D4", "jurusan": "59" }
+      },
+      "pengalaman_pekerjaan": "3 tahun sebagai Staff Internal Audit atau KTU di perkebunan kelapa sawit.",
+      "lainnya_requirement": "Bersedia di kontrak 1 tahunBersedia penempatan di Pangkalan Bun Kalimantan Tengah.",
+      "sertifikat_keahlian": null,
+      "keterampilan": {
+        "teknis": ["Memiliki kemampuan auditing & microsoft office"],
+        "non_teknis": [
+          "Memiliki komunikasi yang baik, daya analisa, detail, teliti, proaktif, inisiatif, kemauan belajar tinggi dan berorientasi pada target."
+        ]
+      },
+      "pertanyaan_skrining": {
+        "Operasional Kebun": {
+          "1": "Apa jabatan saat ini?",
+          "2": "Apa level jabatan pada tempat kerja terakhir?",
+          "3": "Posisi jabatan apa yang menjadi atasan langsung?",
+          "4": "Berapa jumlah Karyawan yang menjadi anak buah/bawahan?",
+          "5": "Berapa total jumlah Karyawan di Perusahaan terakhir?",
+          "6": "Berapa ha luas area kerja saat ini?",
+          "7": "Berapa ha luas area kerja terbesar yang pernah ditangani?",
+          "8": "Apa saja jenis area yang pernah ditangani?",
+          "9": "Jenis area apa yang paling dikuasai?",
+          "10": "Apakah memiliki pengalaman menangani Mekanisasi atau Water Management System?",
+          "11": "Berapa lama pengalaman menangani Mekanisasi atau Water Management System?",
+          "12": "Berapa ton kapasitas pabrik saat ini?",
+          "13": "Berapa ton kapasitas pabrik terbesar yang pernah ditangani?",
+          "14": "Posisi apa saja yang pernah ditangani di Mill / Pabrik?",
+          "15": "Posisi/Divisi apa yang paling dikuasai di Mill / Pabrik?",
+          "16": "Tuliskan paling banyak 3 (tiga) masalah/konflik sosial yang dihadapi di lingkungan kerja saat ini.",
+          "17": "Apa yang dilakukan untuk menghadapi permasalahan sosial tersebut?",
+          "18": "Apakah disediakan kendaraan operasional?",
+          "19": "Tuliskan jenis kendaraannya. (Isi '-' jika tidak disediakan)"
+        },
+        "General": {
+          "26": "Dimana lokasi kerja saat ini?",
+          "27": "Berapa jauh jarak tempuh dari lokasi kerja ke kota terdekat?",
+          "28": "Transportasi apa yang dipergunakan menuju kota terdekat (darat/air/udara)?",
+          "29": "Dimana lokasi asal domisili?",
+          "30": "Silakan pilih salah satu metode kerja administrasi yang digunakan saat ini.",
+          "31": "System apa yang dipergunakan?",
+          "32": "Berapa nominal gaji pokok yang diterima?",
+          "33": "Berapa nominal Take Home Pay (Nett total gaji dan benefit) yang diterima?",
+          "34": "Silakan pilih salah satu pada bentuk tunjangan cuti yang diberikan saat ini dan cantumkan jumlahnya untuk tiap item sesuai plafon yang diterima.",
+          "35": "Berapa jumlah hari cuti per tahun?",
+          "36": "Tuliskan benefit/tunjangan lainnya yang diterima di tempat kerja terakhir dan besarannya.",
+          "37": "Siapakah yang menanggung pajak penghasilan pribadi?",
+          "38": "Apa saja jenis asuransi kesehatan yang diterima?"
+        },
+        "Pernyataan": {
+          "39": "Apakah bersedia penempatan di Kalimantan Tengah?",
+          "40": "Apakah bersedia penempatan sesuai kebutuhan Organisasi?",
+          "41": "Apakah bersedia Bapak/Ibu dilakukan background and financial checking?",
+          "42": "Apakah bersedia melanjutkan proses seleksi jika penawaran pendapatan bersifat gross?",
+          "43": "Apakah bersedia melanjutkan proses seleksi jika paket benefit tidak sesuai dengan permintaan dan atau benefit yang sudah diterima?"
+        }
+      }
+    }
+  },
+  "kandidat": [
+    {
+      "id": 293,
+      "nama_lengkap": "Satria Orlando Pandiangan",
+      "pendidikan": {
+        "non_formal": null,
+        "formal": [
+          {
+            "tingkat_pendidikan": "S1",
+            "nama_instansi": "Universitas Al-washliyah",
+            "jurusan": "Teknik Elektro"
+          }
+        ]
+      },
+      "pengalaman": {
+        "pengalaman_pekerjaan": [
+          {
+            "nama": "PT Jalur Nugrah Ekakurir",
+            "jabatan": "Leader Staff",
+            "thn_mulai": "2019",
+            "thn_akhir": "2024",
+            "until_now": 0,
+            "salary": "3.700.000",
+            "reason": "Habis Kontrak",
+            "jobdesk": "Bongkar Cheker Sortir Distribusi"
+          }
+        ],
+        "tanggung_jawab_pada_pekerjaan_terakhir": "Tidak ada"
+      },
+      "sertifikat_keahlian": null,
+      "keterampilan": { "teknis": null, "non_teknis": null },
+      "jawaban_pertanyaan_skrining": {
+        "1": "Tidak Ada",
+        "2": "0",
+        "3": "Asisten Senior",
+        "4": "24",
+        "5": "500+-",
+        "6": "-/-",
+        "7": "-/-",
+        "8": "2",
+        "9": "Lapangan",
+        "10": "0",
+        "11": "-/-",
+        "12": "260 Ton",
+        "13": "90 Ton",
+        "14": "0",
+        "15": "Asisten Pabrik",
+        "16": "SDM, Peralatan kerja, Dan Target",
+        "17": "Menemui Orang Terkait untuk menyelesaikan permasalahan",
+        "18": "0",
+        "19": "Motor",
+        "26": "Medan",
+        "27": "15KM",
+        "28": "Motor",
+        "29": "Medan",
+        "30": "2",
+        "31": "Exel, world",
+        "32": "3.700.000",
+        "33": "3.500.000",
+        "34": { "option": "1", "subInputs": ["3.7 juta"] },
+        "35": "12 hari",
+        "36": "600Rb/UMT",
+        "37": "0",
+        "38": "BPJS Kes, BPJS TK",
+        "39": "1",
+        "40": "1",
+        "41": "1",
+        "42": "1",
+        "43": "1"
+      },
+      "screening_ai_check": null,
+      "screning_id": 79
+    }
+  ]
+}
