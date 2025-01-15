@@ -1,0 +1,48 @@
+{
+  "candidates": [
+    {
+      "id_kandidat": 204,
+      "nama_kandidat": "Arni",
+      "penilaian": [
+        {
+          "kategori": "pendidikan",
+          "nilai": "4",
+          "uraian": "Kandidat memiliki latar belakang pendidikan formal D3 Keperawatan dari Instiut Kesehatan Hermina, yang sesuai dengan persyaratan jabatan Perawat."
+        },
+        {
+          "kategori": "pengalaman",
+          "nilai": "3",
+          "uraian": "Kandidat memiliki pengalaman pekerjaan sebagai Perawat selama 1 tahun, namun tidak memiliki pengalaman yang signifikan dalam bidang keperawatan di perkebunan kelapa sawit."
+        },
+        {
+          "kategori": "sertifikat_keahlian",
+          "nilai": "1",
+          "uraian": "Kandidat tidak memiliki sertifikat keahlian yang relevan dengan jabatan Perawat."
+        },
+        {
+          "kategori": "keterampilan",
+          "nilai": "2",
+          "uraian": "Kandidat memiliki keterampilan teknis yang terbatas, namun memiliki kemampuan komunikasi dan analisis yang baik."
+        },
+        {
+          "kategori": "jawaban_pertanyaan_skrining_operasional_kebun",
+          "nilai": "4",
+          "uraian": "Kandidat memberikan jawaban yang relevan dan akurat dalam pertanyaan operasional kebun, menunjukkan kemampuan untuk bekerja di lingkungan perkebunan kelapa sawit."
+        },
+        {
+          "kategori": "jawaban_pertanyaan_skrining_general",
+          "nilai": "3",
+          "uraian": "Kandidat memberikan jawaban yang relevan dan akurat dalam pertanyaan general, menunjukkan kemampuan untuk bekerja di lingkungan perkebunan kelapa sawit."
+        },
+        {
+          "kategori": "jawaban_pertanyaan_skrining_pernyataan",
+          "nilai": "4",
+          "uraian": "Kandidat memberikan jawaban yang relevan dan akurat dalam pertanyaan pernyataan, menunjukkan kemampuan untuk bekerja di lingkungan perkebunan kelapa sawit."
+        }
+      ],
+      "rekomendasi": "Disarankan",
+      "ringkasan_penilaian": "Kandidat memiliki latar belakang pendidikan formal yang sesuai dengan persyaratan jabatan Perawat, namun memiliki pengalaman pekerjaan yang terbatas dan tidak memiliki sertifikat keahlian yang relevan. Namun, kandidat memberikan jawaban yang relevan dan akurat dalam pertanyaan operasional kebun, general, dan pernyataan, menunjukkan kemampuan untuk bekerja di lingkungan perkebunan kelapa sawit."
+    }
+  ],
+  "lowongan_id": 7
+}

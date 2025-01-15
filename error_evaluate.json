@@ -1,0 +1,382 @@
+{
+    "data": {
+        "kandidat": [
+            {
+                "id": 527,
+                "pendidikan": {
+                    "formal": [
+                        {
+                            "jurusan": null,
+                            "nama_instansi": "Sekolah Dasar (SD) YPPK St. Yoseph II Biak, Papua",
+                            "tingkat_pendidikan": "SD"
+                        },
+                        {
+                            "jurusan": null,
+                            "nama_instansi": "Sekolah Menengah Pertama (SMP) Negeri 1 Biak, Papua",
+                            "tingkat_pendidikan": "SMP"
+                        },
+                        {
+                            "jurusan": "Ilmu Pengetahuan Alam (IPA)",
+                            "nama_instansi": "Sekolah Menengah Umum (SMU) Negeri 1 Biak, Papua",
+                            "tingkat_pendidikan": "SMA"
+                        },
+                        {
+                            "jurusan": "Jurusan Sosial Ekonomi Pertanian Program Studi Sosial Ekonomi Pertanian",
+                            "nama_instansi": "Universitas Negeri Papua Manokwari",
+                            "tingkat_pendidikan": "S1"
+                        }
+                    ],
+                    "non_formal": [
+                        {
+                            "tahun": "2024",
+                            "training": "Continous Improvement Thinking By PDCA A3 Batch 2",
+                            "ijazahNon": 1,
+                            "penyelenggara": "PT. Taalenta Digital Inteleksia"
+                        },
+                        {
+                            "tahun": "2024",
+                            "training": "Social Inovation in CSR Program",
+                            "ijazahNon": 0,
+                            "penyelenggara": "Filantra Official"
+                        },
+                        {
+                            "tahun": "2024",
+                            "training": "Strategi Menyusun Visi, Misi, dan Nilai yang selaras dengan Tujuan Perusahaan",
+                            "ijazahNon": 1,
+                            "penyelenggara": "PT. Media SDM Indonesia"
+                        },
+                        {
+                            "tahun": "2024",
+                            "training": "Training Perizinan Implikasi PP No 22 Tahun 2021 Terhadap Praktek Perkebunan dan Perkebunan Kelapa Sawit",
+                            "ijazahNon": 1,
+                            "penyelenggara": "Perkumpulan Praktisi Profesional Perkebunan dan Media Perkebunan"
+                        },
+                        {
+                            "tahun": "2024",
+                            "training": "Document Control Management Batch 2",
+                            "ijazahNon": 1,
+                            "penyelenggara": "PT. Akasia Multi Talenta"
+                        },
+                        {
+                            "tahun": "2024",
+                            "training": "Bimbingan Teknis Pengelolaan Limbah Bahan Berbahaya Dan Beracun (B3) Dan Non B3",
+                            "ijazahNon": 1,
+                            "penyelenggara": "Dinas Lingkungan Hidup Kabupaten Merauke - Propinsi Papua Selatan"
+                        },
+                        {
+                            "tahun": "2024",
+                            "training": "Perizinan Lingkungan Batch 2",
+                            "ijazahNon": 1,
+                            "penyelenggara": "PT. Talenta Digital Inteleksia"
+                        },
+                        {
+                            "tahun": "2023",
+                            "training": "Perubahan Sistem Perizinan Perkebunan Indonesia Berdasarkan UU No.6 Tahun 2023",
+                            "ijazahNon": 1,
+                            "penyelenggara": "Perkumpulan Praktisi Profesional Perkebunan dan Media Perkebunan"
+                        },
+                        {
+                            "tahun": "2023",
+                            "training": "Management CSR dan Community Development",
+                            "ijazahNon": 1,
+                            "penyelenggara": "Talenta Borneo Harmoni"
+                        },
+                        {
+                            "tahun": "2023",
+                            "training": "Bimbingan Teknis OSS RBA",
+                            "ijazahNon": 1,
+                            "penyelenggara": "Dinas Penanaman Modal dan Pelayanan Terpadu Satu Pintu (DPMPTSP) Kabupaten Merauke"
+                        },
+                        {
+                            "tahun": "2023",
+                            "training": "Certified Public Relation Officer",
+                            "ijazahNon": 1,
+                            "penyelenggara": "PT. Talenta Borneo Harmoni"
+                        },
+                        {
+                            "tahun": "2022",
+                            "training": "Seminar Nasional Planter Indonesia \"Peningkatan Produktivitas Kelapa Sawit dengan Mekanisasi dan Teknologi yang Ramah Lingkungan\"",
+                            "ijazahNon": 1,
+                            "penyelenggara": "Indonesia Planter Society"
+                        },
+                        {
+                            "tahun": "2020",
+                            "training": "Diskusi Panel Dunia Pendidikan dan Perkebunan “Pengetahuan dan Keterampilan Mana yang lebih penting?\"",
+                            "ijazahNon": 1,
+                            "penyelenggara": "Best Planter Indonesia"
+                        },
+                        {
+                            "tahun": "2020",
+                            "training": "Diskusi Panel Dunia Pendidikan dan Perkebunan \"Menyiapkan Pemimpin Milenial Yang Tanggung dan Profesional\"",
+                            "ijazahNon": 1,
+                            "penyelenggara": "Best Planter Indonesia"
+                        },
+                        {
+                            "tahun": "2015",
+                            "training": "Traning ESQ - Ari Ginanjar",
+                            "ijazahNon": 1,
+                            "penyelenggara": "Ari Ginanjar - Menara 143"
+                        },
+                        {
+                            "tahun": "2014",
+                            "training": "8 Etos Kerja Profesional",
+                            "ijazahNon": 1,
+                            "penyelenggara": "Jansen Sinamo, Dharma Mahardika"
+                        },
+                        {
+                            "tahun": "2013",
+                            "training": "Precious Moment Seminar",
+                            "ijazahNon": 1,
+                            "penyelenggara": "TC Agrindo, Katingan - KALTENG"
+                        },
+                        {
+                            "tahun": "2007",
+                            "training": "Asian Agri Supervisory Managemment",
+                            "ijazahNon": 1,
+                            "penyelenggara": "Light House Management, Pekanbaru – RIAU"
+                        },
+                        {
+                            "tahun": "2007",
+                            "training": "Estate Assistant Training Asian Agri Plantation",
+                            "ijazahNon": 1,
+                            "penyelenggara": "Asian Agri Learning Institute, Buatan – RIAU"
+                        },
+                        {
+                            "tahun": "2004",
+                            "training": "Pelatihan Tambahan bagi Lulusan Perguruan tinggi (Rettoling Batch 2 - Proyek TPSDP/DIKTI) pada Program Studi Prioritas Plant Breeding",
+                            "ijazahNon": 1,
+                            "penyelenggara": "Pusat Pengembangan Penataran Guru (PPPG) Pertanian Cianjur - Jawa Barat"
+                        },
+                        {
+                            "tahun": "2004",
+                            "training": "Magang Kerja - Teknik Budidaya Tanaman Kakao & Prosesing Pabrik",
+                            "ijazahNon": 1,
+                            "penyelenggara": "PT. Rumpun Sari Antan"
+                        },
+                        {
+                            "tahun": "2005",
+                            "training": "Temu Teknis AgroIndustri Kakao",
+                            "ijazahNon": 1,
+                            "penyelenggara": "Badan Penelitian dan Pengembangan Pertanian Pusat Penelitian Kopi dan Kakao Indonesia Jember"
+                        }
+                    ]
+                },
+                "pengalaman": {
+                    "pengalaman_pekerjaan": [
+                        {
+                            "nama": "PT. ACP & PT. APM ~ Region Merauke KPN Plantation",
+                            "reason": "Mencari Suasana lingkungan kerja Baru",
+                            "salary": "32.000.000",
+                            "jabatan": "Senior Manager SSL (Sosial, Security, Licence)",
+                            "jobdesk": "Sosial\n1. Menanggapi isu-isu yang berkaitan dengan pemerintah, masyarakat, dan investor dengan bijak\n2. Mencari informasi tentang opini publik, seperti pendapat, keluhan, pemikiran, kritikan, pujian, dan kepuasan\nmasyarakat.\n3. Membantu pihak humas untuk menentukan apakah solusi yang diberikan efektif atau tidak\n4. Menyiapkan rencana kerja yang berkaitan dengan kegitaan sosial kehumasan dan Program CSR Perusahaan.\n5. Melaksanakan dokumentasi foto, video, peliputan berita, wawancara, serta survei data\n6. Menyiapkan bahan publikasi, perusahaan untuk pihak internal maupun eksternal.\n\nSecurity\n1. Mengembangkan dan menerapkan kebijakan, protokol, dan prosedur keamanan\n2. Mengontrol anggaran untuk operasi keamanan dan memantau pengeluaran\n3. Merekrut, melatih, dan mengawasi petugas keamanan dan penjaga\n4. Mengawasi dan mengkoreksi sikap, seragam, dan penampilan anggota\n5. Melakukan pemibinaan anggota keamanan\n6. Mengambil langkah-langkah pendahuluan terhadap masalah yang timbul di lapangan\n7. Mendelegasikan wewenang kepada wakil komandan regu dan anggota\n8. Bekerjasama dengan pihak kepolisian serta TNI kostrad\n\nLicense\n1. Memastikan semua kegiatan perkebunan telah memiliki perizinan yang sesuai dengan peraturan perundangundangan (PKKPR, IUP, HGU, HGB, PBG, SLO, Izin Lingkungan)\n2. Mengorganisir dan memantau dokumen perizinan, termasuk dokumen asli, softcopy, dan database\n3. Membuat usulan untuk menentukan solusi permasalahan yang dihadapi perusahaan\n4. Membuat, menyampaikan, mengorganisir, dan memantau surat keluar dan masuk terkait perizinan\n5. Pelaporan wajib kepada Instansi terkait atas izin yang telah diperoleh",
+                            "thn_akhir": "2024",
+                            "thn_mulai": "2023",
+                            "until_now": 0
+                        },
+                        {
+                            "nama": "PT. TSB – AJP – WKSM ~ (Region Kaltim Subar) & PT. ACP & PT. APM ~ (Region Merauke) - KPN Plantation",
+                            "reason": "Mutasi kerja",
+                            "salary": "30.000.000",
+                            "jabatan": "Group Estate Manager",
+                            "jobdesk": "Job Deskripsi :\n1. Melakukan rapat koordinasi kebun secara periodik\n2. Membangun & memastikan Team work, Komunikasi dan koordinasi kerja antar departemen terjalin efektif.\n3. Membantu RH dan HP dalam perumusan tujuan dan stretegi kebun\n4. Memimpin dan mengendalikan aktivitas operasional kebun secara menyeluruh, mengambil keputusankeputusan penting sebatas wewenang & tanggungjawabnya\n5. Mengarahkan, mengawasi dan mengimplementasikan pelaksanaan kebijakan, sistem, dan prosedur\noperasional yang telah ditetapkan perusahaan, khususnya pada kebun kelapa sawit.\n6. Mengarahkan, mengawasi, dan mengimplementasikan kebijakan, sistem dan prosedur verifikasi lapangan\n7. Mengarahkan, mengawasi, dan mengimplementasikan kebijakan, sistem dan prosedur yang dilakukan oleh\nbagian CSR.\n8. Mengarahkan, mengawasi dan mengimplementasikan kebijakan, sistem dan prosedur perencanaan produksi,\ncontrol persediaan dan aktivitas penentuan kualitas Tandan Buah Segar di PKS yang dilakukan bagian\nGrading.\n9. Memberikan pengarahan dan mengawasi manager kebun dalam memelihara tanaman agar menghasilkan TBS\nberkualitas baik dan produktivitasnya sesuai target serta sistem administrasi yang memadai\n10. Mengarahkan, mengawasi, dan mengimplementasikan kebijakan, sistem dan prosedur Traksi, Sipil,\nTransportasi dan Administrasi Teknik yang dilakukan bagian Traksi.\n11. Mengarahkan, mengawasi, dan mengimplementasikan kebijakan, sistem, dan prosedur penerimaan,\npenyimpanan dan pengeluaran BBM dan oli, pupuk, chemicals, peralatan dan suku cadang, bahan baku dan\nbarang jadi yang dilakukan bagian Gudang\n12. Menyusun, mempertanggungjawabkan dan mengawasi pembiayaan operasional kebun serta mengambil\ntindakan jika terdapat penyimpangan terhadap Budget.\n13. Mengevaluasi laporan kebun serta hasil operasional secara akurat dan tepat waktu guna pengambilan\nkeputusan serta mendistribusikan laporan tersebut kepada RH & HP secara periodik.\n14. Mengadakan pengawasan secara umum melalui sistem Pelaporan yang ada guna memastikan bahwa seluruh\naktivitas perusahaan berjalan sesuai arah Kebijakan, Sistem dan prosedur yang telah ditetapkan perusahaan.\n15. Mengambil langkah-langkah penting dalam rangka mengamankan aset perusahaan dan aktivitas yang\nmenyangkut perkembangan kebun\n16. Melaksanakan tugas lain sesuai penugasan yang diberikan Regional Head dan Head Plantation.\n17. Percepatan persiapan ISPO, FPIC, Plasma swadaya, Restorasi sempadan Sungai (HCV), menjalankan\nkegiatan CSR yang berhubungan dengan Perjanjian sebelum pembangunan kebun.\n18. Menjaga hubungan yang baik dengan Pihak external, Marga pemilik ulayat, Tripidis dan Pemerintahan daerah\ndan Instansi pemerintahan terkait serta tokoh Masyarakat.\n19. Menjaga kondisi kebun dalam suasana Aman dan terkendali dengan melibatkan Polsek, Polres, Koramil,\nKorem, TNI Kostrad, TNI Kopasus.",
+                            "thn_akhir": "2023",
+                            "thn_mulai": "2020",
+                            "until_now": 0
+                        },
+                        {
+                            "nama": "PT. Agriprima Cipta Persada ~ Regional Merauke - KPN Plantation",
+                            "reason": "Mutasi Promosi GEM",
+                            "salary": "26.000.000",
+                            "jabatan": "Estate Manager Kebun ACP2",
+                            "jobdesk": "Job Deskripsi :\n1.\tMenyusun rencana produksi meliputi arah pengembangan area penanaman, luasan tanam, mereview, menentukan kriteria penilaian karyawan, dan penilaian area tanam guna memastikan pencapaian produksi (volume dan kualitas) untuk mencapai Perkebunan sawit yang berkelanjutan.\n2.\tMereview, menyusun, dan merekomendasikan biaya produksi yang akan digunakan untuk penyusunan rencana kebutuhan sarana penunjang proses budidaya.\n3.\tMengelola pelaksanaan dan evaluasi terhadap pembinaan karyawan pada tahapan budidaya dalam rangka memperoleh kualitas karyawan yang berkelanjutan dalam budidaya untuk mencapai target produksi.\n4.\tMereview SOP secara berkala dalam rangka peningkatan / perbaikan yang berkelanjutan dalam mendukung proses produksi serta terpenuhinya standar GAP, K3, dan lingkungan.\n5.\tMenyusun laporan menyeluruh dan melaporkan kepada atasan terhadap perkembangan proses budidaya serta memberikan rekomendasi untuk memastikan pencapaian target produksi.\n6.\tMemberikan arahan kepada bawahan terkait rencana panen yang disesuaikan dengan permintaan produksi serta kualitas yang sesuai standart management",
+                            "thn_akhir": "2020",
+                            "thn_mulai": "2017",
+                            "until_now": 0
+                        },
+                        {
+                            "nama": "PT. Agriprima Cipta Persada ~ Regional Office Merauke \tKPN Plantation",
+                            "reason": "Mutasi Kerja",
+                            "salary": "21.000.000",
+                            "jabatan": "EPD Manager Regional Office",
+                            "jobdesk": "Job Deskripsi :\n1.\tMerencanakan dan mengelola data plantation operation (pengumpulan dan penyajian data untuk pelaporan dan kepentingan operation).\n2.\tMenganalisa laporan harian kebun dan pabrik serta memberikan input dan masukan\n3.\tMempersiapkan system analisa report yang mendukung pelaporan harian maupun bulanan\n4.\tMembantu menyusun dan memonitor budget operasional.\n5.\tMengawal budget operasional (fisik dan biaya).\n6.\tMembantu proses penggunaan budget operasional (BAPP, Contract dan sebagainya) dari lapangan.\n7.\tMembantu penyediaan material tanaman (kecambah) dan instalasi bibitan serta mengawal persiapan penanaman dan perawatan di pembibitan.\n8.\tMengevaluasi dan memonitor data guna kepentingan operation.\n9.\tMenyusun estate & mill performances\n10.\tFollow up laporan QC, R&D , plantation advisor dsb\n11.\tMemberikan masukan kepada atasan langsung dan atau secara bersama untuk merumuskan atau mengevaluasi kebijakan perusahaan (benchmarking).\n12.\tMenyusun penyempurnaan SOP Agronomi dan administrasi kultur teknis.\n13.\tMenyusun sistem dan prosedur administrasi dan pelaporan",
+                            "thn_akhir": "2017",
+                            "thn_mulai": "2016",
+                            "until_now": 0
+                        },
+                        {
+                            "nama": "PT. Alam Jaya Persada ~ Region Kaltim Sulbar – Kalimantan Timur  \tKPN Plantation",
+                            "reason": "Mutasi Promosi Manager",
+                            "salary": "16.000.000",
+                            "jabatan": "Asisten Kepala",
+                            "jobdesk": "Job Deskripsi :\n1.\tMembantu Manajer Kebun dalam menyusun program kerja dan anggaran tahunan serta mengelola aspek agronomi, termasuk pengelolaan pembangunan dan pengembangan kebun dan memastikan produksi maksimal dan meminimalkan kerugian di lapangan\n2.\tMendukung Manajer Kebun dalam peningkatan produktivitas dengan pengembangan kompetensi dan karir SDM di kebun.\n3.\tKoordinasi lintas departemen untuk mencapai target yang ditetapkan oleh Manajemen bersama Manajer Kebun.\n4.\tMonitoring operasional kebun dan pelaporan komprehensif kepada atasan langsung.\n5.\tMembantu Manajer Kebun Bertanggung jawab atas aspek pekerjaan non agronomi untuk mendukung operasional kebun. Memastikan kualitas panen sesuai SOP, Menjalankan SOP agar seluruh kegiatan operasional kebun sesuai ketentuan perusahaan\n6.\tAktif dalam tugas-tugas administrasi dan keuangan di tingkat kebun.\n7.\tMemastikan alokasi tenaga kerja, kendaraan, dan peralatan yang tepat\n8.\tMengendalikan operasional untuk mengurangi penyimpangan antara perencanaan dan realisasi\n9.\tMemastikan administrasi terlaksana sesuai prosedur\n10.\tMengawasi pemakaian tenaga kerja perawatan, alat, dan bahan\n11.\tMengawasi prestasi tenaga pemanen",
+                            "thn_akhir": "2016",
+                            "thn_mulai": "2013",
+                            "until_now": 0
+                        },
+                        {
+                            "nama": "PT. Rimba Matoa Lestari, Jayapura – Papua \tAgrindo Group",
+                            "reason": "Promosi Askep di KPN Plantation",
+                            "salary": "13.000.000",
+                            "jabatan": "Senior Asisten",
+                            "jobdesk": "Job Deskripsi\n1.\tMenyusun rencana pembukaan lahan, di dalamnya termasuk budget dan mengorganisasi team untuk mencapai target pembukaan areal dan penanaman yang telah ditergetkan oleh Perusahaan\n2.\tMenyusun rencana dan anggaran kerja pemeliharaan TBM\n3.\tMemberikan pengarahan kepada pekerja mengenai teknik tanam dan pemeliharaan kelapa sawit yang baik dan benar.\n4.\tMelakukan pengawasan, mengevaluasi dan membuat laporan atas pekerjaan LC, tanam kelapa sawit dan pemeliharaan tanaman seruai rotasinya\n5.\tMenjalin hubungan yang baik dengan masyarakat sekitar\n6.\tMengerti dan memahami sistem operasional unit excavator, buldozer, traktor dll\n7.\tMengelola pembangunan Afdeling yang berkelanjutan dan ramah lingkungan, selaras dengan kebijakan Manajemen.\n8.\tMeningkatkan produktivitas melalui pengembangan kompetensi dan karir SDM Afdeling.\n9.\tKoordinasi lintas-seksi untuk memenuhi target yang ditetapkan oleh Manager Kebun.\n10.\tMonitoring dan pelaporan rutin operasional Afdeling kepada Manager Kebun.\n11.\tMembangun komunitas perkebunan yang mendukung kesejahteraan dan motivasi karyawan",
+                            "thn_akhir": "2013",
+                            "thn_mulai": "2012",
+                            "until_now": 0
+                        },
+                        {
+                            "nama": "PT. Karya Dewi Putra, Katingan - Kalimantan tengah Agrindo Group",
+                            "reason": "Mutasi Promosi Senior Asisten",
+                            "salary": "10.000.000",
+                            "jabatan": "Asisten Lapangan",
+                            "jobdesk": "Job Deskripsi\n1.\tMenyusun rencana pemeliharanan tanaman (TBM) tepat rotasi, di dalamnya termasuk budget dan mengorganisasi team untuk mencapai target rotasi pemeliharaan\n2.\tMenyusun rencana dan anggaran kerja pemeliharaan dan Target Produksi\n3.\tMemberikan pengarahan kepada pekerja mengenai teknik pemeliharaan tanaman dan panen yang baik dan benar.\n4.\tMelakukan pengawasan, mengevaluasi dan membuat laporan atas pekerjaan pemeiliharaan dan panen yang dilakukan karyawan.\n5.\tMenjalin hubungan yang baik dengan masyarakat sekitar\n6.\tMengelola pembangunan dan pengembangan Afdeling yang berkelanjutan dan ramah lingkungan, sesuai dengan kebijakan Manajemen.\n7.\tKoordinasi lintas-seksi untuk memenuhi target yang ditetapkan oleh Manager Kebun.\n8.\tMelakukan monitoring dan pelaporan rutin terhadap operasional Afdeling kepada Manager Kebun.\n9.\tMembangun komunitas perkebunan yang kondusif untuk kesejahteraan dan motivasi kerja karyawan",
+                            "thn_akhir": "2011",
+                            "thn_mulai": "2009",
+                            "until_now": 0
+                        },
+                        {
+                            "nama": "PT. Rimbamatoa Lestari, Jayapura - Papua \tAgrindo Group",
+                            "reason": "Mutasi",
+                            "salary": "6.000.000",
+                            "jabatan": "Assistant",
+                            "jobdesk": "Job Deskripsi\n1.\tMenyusun rencana dan anggaran kerja pembibitan\n2.\tMemberikan arahan kepada pekerja mengenai teknik pembibitan\n3.\tMembuat perencanaan harian, mingguan, bulanan, triwulan, semester, dan tahunan\n4.\tMengatur, melaksanakan, dan mengawasi pekerjaan di bidang pembibitan\n5.\tMengurus pekerjaan administrasi, seperti laporan manajemen\n6.\tMengendalikan biaya operasional pembibitan\n7.\tMengawasi, mengevaluasi, dan membuat laporan atas pekerjaan operator alat berat\n8.\tMenjalin hubungan baik dengan masyarakat sekitar tempat kerja",
+                            "thn_akhir": "2009",
+                            "thn_mulai": "2008",
+                            "until_now": 0
+                        },
+                        {
+                            "nama": "PT. Saudara Sejati Luhur, Plantation I Kisaran - Sumatra Utara -\tAsian Agri Internasional",
+                            "reason": "Mutasi",
+                            "salary": "4.500.000",
+                            "jabatan": "Asisten",
+                            "jobdesk": "Job Deskripsi\n1.\tMenyusun rencana pembukaan lahan / Replanting, di dalamnya termasuk budget dan mengorganisasi team untuk mencapai target pembukaan areal / Replanting dan penanaman yang telah ditergetkan oleh Perusahaan\n2.\tMenyusun rencana dan anggaran kerja Replanting\n3.\tMenyusun RKT, RKB dan RKH\n4.\tMemberikan pengarahan kepada pekerja mengenai teknik Replanting kelapa sawit yang baik dan benar.\n5.\tMelakukan pengawasan, mengevaluasi dan membuat laporan atas pekerjaan replanting yang dilakukan Operator alat berat.\n6.\tMenjalin hubungan yang baik dengan masyarakat sekitar \n7.\tMengerti dan memahami sistem operasional unit excavator, buldozer, traktor dll",
+                            "thn_akhir": "2008",
+                            "thn_mulai": "2007",
+                            "until_now": 0
+                        }
+                    ],
+                    "tanggung_jawab_pada_pekerjaan_terakhir": "Job Deskripsi :\nSosial\n1.\tMenanggapi isu-isu yang berkaitan dengan pemerintah, masyarakat, dan investor dengan bijak\n2.\tMencari informasi tentang opini publik, seperti pendapat, keluhan, pemikiran, kritikan, pujian, dan kepuasan masyarakat.\n3.\tMembantu pihak humas untuk menentukan apakah solusi yang diberikan efektif atau tidak\n4.\tMenyiapkan rencana kerja yang berkaitan dengan kegitaan sosial kehumasan dan Program CSR Perusahaan.\n5.\tMelaksanakan dokumentasi foto, video, peliputan berita, wawancara, serta survei data\n6.\tMenyiapkan bahan publikasi, perusahaan untuk pihak internal maupun eksternal\n\n\tPerformance :\n1.\tPenyelesaian Tuntutan Marga pemilik Ulayat pengurangan Fee Management dalam Perjanjian kerjasama Plasma dari 5% menjadi 2,5% \n2.\tPenyelesaian Portal Pabrik PT.APM oleh Masyarakat Adat pemilik ulayat akibat isu rekomendasi Pj.Gubernur Propinsi Papua Selatan\n3.\tPenyelesaian tuntutan marga pemilik ulayat mendapatkan insentif tanpa bekerja\n4.\tProgram CSR  Pendidikan, Keagamaan, Prasarana dan Sosial serta Pemberdayaan Masyarakat\n5.\tMelakukat Latgab Damkar bersama TIM damkar Satpol PP kabupaten Merauke\nSecurity\n1.\tMengembangkan dan menerapkan kebijakan, protokol, dan prosedur keamanan \n2.\tMengontrol anggaran untuk operasi keamanan dan memantau pengeluaran\n3.\tMerekrut, melatih, dan mengawasi petugas keamanan dan penjaga\n4.\tMengawasi dan mengkoreksi sikap, seragam, dan penampilan anggota\n5.\tMelakukan pemibinaan anggota keamanan\n6.\tMengambil langkah-langkah pendahuluan terhadap masalah yang timbul di lapangan\n7.\tMendelegasikan wewenang kepada wakil komandan regu dan anggota\n8.\tBekerjasama dengan pihak kepolisian serta TNI kostrad\n\n\tPerformance :\n1.\tBekerjasama dengan Aparat keamanan TNI Polri melakukan Sosialisasi Bahaya Narkoba dan Minuman keras\n2.\tMembuat skenario akses keluar masuk dan portal Pos keamanan satu Jalur dalam rangka meminimalkan peredaran Miras di dalam wilayah perkebunan  \nLicense\n1.\tMemastikan semua kegiatan perkebunan telah memiliki perizinan yang sesuai dengan peraturan perundang-undangan (PKKPR, IUP, HGU, HGB, PBG, SLO, Izin Lingkungan)\n2.\tMengorganisir dan memantau dokumen perizinan, termasuk dokumen asli, softcopy, dan database\n3.\tMembuat usulan untuk menentukan solusi permasalahan yang dihadapi perusahaan\n4.\tMembuat, menyampaikan, mengorganisir, dan memantau surat keluar dan masuk terkait perizinan\n5.\tPelaporan wajib kepada Instansi terkait atas izin yang telah diperoleh\n\n\tPerformance :\n1.\tPenyelesaian Adendum Amdal PT ACP & APM akibat perpindahan lokasi Pabrik\n2.\tPenyelesain PBG & SLF Pabrik PT. APM\n3.\tPenyelesaian HGB tanah Milik PT ACP (rencana kantor RO)\n4.\tPersiapan ISPO dokumen Legal PT. ACP dan APM\n5.\tPenyelesaian SIPA air bawah tanah 16 titik\n6.\tMencari lokasi rencana Refinary dan Bulking station yang strategis dalam wilayah Propinsi Papua Selatan"
+                },
+                "screning_id": 78,
+                "keterampilan": {
+                    "teknis": null,
+                    "non_teknis": null
+                },
+                "nama_lengkap": "Mohammad Arief",
+                "screening_ai_check": 0,
+                "sertifikat_keahlian": null,
+                "jawaban_pertanyaan_skrining": {
+                    "1": "Group Estate Manager",
+                    "2": "4",
+                    "3": "Regional Head",
+                    "4": "50",
+                    "5": "2500",
+                    "6": "13606",
+                    "7": "13606",
+                    "8": "0,1,2,3",
+                    "9": "LC TM",
+                    "10": "0",
+                    "11": "2 tahun",
+                    "16": "1.\tPenyelesaian Tuntutan Marga pemilik Ulayat pengurangan Fee Management dalam Perjanjian kerjasama Plasma dari 5% menjadi 2,5%  2.\tPenyelesaian Portal Pabrik PT.APM oleh Masyarakat Adat pemilik ulayat akibat isu rekomendasi Pj.Gubernur Propinsi Papua Selatan 3.\tPenyelesaian tuntutan marga pemilik ulayat mendapatkan insentif tanpa bekerja",
+                    "17": "melakukan Nogosiasi dengan cara pendekatan melalui Ketua ketua adat, membangun komunikasi dengan Pemerintah terkait PTSP, Koperasi, dan dinas pertanian, serta pihak keamanan, memberikan penjelasan yang jelas terkait tuntutan masyarakat, bila tidak memahami maka dilakukan edukasi dengan menggandeng pihak pihak terkait",
+                    "18": "0",
+                    "19": "Hilux Double Cabin",
+                    "26": "Merauke - Papua Selatan",
+                    "27": "260 km",
+                    "28": "darat",
+                    "29": "Bandung",
+                    "30": "2",
+                    "31": "SAP",
+                    "32": "31000000",
+                    "33": "32000000",
+                    "34": {
+                        "option": "2",
+                        "subInputs": [
+                            "tidak diuangkan",
+                            "1 x gaji"
+                        ]
+                    },
+                    "35": "18 hari",
+                    "36": "BPJS kesehatan, Jamsostek , anak pindah sekolah, beasiswa berprestasi, tunjangan perumahan",
+                    "37": "0",
+                    "38": "BPJS kesehatan",
+                    "39": "1",
+                    "40": "1",
+                    "41": "1",
+                    "42": "1",
+                    "43": "1"
+                }
+            }
+        ],
+        "lowongan_pekerjaan": {
+            "id": 13,
+            "jabatan": {
+                "pendidikan": {
+                    "formal": {
+                        "jurusan": "Pertanian, Perkebunan, TPHP, Agroteknologi",
+                        "tingkat_pendidikan": "S1"
+                    }
+                },
+                "keterampilan": {
+                    "teknis": null,
+                    "non_teknis": null
+                },
+                "nama_jabatan": "Group Estate Manager",
+                "deskripsi_jabatan": "Mengelola dan mengembangkan performance / kinerja operasional perkebunan di wilayah kerja sesuai dengan target-target yang diberikan manajemen dengan memperhatikan prinsip-prinsip best management practice dan kebijakan perusahaan untuk mencapai tujuan objektif perusahaan",
+                "lainnya_requirement": "",
+                "pertanyaan_skrining": {
+                    "General": {
+                        "26": "Dimana lokasi kerja saat ini?",
+                        "27": "Berapa jauh jarak tempuh dari lokasi kerja ke kota terdekat?",
+                        "28": "Transportasi apa yang dipergunakan menuju kota terdekat (darat/air/udara)?",
+                        "29": "Dimana lokasi asal domisili?",
+                        "30": "Silakan pilih salah satu metode kerja administrasi yang digunakan saat ini.",
+                        "31": "System apa yang dipergunakan?",
+                        "32": "Berapa nominal gaji pokok yang diterima?",
+                        "33": "Berapa nominal Take Home Pay (Nett total gaji dan benefit) yang diterima?",
+                        "34": "Silakan pilih salah satu pada bentuk tunjangan cuti yang diberikan saat ini dan cantumkan jumlahnya untuk tiap item sesuai plafon yang diterima.",
+                        "35": "Berapa jumlah hari cuti per tahun?",
+                        "36": "Tuliskan benefit/tunjangan lainnya yang diterima di tempat kerja terakhir dan besarannya.",
+                        "37": "Siapakah yang menanggung pajak penghasilan pribadi?",
+                        "38": "Apa saja jenis asuransi kesehatan yang diterima?"
+                    },
+                    "Pernyataan": {
+                        "39": "Apakah bersedia penempatan di Kalimantan Tengah?",
+                        "40": "Apakah bersedia penempatan sesuai kebutuhan Organisasi?",
+                        "41": "Apakah bersedia Bapak/Ibu dilakukan background and financial checking?",
+                        "42": "Apakah bersedia melanjutkan proses seleksi jika penawaran pendapatan bersifat gross?",
+                        "43": "Apakah bersedia melanjutkan proses seleksi jika paket benefit tidak sesuai dengan permintaan dan atau benefit yang sudah diterima?"
+                    },
+                    "Operasional Kebun": {
+                        "1": "Apa jabatan saat ini?",
+                        "2": "Apa level jabatan pada tempat kerja terakhir?",
+                        "3": "Posisi jabatan apa yang menjadi atasan langsung?",
+                        "4": "Berapa jumlah Karyawan yang menjadi anak buah/bawahan?",
+                        "5": "Berapa total jumlah Karyawan di Perusahaan terakhir?",
+                        "6": "Berapa ha luas area kerja saat ini?",
+                        "7": "Berapa ha luas area kerja terbesar yang pernah ditangani?",
+                        "8": "Apa saja jenis area yang pernah ditangani?",
+                        "9": "Jenis area apa yang paling dikuasai?",
+                        "10": "Apakah memiliki pengalaman menangani Mekanisasi atau Water Management System?",
+                        "11": "Berapa lama pengalaman menangani Mekanisasi atau Water Management System?",
+                        "16": "Tuliskan paling banyak 3 (tiga) masalah/konflik sosial yang dihadapi di lingkungan kerja saat ini.",
+                        "17": "Apa yang dilakukan untuk menghadapi permasalahan sosial tersebut?",
+                        "18": "Apakah disediakan kendaraan operasional?",
+                        "19": "Tuliskan jenis kendaraannya. (Isi '-' jika tidak disediakan)"
+                    }
+                },
+                "sertifikat_keahlian": null,
+                "pengalaman_pekerjaan": "2 tahun sebagai Group Estate Manager",
+                "uraian_tugas_tanggung_jawab": [
+                    "Mengkaji dan menyempurnakan budget produksi dan biaya tahunan kebun bersama dengan Manager kebun",
+                    "Membuat usulan kepada Regional Head atas persediaan barang yang berlebihan, tidak terpakai atau tidak layak lagi untuk pemindahaan atau penghapusan material dari gudang dengan melakukan koordinasi dengan Manager Kebun",
+                    "Memastikan agar semua kendaraan dan alat berat dalam keadaan terawat baik dan layak jalan dengan melakukan koordinasi kepada Traksi dan Workshop.",
+                    "Merencanakan, memonitoring dan merealisasikan pelaksanaan Capex yang telah di tetapkan, baik secara realisasi fisik dan biaya.",
+                    "Memaksimumkan fungsi kendaraan dan alat berat, sehingga tercapainya efesiensi dan efektifitas kendaraan dan alat berat."
+                ]
+            }
+        },
+        "key_pertanyaan_screening": "operasional_kebun;general;pernyataan"
+    },
+    "status": true,
+    "message": "Success"
+}
