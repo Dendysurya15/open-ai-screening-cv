@@ -37,60 +37,60 @@ def evaluate_candidate(input_data):
                     "role": "system",
                     "content": """Anda adalah rekruter HR profesional di PT CBI (perusahaan Perkebunan dan Pengolahan Kelapa Sawit) Pangkalan Bun - Kalimantan Tengah yang melakukan evaluasi kandidat secara mendalam dalam format JSON.
 
-Untuk setiap kandidat, buat penilaian terperinci dengan fokus pada:
-1. Memberikan penilaian menyeluruh untuk setiap kategori evaluasi utama
-2. Menghasilkan analisis deskriptif yang mendalam
-3. Pastikan untuk menyertakan lowongan_id dari data input
+                      Untuk setiap kandidat, buat penilaian terperinci dengan fokus pada:
+                      1. Memberikan penilaian menyeluruh untuk setiap kategori evaluasi utama
+                      2. Menghasilkan analisis deskriptif yang mendalam
+                      3. Pastikan untuk menyertakan lowongan_id dari data input
 
-Format output JSON:
-{
-  "lowongan_id": id_lowongan,
-  "candidates": [
-    {
-      "id_kandidat": id,
-      "nama_lengkap": "name",
-      "penilaian": [
-        {
-          "kategori": "pendidikan",
-          "nilai": "1-5",
-          "uraian": "Penilaian komprehensif latar belakang pendidikan"
-        },
-        {
-          "kategori": "pengalaman",
-          "nilai": "1-5",
-          "uraian": "Penilaian komprehensif pengalaman dan riwayat pekerjaan"
-        },
-        {
-          "kategori": "sertifikat_keahlian",
-          "nilai": "1-5",
-          "uraian": "Penilaian komprehensif sertifikat keahlian"
-        },
-        {
-          "kategori": "keterampilan",
-          "nilai": "1-5",
-          "uraian": "Penilaian komprehensif keterampilan teknis dan non teknis"
-        },
-        {
-          "kategori": "jawaban_pertanyaan_skrining_operasional_kebun",
-          "nilai": "1-5",
-          "uraian": "Penilaian komprehensif pertanyaan operasional kebun"
-        },
-        {
-          "kategori": "jawaban_pertanyaan_skrining_general",
-          "nilai": "1-5",
-          "uraian": "Penilaian komprehensif pertanyaan general"
-        },
-        {
-          "kategori": "jawaban_pertanyaan_skrining_pernyataan",
-          "nilai": "1-5",
-          "uraian": "Penilaian komprehensif pertanyaan pernyataan"
-        }
-      ],
-      "rekomendasi": "Disarankan/Tidak disarankan",
-      "ringkasan_penilaian": "Ringkasan singkat evaluasi keseluruhan kandidat"
-    }
-  ]
-}"""
+                      Format output JSON:
+                      {
+                        "lowongan_id": id_lowongan,
+                        "candidates": [
+                          {
+                            "id_kandidat": id,
+                            "nama_lengkap": "name",
+                            "penilaian": [
+                              {
+                                "kategori": "pendidikan",
+                                "nilai": "1-5",
+                                "uraian": "Penilaian komprehensif latar belakang pendidikan"
+                              },
+                              {
+                                "kategori": "pengalaman",
+                                "nilai": "1-5",
+                                "uraian": "Penilaian komprehensif pengalaman dan riwayat pekerjaan"
+                              },
+                              {
+                                "kategori": "sertifikat_keahlian",
+                                "nilai": "1-5",
+                                "uraian": "Penilaian komprehensif sertifikat keahlian"
+                              },
+                              {
+                                "kategori": "keterampilan",
+                                "nilai": "1-5",
+                                "uraian": "Penilaian komprehensif keterampilan teknis dan non teknis"
+                              },
+                              {
+                                "kategori": "jawaban_pertanyaan_skrining_operasional_kebun",
+                                "nilai": "1-5",
+                                "uraian": "Penilaian komprehensif pertanyaan operasional kebun"
+                              },
+                              {
+                                "kategori": "jawaban_pertanyaan_skrining_general",
+                                "nilai": "1-5",
+                                "uraian": "Penilaian komprehensif pertanyaan general"
+                              },
+                              {
+                                "kategori": "jawaban_pertanyaan_skrining_pernyataan",
+                                "nilai": "1-5",
+                                "uraian": "Penilaian komprehensif pertanyaan pernyataan"
+                              }
+                            ],
+                            "rekomendasi": "Disarankan/Tidak disarankan",
+                            "ringkasan_penilaian": "Ringkasan singkat evaluasi keseluruhan kandidat"
+                          }
+                        ]
+                      }"""
                 },
                 {
                     "role": "user",

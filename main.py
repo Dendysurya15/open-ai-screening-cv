@@ -9,7 +9,7 @@ from threading import Thread
 from pysher import Pusher as PysherClient
 import gas_ai
 from datetime import datetime
-
+# from process_result_ai import process_result_ai
 # Load environment variables
 load_dotenv()
 
@@ -51,6 +51,8 @@ def insert_to_cronjob(data):
 
         conn = connect_to_mysql()
         cursor = conn.cursor()
+        
+        inserted_screening_ids = []  # Track newly inserted screenings
         
         for processed_data in data_list:
             # Skip if no data
@@ -95,8 +97,14 @@ def insert_to_cronjob(data):
                 cursor.execute(query, values)
                 conn.commit()
                 
+                inserted_screening_ids.append(screening_id)  # Track this screening
                 print(f"Data dengan screening_id {screening_id} berhasil disimpan ke tabel cronjob!")
         
+        # Process newly inserted screenings immediately
+        if inserted_screening_ids:
+            print("Processing newly inserted screenings...")
+            process_pending_screenings()
+            
     except Exception as e:
         print(f"Error: {e}")
     finally:
@@ -169,7 +177,8 @@ def fetch_api_data():
     result = get_screening_data()
     if isinstance(result, dict):
         if result.get('status') == False:
-            print(f"API Response: {result.get('message')}")
+            # print(f"API Response: {result.get('message')}")
+            pass
         else:
             insert_to_cronjob(result)
     else:
@@ -179,7 +188,7 @@ def process_pending_screenings():
     """Process all pending screenings in the MySQL database"""
     try:
         conn = connect_to_mysql()
-        cursor = conn.cursor(dictionary=True)  # Use dictionary cursor for easier data handling
+        cursor = conn.cursor(dictionary=True)
         
         # Get all unprocessed screenings (status = 0)
         query = "SELECT * FROM cronjob WHERE status = 0"
@@ -190,29 +199,63 @@ def process_pending_screenings():
         
         for screening in pending_screenings:
             try:
-                # Parse the JSON data
                 screening_data = json.loads(screening['data'])
-                
-                # Process the screening using gas_ai
                 result = gas_ai.evaluate_candidate(screening_data['data'])
                 
-                if result:
-                    # Save the result to a JSON file with timestamp
-                    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-                    output_filename = f"output_{screening['screening_id']}_{timestamp}.json"
+                if result and 'candidates' in result and len(result['candidates']) > 0:
+                    candidate = result['candidates'][0]
+                    penilaian = {item['kategori']: item for item in candidate['penilaian']}
                     
-                    with open(output_filename, 'w', encoding='utf-8') as f:
-                        json.dump(result, f, indent=2, ensure_ascii=False)
+                    # Prepare summary of screening questions as JSON
+                    screening_summary = {
+                        'operasional_kebun': penilaian['jawaban_pertanyaan_skrining_operasional_kebun'],
+                        'general': penilaian['jawaban_pertanyaan_skrining_general'],
+                        'pernyataan': penilaian['jawaban_pertanyaan_skrining_pernyataan']
+                    }
                     
-                    # Update the status in database
-                    update_query = "UPDATE cronjob SET status = 1 WHERE id = %s"
-                    cursor.execute(update_query, (screening['id'],))
+                    # Update query with all fields
+                    update_query = """
+                    UPDATE cronjob SET 
+                        status = 1,
+                        nilai_pendidikan = %s,
+                        summary_pendidikan = %s,
+                        nilai_pengalaman = %s,
+                        sumarry_pengalaman = %s,
+                        nilai_sertifikat_keahlian = %s,
+                        summary_sertifikat_keahlian = %s,
+                        nilai_keterampilan = %s,
+                        summary_keterampilan = %s,
+                        summary_nilai_pertanyaan_screening = %s
+                    WHERE id = %s
+                    """
+                    
+                    update_values = (
+                        int(penilaian['pendidikan']['nilai']),
+                        penilaian['pendidikan']['uraian'],
+                        int(penilaian['pengalaman']['nilai']),
+                        penilaian['pengalaman']['uraian'],
+                        int(penilaian['sertifikat_keahlian']['nilai']),
+                        penilaian['sertifikat_keahlian']['uraian'],
+                        int(penilaian['keterampilan']['nilai']),
+                        penilaian['keterampilan']['uraian'],
+                        json.dumps(screening_summary),
+                        screening['id']
+                    )
+                    
+                    cursor.execute(update_query, update_values)
                     conn.commit()
                     
-                    print(f"Successfully processed screening {screening['screening_id']}, output saved to {output_filename}")
+                    # # Save to JSON file (keeping existing functionality)
+                    # timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+                    # output_filename = f"output_{screening['screening_id']}_{timestamp}.json"
+                    # with open(output_filename, 'w', encoding='utf-8') as f:
+                    #     json.dump(result, f, indent=2, ensure_ascii=False)
+                    
+                    print(f"Successfully processed screening {screening['screening_id']}")
                 else:
-                    print(f"Failed to process screening {screening['screening_id']}")
+                    print(f"Failed to process screening {screening['screening_id']}: Invalid result format")
             
+
             except Exception as e:
                 print(f"Error processing screening {screening['screening_id']}: {str(e)}")
                 continue
@@ -225,7 +268,7 @@ def process_pending_screenings():
             conn.close()
 
 def run_scheduler():
-    schedule.every(15).minutes.do(fetch_api_data)
+    # schedule.every(15).minutes.do(fetch_api_data)
     schedule.every(5).minutes.do(process_pending_screenings)  # Add screening processing to scheduler
     
     while True:
@@ -234,7 +277,7 @@ def run_scheduler():
 
 if __name__ == "__main__":
     # Initial runs
-    fetch_api_data()
+    # fetch_api_data()
     process_pending_screenings()
     
     # Setup and run pusher in separate thread
