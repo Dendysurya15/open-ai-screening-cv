@@ -1,0 +1,26 @@
+{
+    "keyIdIdentities": {
+      "1": {
+        "label": "Pendidikan"
+      },
+      "2": {
+        "label": "Riwayat Pekerjaan"
+      },
+      "3": {
+        "label": "Kemampuan Bahasa"
+      },
+      "4": {
+        "label": "Gaji"
+      }
+    },
+    "keyIdDocuments": {
+      "2": {
+        "label": "Dokumen Pendukung",
+        "subItems": "newDocuments"
+      },
+      "3": {
+        "label": "Dokumen Lainnya"
+      }
+    }
+  }
+  

@@ -30,57 +30,72 @@ def check_screening_exists(cursor, screening_id):
 
 def insert_to_cronjob(data):
     try:
-        # Jika data adalah string JSON, parse terlebih dahulu
+        # Parse JSON if string
         if isinstance(data, str):
             data = json.loads(data)
         
-        # Jika tidak ada key 'status', berarti data dari pusher
+        # Handle data from pusher (single data)
         if 'status' not in data:
             processed_data = {
                 'status': True,
                 'message': 'Success',
                 'data': data['data']
             }
+            data_list = [processed_data]
         else:
-            processed_data = data
+            # Handle data from API (could be single or bulk)
+            if isinstance(data.get('data'), list):
+                data_list = [{'status': data['status'], 'message': data['message'], 'data': item} for item in data['data']]
+            else:
+                data_list = [data]
 
-        # Cek apakah ada data
-        if not processed_data.get('data'):
-            print("Tidak ada data untuk diproses")
-            return
-            
         conn = connect_to_mysql()
         cursor = conn.cursor()
         
-        # Cek struktur data kandidat
-        if 'kandidat' not in processed_data['data'] or not processed_data['data']['kandidat']:
-            print("Tidak ada data kandidat yang tersedia")
-            return
+        for processed_data in data_list:
+            # Skip if no data
+            if not processed_data.get('data'):
+                print("Tidak ada data untuk diproses")
+                continue
+                
+            # Get kandidat list
+            kandidat_list = processed_data['data'].get('kandidat', [])
+            if not kandidat_list:
+                print("Tidak ada data kandidat yang tersedia")
+                continue
             
-        # Mengakses screening_id dari struktur yang benar
-        screening_id = processed_data['data']['kandidat'][0]['screning_id']
-        
-        # Cek apakah screening_id sudah ada
-        if check_screening_exists(cursor, screening_id):
-            print(f"Data dengan screening_id {screening_id} sudah ada dalam database!")
-            return
-        
-        # Query untuk insert data
-        query = """
-        INSERT INTO cronjob (screening_id, data, status)
-        VALUES (%s, %s, %s)
-        """
-        
-        # Siapkan values
-        json_data = json.dumps(processed_data)
-        status = 0  # Status 0 berarti belum diproses AI
-        
-        values = (screening_id, json_data, status)
-        
-        cursor.execute(query, values)
-        conn.commit()
-        
-        print(f"Data dengan screening_id {screening_id} berhasil disimpan ke tabel cronjob!")
+            # Insert each kandidat
+            for kandidat in kandidat_list:
+                screening_id = kandidat['screning_id']
+                
+                # Check if screening_id exists
+                if check_screening_exists(cursor, screening_id):
+                    print(f"Data dengan screening_id {screening_id} sudah ada dalam database!")
+                    continue
+                
+                # Prepare single kandidat data
+                single_data = {
+                    'status': processed_data['status'],
+                    'message': processed_data['message'],
+                    'data': {
+                        'key_pertanyaan_screening': processed_data['data']['key_pertanyaan_screening'],
+                        'lowongan_pekerjaan': processed_data['data']['lowongan_pekerjaan'],
+                        'kandidat': [kandidat]
+                    }
+                }
+                
+                # Updated query to include created_at
+                query = """
+                INSERT INTO cronjob (screening_id, data, status, created_at)
+                VALUES (%s, %s, %s, NOW())
+                """
+                
+                values = (screening_id, json.dumps(single_data), 0)
+                
+                cursor.execute(query, values)
+                conn.commit()
+                
+                print(f"Data dengan screening_id {screening_id} berhasil disimpan ke tabel cronjob!")
         
     except Exception as e:
         print(f"Error: {e}")

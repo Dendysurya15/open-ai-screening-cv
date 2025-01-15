@@ -1,0 +1,48 @@
+{
+  "candidates": [
+    {
+      "id_kandidat": 741,
+      "nama_kandidat": "Nico Netanyahu",
+      "penilaian": [
+        {
+          "kategori": "pendidikan",
+          "nilai": "4",
+          "uraian": "Lulusan S1 dari Universitas Methodist Indonesia dengan jurusan yang relevan dengan jabatan KTU Estate"
+        },
+        {
+          "kategori": "pengalaman",
+          "nilai": "4",
+          "uraian": "Memiliki pengalaman kerja sebagai Customer Service Officer di PT Bank Central Asia Tbk selama 3 tahun, yang dapat dipertimbangkan sebagai pengalaman yang relevan dengan jabatan KTU Estate"
+        },
+        {
+          "kategori": "sertifikat_keahlian",
+          "nilai": "1",
+          "uraian": "Tidak memiliki sertifikat keahlian yang relevan dengan jabatan KTU Estate"
+        },
+        {
+          "kategori": "keterampilan",
+          "nilai": "1",
+          "uraian": "Tidak memiliki keterampilan teknis dan non-teknis yang relevan dengan jabatan KTU Estate"
+        },
+        {
+          "kategori": "jawaban_pertanyaan_skrining_operasional_kebun",
+          "nilai": "3",
+          "uraian": "Memberikan jawaban yang relevan dengan pertanyaan operasional kebun, tetapi masih perlu diperbaiki"
+        },
+        {
+          "kategori": "jawaban_pertanyaan_skrining_general",
+          "nilai": "4",
+          "uraian": "Memberikan jawaban yang relevan dengan pertanyaan general, dengan detail yang cukup"
+        },
+        {
+          "kategori": "jawaban_pertanyaan_skrining_pernyataan",
+          "nilai": "4",
+          "uraian": "Memberikan jawaban yang relevan dengan pertanyaan pernyataan, dengan detail yang cukup"
+        }
+      ],
+      "rekomendasi": "Disarankan",
+      "ringkasan_penilaian": "Kandidat memiliki latar belakang pendidikan yang relevan, pengalaman kerja yang relevan, dan memberikan jawaban yang relevan dengan pertanyaan screening. Namun, masih perlu diperbaiki dalam hal sertifikat keahlian dan keterampilan."
+    }
+  ],
+  "lowongan_id": 9
+}

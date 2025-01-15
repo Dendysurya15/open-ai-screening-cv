@@ -114,6 +114,7 @@ Format output JSON:
         return None
 
 def process_mysql_screening(screening_data):
+    
     """Process a single screening from MySQL data"""
     try:
         # Parse the JSON data from MySQL
