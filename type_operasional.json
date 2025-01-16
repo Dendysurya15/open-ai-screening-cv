@@ -1,0 +1,211 @@
+{
+    "data": {
+        "kandidat": [
+            {
+                "id": 616,
+                "pendidikan": {
+                    "formal": [
+                        {
+                            "jurusan": "Budidaya Perairan / Perikanan",
+                            "nama_instansi": "Universitas Muhammadiyah Malang",
+                            "tingkat_pendidikan": "S1"
+                        }
+                    ],
+                    "non_formal": [
+                        {
+                            "tahun": "2020",
+                            "training": "Pelatihan Sertifikasi ISO 2200, HACCP dan GMP",
+                            "ijazahNon": 1,
+                            "penyelenggara": "Mina Indonesia"
+                        },
+                        {
+                            "tahun": "2017",
+                            "training": "Asisten Praktikum Perikanan",
+                            "ijazahNon": 1,
+                            "penyelenggara": "Prodi Budidaya Perairan"
+                        },
+                        {
+                            "tahun": "2018",
+                            "training": "Asisten Praktikum Perikanan",
+                            "ijazahNon": 1,
+                            "penyelenggara": "Prodi Budidaya Perairan"
+                        },
+                        {
+                            "tahun": "2019",
+                            "training": "Asisten Praktikum Perikanan",
+                            "ijazahNon": 1,
+                            "penyelenggara": "Prodi Budidaya Perairan"
+                        },
+                        {
+                            "tahun": "2017",
+                            "training": "Magang di Balai Benih Ikan Blitar",
+                            "ijazahNon": 1,
+                            "penyelenggara": "Himpunan Mahasiswa Jurusan Perikanan"
+                        },
+                        {
+                            "tahun": "2018",
+                            "training": "Magang di UPT Cangkringan",
+                            "ijazahNon": 1,
+                            "penyelenggara": "Himpunan Mahasiswa Jurusan Perikanan"
+                        },
+                        {
+                            "tahun": "2019",
+                            "training": "Praktek Kerja Lapang di BKIPM DENPASAR BALI",
+                            "ijazahNon": 1,
+                            "penyelenggara": "Mandiri"
+                        }
+                    ]
+                },
+                "pengalaman": {
+                    "pengalaman_pekerjaan": [
+                        {
+                            "nama": "PT Daya Indah Yasa",
+                            "reason": "Mengurusi orang tua sakit selama 10 bulan di Jawa",
+                            "salary": "3.700.000",
+                            "jabatan": "Supervisor",
+                            "jobdesk": "Menjadi leader disebuah toko retail (MR.DIY) bertanggungjawab atas segala kegiatan di toko, dpt mengcover pekerjaan staff yang lain, menggerjakan laporan harian, menghandle laporan sales dan keuangan toko, bekerja secara shift dan tim.",
+                            "thn_akhir": "2022",
+                            "thn_mulai": "2021",
+                            "until_now": 0
+                        }
+                    ],
+                    "tanggung_jawab_pada_pekerjaan_terakhir": "Tidak ada"
+                },
+                "screning_id": 90,
+                "keterampilan": {
+                    "teknis": null,
+                    "non_teknis": null
+                },
+                "nama_lengkap": "Vicky agata dwiana nurcahya",
+                "screening_ai_check": 0,
+                "sertifikat_keahlian": null,
+                "jawaban_pertanyaan_skrining": {
+                    "1": "-",
+                    "2": "2",
+                    "3": "Assistant Branch Manager",
+                    "4": "9",
+                    "5": "12",
+                    "6": "-",
+                    "7": "-",
+                    "8": "3",
+                    "9": "-",
+                    "10": "0",
+                    "11": "-",
+                    "12": "-",
+                    "13": "-",
+                    "14": "Belum pernah",
+                    "15": "-",
+                    "16": "Komunikasi",
+                    "17": "Sering melakukan briefing dan evaluasi agar komunikasi tetap terjaga, menjaga lisan, memahami keadaan",
+                    "18": "1",
+                    "19": "-",
+                    "26": "Pangkalan Banteng",
+                    "27": "1 jam",
+                    "28": "Darat (Motor)",
+                    "29": "Desa Sungai Kuning, Pangkalan Banteng",
+                    "30": "2",
+                    "31": "Roaster, Web",
+                    "32": "3400000",
+                    "33": "3700000",
+                    "34": {
+                        "option": "3",
+                        "subInputs": []
+                    },
+                    "35": "12",
+                    "36": "Tunjangan jabatan, tunjanhan cuti, tunjangan hari raya, tunjangan hari tua, BPJS Kesehatan, BPJS ketenagakerjaan",
+                    "37": "1",
+                    "38": "-",
+                    "39": "1",
+                    "40": "1",
+                    "41": "1",
+                    "42": "1",
+                    "43": "1"
+                }
+            }
+        ],
+        "lowongan_pekerjaan": {
+            "id": 18,
+            "jabatan": {
+                "pendidikan": {
+                    "formal": {
+                        "jurusan": "59",
+                        "tingkat_pendidikan": "S1"
+                    }
+                },
+                "keterampilan": {
+                    "teknis": [
+                        "Memiliki kemampuan auditing & microsoft office"
+                    ],
+                    "non_teknis": [
+                        "Memiliki komunikasi yang baik, daya analisa, detail, teliti, proaktif, inisiatif, kemauan belajar tinggi dan berorientasi pada target."
+                    ]
+                },
+                "nama_jabatan": "Staff Auditor",
+                "deskripsi_jabatan": "Melakukan pemeriksaan, membuat laporan audit dan follow up hasil temuan audit serta melaporkan hasil kerja kepada user.",
+                "lainnya_requirement": "Bersedia di kontrak 1 tahunBersedia penempatan di Pangkalan Bun Kalimantan Tengah.",
+                "pertanyaan_skrining": {
+                    "General": {
+                        "26": "Dimana lokasi kerja saat ini?",
+                        "27": "Berapa jauh jarak tempuh dari lokasi kerja ke kota terdekat?",
+                        "28": "Transportasi apa yang dipergunakan menuju kota terdekat (darat/air/udara)?",
+                        "29": "Dimana lokasi asal domisili?",
+                        "30": "Silakan pilih salah satu metode kerja administrasi yang digunakan saat ini.",
+                        "31": "System apa yang dipergunakan?",
+                        "32": "Berapa nominal gaji pokok yang diterima?",
+                        "33": "Berapa nominal Take Home Pay (Nett total gaji dan benefit) yang diterima?",
+                        "34": "Silakan pilih salah satu pada bentuk tunjangan cuti yang diberikan saat ini dan cantumkan jumlahnya untuk tiap item sesuai plafon yang diterima.",
+                        "35": "Berapa jumlah hari cuti per tahun?",
+                        "36": "Tuliskan benefit/tunjangan lainnya yang diterima di tempat kerja terakhir dan besarannya.",
+                        "37": "Siapakah yang menanggung pajak penghasilan pribadi?",
+                        "38": "Apa saja jenis asuransi kesehatan yang diterima?"
+                    },
+                    "Pernyataan": {
+                        "39": "Apakah bersedia penempatan di Kalimantan Tengah?",
+                        "40": "Apakah bersedia penempatan sesuai kebutuhan Organisasi?",
+                        "41": "Apakah bersedia Bapak/Ibu dilakukan background and financial checking?",
+                        "42": "Apakah bersedia melanjutkan proses seleksi jika penawaran pendapatan bersifat gross?",
+                        "43": "Apakah bersedia melanjutkan proses seleksi jika paket benefit tidak sesuai dengan permintaan dan atau benefit yang sudah diterima?"
+                    },
+                    "Operasional Kebun": {
+                        "1": "Apa jabatan saat ini?",
+                        "2": "Apa level jabatan pada tempat kerja terakhir?",
+                        "3": "Posisi jabatan apa yang menjadi atasan langsung?",
+                        "4": "Berapa jumlah Karyawan yang menjadi anak buah/bawahan?",
+                        "5": "Berapa total jumlah Karyawan di Perusahaan terakhir?",
+                        "6": "Berapa ha luas area kerja saat ini?",
+                        "7": "Berapa ha luas area kerja terbesar yang pernah ditangani?",
+                        "8": "Apa saja jenis area yang pernah ditangani?",
+                        "9": "Jenis area apa yang paling dikuasai?",
+                        "10": "Apakah memiliki pengalaman menangani Mekanisasi atau Water Management System?",
+                        "11": "Berapa lama pengalaman menangani Mekanisasi atau Water Management System?",
+                        "12": "Berapa ton kapasitas pabrik saat ini?",
+                        "13": "Berapa ton kapasitas pabrik terbesar yang pernah ditangani?",
+                        "14": "Posisi apa saja yang pernah ditangani di Mill / Pabrik?",
+                        "15": "Posisi/Divisi apa yang paling dikuasai di Mill / Pabrik?",
+                        "16": "Tuliskan paling banyak 3 (tiga) masalah/konflik sosial yang dihadapi di lingkungan kerja saat ini.",
+                        "17": "Apa yang dilakukan untuk menghadapi permasalahan sosial tersebut?",
+                        "18": "Apakah disediakan kendaraan operasional?",
+                        "19": "Tuliskan jenis kendaraannya. (Isi '-' jika tidak disediakan)"
+                    }
+                },
+                "sertifikat_keahlian": null,
+                "pengalaman_pekerjaan": "3 tahun sebagai Staff Internal Audit atau KTU di perkebunan kelapa sawit.",
+                "uraian_tugas_tanggung_jawab": [
+                    "Melakukan audit operasional pada unit kerja yang menjadi tanggung jawabnya.",
+                    "Mengumpulkan data yang diperlukan untuk proses audit.",
+                    "Melakukan analisa data dalam proses audit dan memastikan seluruh prosedur/instruksi kerja terlaksana.",
+                    "Melakukan konfirmasi & verifikasi ke lapangan (jika diperlukan) dengan auditee untuk memastikan permasalahan temuan audit.",
+                    "Melaporkan dan berdiskusi dengan ketua tim dan anggota lainnya untuk setiap temuan audit.",
+                    "Memberikan rekomendasi atas temuan audit sebagai tindak lanjut unit kerja / manajemen.",
+                    "Memastikan rekomendasi atas temuan audit dilakukan follow up oleh unit kerja.",
+                    "Membuat tentative draft untuk setiap temuan dan dilaporkan kepada ketua tim.",
+                    "Melakukan review terhadap item yang memiliki resiko tinggi pada kinerja laporan keuangan pada saat proses audit berjalan.",
+                    "Memperbarui dan mengupdate informasi terkait dengan SOP/WI yang berlaku di unit kerja sebagai dasar dalam audit kepatuhan."
+                ]
+            }
+        },
+        "key_pertanyaan_screening": "Operasional Kebun,General,Pernyataan"
+    },
+    "status": true,
+    "message": "Success"
+}

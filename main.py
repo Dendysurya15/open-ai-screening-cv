@@ -184,22 +184,54 @@ def fetch_api_data():
     else:
         print("Invalid response format")
 
-def process_pending_screenings():
-    """Process all pending screenings in the MySQL database"""
+def process_pending_screenings(Testmode=False, limit=None):
+    """
+    Process pending screenings in the MySQL database
+    Args:
+        Testmode (bool): If True, only generate and save prompts without processing
+        limit (int): Maximum number of screenings to process. None for no limit
+    """
     try:
         conn = connect_to_mysql()
         cursor = conn.cursor(dictionary=True)
         
-        # Get all unprocessed screenings (status = 0)
+        # Modify query to include LIMIT if specified
         query = "SELECT * FROM cronjob WHERE status = 0"
+        if limit:
+            query += f" LIMIT {limit}"
+        
         cursor.execute(query)
         pending_screenings = cursor.fetchall()
         
         print(f"Found {len(pending_screenings)} pending screenings to process")
         
+        # Create prompt directory if it doesn't exist
+        prompt_dir = "prompt"
+        if not os.path.exists(prompt_dir):
+            os.makedirs(prompt_dir)
+        
         for screening in pending_screenings:
             try:
                 screening_data = json.loads(screening['data'])
+                lowongan_id = screening_data['data']['lowongan_pekerjaan']['id']
+
+                if Testmode:
+                    print(f"\nPrompt for screening {screening['screening_id']}:")
+                    messages = gas_ai.generate_prompt(lowongan_id, screening_data['data'], is_simplified=False)
+                    
+                    # Simpan prompt ke file JSON dalam folder prompt
+                    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+                    filename = f"prompt_screening_{screening['screening_id']}_{timestamp}.json"
+                    filepath = os.path.join(prompt_dir, filename)
+                    
+                    with open(filepath, 'w', encoding='utf-8') as f:
+                        json.dump(messages, f, indent=2, ensure_ascii=False)
+                    
+                    print(f"Prompt telah disimpan ke file: {filepath}")
+                    print(json.dumps(messages, indent=2))  # Tetap menampilkan di console
+                    continue
+                
+                # Normal processing mode
                 result = gas_ai.evaluate_candidate(screening_data['data'])
                 
                 if result and 'candidates' in result and len(result['candidates']) > 0:
@@ -278,7 +310,8 @@ def run_scheduler():
 if __name__ == "__main__":
     # Initial runs
     # fetch_api_data()
-    process_pending_screenings()
+    # process_pending_screenings(Testmode=True, limit=1)
+    process_pending_screenings(Testmode=False)
     
     # Setup and run pusher in separate thread
     pusher_thread = Thread(target=setup_pusher)

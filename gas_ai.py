@@ -18,8 +18,35 @@ def process_streaming_response(stream):
         print("Warning: Could not parse response as JSON")
         return complete_response
 
+def load_prompt_ai():
+    with open('prompt_ai.json', 'r') as file:
+        return json.load(file)
+
+def simplify_input_data(input_data):
+    """Create simplified version of input data"""
+    return {
+        "lowongan_pekerjaan": input_data["lowongan_pekerjaan"],
+        "kandidat": [{
+            "id": input_data["kandidat"][0]["id"],
+            "nama_lengkap": input_data["kandidat"][0]["nama_lengkap"],
+            "pendidikan": {
+                "formal": input_data["kandidat"][0]["pendidikan"]["formal"][-2:],
+                "non_formal": input_data["kandidat"][0]["pendidikan"].get("non_formal", [])[:2]
+            },
+            "pengalaman": {
+                "pengalaman_pekerjaan": input_data["kandidat"][0]["pengalaman"]["pengalaman_pekerjaan"][:2], 
+                "tanggung_jawab_pada_pekerjaan_terakhir": input_data["kandidat"][0]["pengalaman"]["tanggung_jawab_pada_pekerjaan_terakhir"]
+            },
+            "jawaban_pertanyaan_skrining": input_data["kandidat"][0]["jawaban_pertanyaan_skrining"]
+        }]
+    }
+
 def evaluate_candidate(input_data):
     """Evaluate candidate using the OpenAI API"""
+    
+    # Load system message from prompt_ai.json
+    prompts = load_prompt_ai()
+    
     try:
         # Extract lowongan_id from input data
         lowongan_id = input_data['lowongan_pekerjaan']['id']
@@ -29,80 +56,35 @@ def evaluate_candidate(input_data):
             api_key="lm-studio"
         )
 
-        # Create chat completion with streaming
-        stream = client.chat.completions.create(
-            model="meta-llama-3.1-8b-instruct",
-            messages=[
-                {
-                    "role": "system",
-                    "content": """Anda adalah rekruter HR profesional di PT CBI (perusahaan Perkebunan dan Pengolahan Kelapa Sawit) Pangkalan Bun - Kalimantan Tengah yang melakukan evaluasi kandidat secara mendalam dalam format JSON.
+        # Try with full input data first
+        try:
+            stream = client.chat.completions.create(
+                model="meta-llama-3.1-8b-instruct",
+                messages=[
+                    {"role": "system", "content": json.dumps(prompts['default_system_message'], ensure_ascii=False)},
+                    {"role": "user", "content": f"Evaluasi kandidat berikut untuk lowongan dengan ID {lowongan_id}:\n" + json.dumps(input_data, indent=2, ensure_ascii=False)}
+                ],
+                temperature=0.2,
+                max_completion_tokens=-1,
+                stream=True
+            )
+            result = process_streaming_response(stream)
+            
+        except Exception as e:
+            print("Trying with simplified input due to:", str(e))
+            # If failed, try with simplified input
+            simplified_input = simplify_input_data(input_data)
+            stream = client.chat.completions.create(
+                model="meta-llama-3.1-8b-instruct",
+                messages=[
+                    {"role": "system", "content": json.dumps(prompts['default_system_message'], ensure_ascii=False)},
+                    {"role": "user", "content": f"Evaluasi kandidat berikut untuk lowongan dengan ID {lowongan_id}:\n" + json.dumps(simplified_input, indent=2, ensure_ascii=False)}
+                ],
+                temperature=0.2,
+                stream=True
+            )
+            result = process_streaming_response(stream)
 
-                      Untuk setiap kandidat, buat penilaian terperinci dengan fokus pada:
-                      1. Memberikan penilaian menyeluruh untuk setiap kategori evaluasi utama
-                      2. Menghasilkan analisis deskriptif yang mendalam
-                      3. Pastikan untuk menyertakan lowongan_id dari data input
-
-                      Format output JSON:
-                      {
-                        "lowongan_id": id_lowongan,
-                        "candidates": [
-                          {
-                            "id_kandidat": id,
-                            "nama_lengkap": "name",
-                            "penilaian": [
-                              {
-                                "kategori": "pendidikan",
-                                "nilai": "1-5",
-                                "uraian": "Penilaian komprehensif latar belakang pendidikan"
-                              },
-                              {
-                                "kategori": "pengalaman",
-                                "nilai": "1-5",
-                                "uraian": "Penilaian komprehensif pengalaman dan riwayat pekerjaan"
-                              },
-                              {
-                                "kategori": "sertifikat_keahlian",
-                                "nilai": "1-5",
-                                "uraian": "Penilaian komprehensif sertifikat keahlian"
-                              },
-                              {
-                                "kategori": "keterampilan",
-                                "nilai": "1-5",
-                                "uraian": "Penilaian komprehensif keterampilan teknis dan non teknis"
-                              },
-                              {
-                                "kategori": "jawaban_pertanyaan_skrining_operasional_kebun",
-                                "nilai": "1-5",
-                                "uraian": "Penilaian komprehensif pertanyaan operasional kebun"
-                              },
-                              {
-                                "kategori": "jawaban_pertanyaan_skrining_general",
-                                "nilai": "1-5",
-                                "uraian": "Penilaian komprehensif pertanyaan general"
-                              },
-                              {
-                                "kategori": "jawaban_pertanyaan_skrining_pernyataan",
-                                "nilai": "1-5",
-                                "uraian": "Penilaian komprehensif pertanyaan pernyataan"
-                              }
-                            ],
-                            "rekomendasi": "Disarankan/Tidak disarankan",
-                            "ringkasan_penilaian": "Ringkasan singkat evaluasi keseluruhan kandidat"
-                          }
-                        ]
-                      }"""
-                },
-                {
-                    "role": "user",
-                    "content": f"Evaluasi kandidat berikut untuk lowongan dengan ID {lowongan_id}:\n" + json.dumps(input_data, indent=2)
-                }
-            ],
-            temperature=0.2,
-            stream=True
-        )
-
-        result = process_streaming_response(stream)
-        
         # Ensure lowongan_id is in the result
         if result and isinstance(result, dict) and 'lowongan_id' not in result:
             result['lowongan_id'] = lowongan_id
@@ -110,37 +92,6 @@ def evaluate_candidate(input_data):
         return result
 
     except Exception as e:
+        print("Both attempts failed:")
         print(f"Error in evaluate_candidate: {str(e)}")
         return None
-
-def process_mysql_screening(screening_data):
-    
-    """Process a single screening from MySQL data"""
-    try:
-        # Parse the JSON data from MySQL
-        if isinstance(screening_data, str):
-            data = json.loads(screening_data)
-        else:
-            data = screening_data
-
-        # Extract the relevant data for evaluation
-        if 'data' in data:
-            result = evaluate_candidate(data['data'])
-            
-            if result:
-                # Generate timestamp for the output file
-                timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-                screening_id = data['data']['kandidat'][0]['screning_id']
-                output_filename = f"output_{screening_id}_{timestamp}.json"
-                
-                # Save the result to a JSON file
-                with open(output_filename, 'w', encoding='utf-8') as f:
-                    json.dump(result, f, indent=2, ensure_ascii=False)
-                
-                return True, output_filename
-            
-        return False, None
-
-    except Exception as e:
-        print(f"Error in process_mysql_screening: {str(e)}")
-        return False, None
