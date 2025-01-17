@@ -18,9 +18,53 @@ def process_streaming_response(stream):
         print("Warning: Could not parse response as JSON")
         return complete_response
 
-def load_prompt_ai():
+def load_prompt_ai(input_data):
+    """Load and configure AI prompt based on input data"""
     with open('prompt_ai.json', 'r') as file:
-        return json.load(file)
+        prompts = json.load(file)
+    
+    # Define base penilaian categories
+    penilaian_candidate = [
+        {
+            "kategori": "pendidikan",
+            "nilai": "1-5", 
+            "uraian": "Penilaian komprehensif latar belakang pendidikan"
+        },
+        {
+            "kategori": "pengalaman",
+            "nilai": "1-5",
+            "uraian": "Penilaian komprehensif pengalaman dan riwayat pekerjaan"
+        },
+        {
+            "kategori": "sertifikat_keahlian", 
+            "nilai": "1-5",
+            "uraian": "Penilaian komprehensif sertifikat keahlian"
+        },
+        {
+            "kategori": "keterampilan",
+            "nilai": "1-5",
+            "uraian": "Penilaian komprehensif keterampilan teknis dan non teknis"
+        }
+    ]
+    
+    screening_categories = input_data.get('key_pertanyaan_screening', '').split(',')
+    
+    # Add dynamic screening categories
+    for category in screening_categories:
+        # Remove any whitespace and convert to snake_case
+        category_clean = category.strip()
+        category_snake = category_clean.lower().replace(' ', '_')
+        
+        penilaian_candidate.append({
+            "kategori": f"jawaban_pertanyaan_skrining_{category_snake}",  # Changed from jawaban_pertanyaan_skrining_
+            "nilai": "1-5",
+            "uraian": f"Penilaian komprehensif pertanyaan skrining untuk kategori {category_clean}"
+        })
+    
+    # Add penilaian_candidate to system message
+    prompts['default_system_message']['output_format']['candidates'][0]['penilaian'] = penilaian_candidate
+    
+    return prompts['default_system_message']
 
 def simplify_input_data(input_data):
     """Create simplified version of input data"""
@@ -43,14 +87,29 @@ def simplify_input_data(input_data):
 
 def evaluate_candidate(input_data):
     """Evaluate candidate using the OpenAI API"""
-    
-    # Load system message from prompt_ai.json
-    prompts = load_prompt_ai()
-    
     try:
-        # Extract lowongan_id from input data
-        lowongan_id = input_data['lowongan_pekerjaan']['id']
-        
+        # Handle both direct JSON and database format
+        if isinstance(input_data, dict):
+            if 'data' in input_data:
+                # Database format - data is nested
+                processed_data = input_data['data']
+            else:
+                # Direct JSON format - data is at root level
+                processed_data = input_data
+        else:
+            raise ValueError("Invalid input data format")
+
+        # Get lowongan_id - handle both formats
+        if 'lowongan_pekerjaan' in processed_data:
+            lowongan_id = processed_data['lowongan_pekerjaan']['id']
+        elif 'data' in processed_data and 'lowongan_pekerjaan' in processed_data['data']:
+            lowongan_id = processed_data['data']['lowongan_pekerjaan']['id']
+        else:
+            raise ValueError("Missing lowongan_id in input data")
+
+        # Get system message with all prompts configured based on input data
+        system_message = load_prompt_ai(processed_data)
+
         client = openai.OpenAI(
             base_url="http://10.9.116.125:1234/v1", 
             api_key="lm-studio"
@@ -61,8 +120,8 @@ def evaluate_candidate(input_data):
             stream = client.chat.completions.create(
                 model="meta-llama-3.1-8b-instruct",
                 messages=[
-                    {"role": "system", "content": json.dumps(prompts['default_system_message'], ensure_ascii=False)},
-                    {"role": "user", "content": f"Evaluasi kandidat berikut untuk lowongan dengan ID {lowongan_id}:\n" + json.dumps(input_data, indent=2, ensure_ascii=False)}
+                    {"role": "system", "content": json.dumps(system_message, ensure_ascii=False)},
+                    {"role": "user", "content": f"Evaluasi kandidat berikut untuk lowongan dengan ID {lowongan_id}:\n" + json.dumps(processed_data, indent=2, ensure_ascii=False)}
                 ],
                 temperature=0.2,
                 max_completion_tokens=-1,
@@ -71,13 +130,13 @@ def evaluate_candidate(input_data):
             result = process_streaming_response(stream)
             
         except Exception as e:
-            print("Trying with simplified input due to:", str(e))
+            print(f"First attempt failed: {str(e)}")
             # If failed, try with simplified input
-            simplified_input = simplify_input_data(input_data)
+            simplified_input = simplify_input_data(processed_data)
             stream = client.chat.completions.create(
                 model="meta-llama-3.1-8b-instruct",
                 messages=[
-                    {"role": "system", "content": json.dumps(prompts['default_system_message'], ensure_ascii=False)},
+                    {"role": "system", "content": json.dumps(system_message, ensure_ascii=False)},
                     {"role": "user", "content": f"Evaluasi kandidat berikut untuk lowongan dengan ID {lowongan_id}:\n" + json.dumps(simplified_input, indent=2, ensure_ascii=False)}
                 ],
                 temperature=0.2,
@@ -86,12 +145,55 @@ def evaluate_candidate(input_data):
             result = process_streaming_response(stream)
 
         # Ensure lowongan_id is in the result
-        if result and isinstance(result, dict) and 'lowongan_id' not in result:
-            result['lowongan_id'] = lowongan_id
-            
-        return result
+        if result and isinstance(result, dict):
+            if 'lowongan_id' not in result:
+                result['lowongan_id'] = lowongan_id
+            return result
+        else:
+            raise ValueError("Invalid response format from AI")
 
     except Exception as e:
-        print("Both attempts failed:")
+        print(f"Both attempts failed:")
         print(f"Error in evaluate_candidate: {str(e)}")
         return None
+
+def main():
+    """Command line interface for direct JSON processing"""
+    import argparse
+    import sys
+    
+    parser = argparse.ArgumentParser(description='Process candidate evaluation using AI')
+    parser.add_argument('--i', '--input', help='Input JSON file path', required=True)
+    parser.add_argument('--o', '--output', help='Output JSON file path', required=True)
+    
+    args = parser.parse_args()
+    
+    try:
+        # Read input JSON
+        with open(args.i, 'r', encoding='utf-8') as f:
+            input_data = json.load(f)
+        
+        # Process the data
+        result = evaluate_candidate(input_data)
+        
+        if result:
+            # Write output JSON
+            with open(args.o, 'w', encoding='utf-8') as f:
+                json.dump(result, f, indent=2, ensure_ascii=False)
+            print(f"Successfully processed and saved results to {args.o}")
+        else:
+            print("Processing failed - no result generated")
+            sys.exit(1)
+            
+    except FileNotFoundError:
+        print(f"Error: Could not find input file {args.i}")
+        sys.exit(1)
+    except json.JSONDecodeError:
+        print(f"Error: Invalid JSON in input file {args.i}")
+        sys.exit(1)
+    except Exception as e:
+        print(f"Error: {str(e)}")
+        sys.exit(1)
+
+if __name__ == "__main__":
+    main()

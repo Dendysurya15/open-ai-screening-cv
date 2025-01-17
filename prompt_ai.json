@@ -18,43 +18,7 @@
                 {
                     "id_kandidat": "id",
                     "nama_lengkap": "name",
-                    "penilaian": [
-                        {
-                            "kategori": "pendidikan",
-                            "nilai": "1-5",
-                            "uraian": "Penilaian komprehensif latar belakang pendidikan"
-                        },
-                        {
-                            "kategori": "pengalaman",
-                            "nilai": "1-5",
-                            "uraian": "Penilaian komprehensif pengalaman dan riwayat pekerjaan"
-                        },
-                        {
-                            "kategori": "sertifikat_keahlian",
-                            "nilai": "1-5",
-                            "uraian": "Penilaian komprehensif sertifikat keahlian"
-                        },
-                        {
-                            "kategori": "keterampilan",
-                            "nilai": "1-5",
-                            "uraian": "Penilaian komprehensif keterampilan teknis dan non teknis"
-                        },
-                        {
-                            "kategori": "jawaban_pertanyaan_skrining_operasional_kebun",
-                            "nilai": "1-5",
-                            "uraian": "Penilaian komprehensif pertanyaan operasional kebun"
-                        },
-                        {
-                            "kategori": "jawaban_pertanyaan_skrining_general",
-                            "nilai": "1-5",
-                            "uraian": "Penilaian komprehensif pertanyaan general"
-                        },
-                        {
-                            "kategori": "jawaban_pertanyaan_skrining_pernyataan",
-                            "nilai": "1-5",
-                            "uraian": "Penilaian komprehensif pertanyaan pernyataan"
-                        }
-                    ],
+                    "penilaian": [],
                     "rekomendasi": "Disarankan/Tidak disarankan",
                     "ringkasan_penilaian": "Ringkasan singkat evaluasi keseluruhan kandidat"
                 }

@@ -1,0 +1,48 @@
+{
+  "candidates": [
+    {
+      "id_kandidat": 35,
+      "nama_kandidat": "Hendi Kurniawan",
+      "penilaian": [
+        {
+          "kategori": "pendidikan",
+          "nilai": "4",
+          "uraian": "Lulusan D3 Keperawatan dari Politeknik Kesehatan Kementerian Kesehatan Bengkulu"
+        },
+        {
+          "kategori": "pengalaman",
+          "nilai": "4",
+          "uraian": "Pengalaman kerja sebagai perawat di beberapa tempat, termasuk PT. Palma Agro Lestari Jaya dan Program Penugasan Khusus Nusantara Sehat"
+        },
+        {
+          "kategori": "sertifikat_keahlian",
+          "nilai": "3",
+          "uraian": "Tidak ada sertifikat keahlian yang relevan"
+        },
+        {
+          "kategori": "keterampilan",
+          "nilai": "3",
+          "uraian": "Tidak ada keterampilan teknis yang relevan"
+        },
+        {
+          "kategori": "screening_supporting",
+          "nilai": "4",
+          "uraian": "Jabatan saat ini adalah Staff Paramedis, dengan tugas utama memberikan pelayanan kesehatan karyawan, pelayanan P3K kasus Kecelakaan Kerja, dan upaya preventif dan promotif pencegahan penyakit"
+        },
+        {
+          "kategori": "screening_general",
+          "nilai": "4",
+          "uraian": "Lokasi kerja saat ini adalah Ketungau Tengah, dengan jarak tempuh 90 Km dari kota terdekat"
+        },
+        {
+          "kategori": "screening_pernyataan",
+          "nilai": "4",
+          "uraian": "Bersedia penempatan di Kalimantan Tengah, dan bersedia penempatan sesuai kebutuhan Organisasi"
+        }
+      ],
+      "rekomendasi": "Disarankan",
+      "ringkasan_penilaian": "Kandidat ini memiliki latar belakang pendidikan yang relevan, pengalaman kerja yang luas, dan keterampilan yang baik dalam memberikan pelayanan kesehatan. Namun, tidak ada sertifikat keahlian yang relevan dan keterampilan teknis yang relevan. Oleh karena itu, disarankan untuk merekrut kandidat ini."
+    }
+  ],
+  "lowongan_id": 7
+}

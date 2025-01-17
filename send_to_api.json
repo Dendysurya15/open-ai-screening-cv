@@ -1,0 +1,36 @@
+{
+    "identities": {
+        "1": {
+            "pendidikan": {
+                "score": "1",
+                "comment": null
+            }
+        },
+        "2": {
+            "pengalaman": {
+                "score": "1",
+                "comment": null
+            }
+        }
+    },
+    "screening": {
+        "2": {
+            "jawaban_pertanyaan_skrining_operasional_kebun": {
+                "score": "1",
+                "comment": null
+            }
+        },
+        "3": {
+            "jawaban_pertanyaan_skrining_general": {
+                "score": "1",
+                "comment": null
+            }
+        },
+        "4": {
+            "jawaban_pertanyaan_skrining_pernyataan": {
+                "score": "1",
+                "comment": null
+            }
+        }
+    }
+}

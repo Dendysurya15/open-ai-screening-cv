@@ -2,119 +2,76 @@
     "data": {
         "kandidat": [
             {
-                "id": 616,
+                "id": 729,
                 "pendidikan": {
                     "formal": [
                         {
-                            "jurusan": "Budidaya Perairan / Perikanan",
-                            "nama_instansi": "Universitas Muhammadiyah Malang",
+                            "jurusan": "2",
+                            "nama_instansi": "Sekolah Tinggi Ilmu Ekonomi Trianandra",
                             "tingkat_pendidikan": "S1"
                         }
                     ],
-                    "non_formal": [
-                        {
-                            "tahun": "2020",
-                            "training": "Pelatihan Sertifikasi ISO 2200, HACCP dan GMP",
-                            "ijazahNon": 1,
-                            "penyelenggara": "Mina Indonesia"
-                        },
-                        {
-                            "tahun": "2017",
-                            "training": "Asisten Praktikum Perikanan",
-                            "ijazahNon": 1,
-                            "penyelenggara": "Prodi Budidaya Perairan"
-                        },
-                        {
-                            "tahun": "2018",
-                            "training": "Asisten Praktikum Perikanan",
-                            "ijazahNon": 1,
-                            "penyelenggara": "Prodi Budidaya Perairan"
-                        },
-                        {
-                            "tahun": "2019",
-                            "training": "Asisten Praktikum Perikanan",
-                            "ijazahNon": 1,
-                            "penyelenggara": "Prodi Budidaya Perairan"
-                        },
-                        {
-                            "tahun": "2017",
-                            "training": "Magang di Balai Benih Ikan Blitar",
-                            "ijazahNon": 1,
-                            "penyelenggara": "Himpunan Mahasiswa Jurusan Perikanan"
-                        },
-                        {
-                            "tahun": "2018",
-                            "training": "Magang di UPT Cangkringan",
-                            "ijazahNon": 1,
-                            "penyelenggara": "Himpunan Mahasiswa Jurusan Perikanan"
-                        },
-                        {
-                            "tahun": "2019",
-                            "training": "Praktek Kerja Lapang di BKIPM DENPASAR BALI",
-                            "ijazahNon": 1,
-                            "penyelenggara": "Mandiri"
-                        }
-                    ]
+                    "non_formal": null
                 },
                 "pengalaman": {
                     "pengalaman_pekerjaan": [
                         {
-                            "nama": "PT Daya Indah Yasa",
-                            "reason": "Mengurusi orang tua sakit selama 10 bulan di Jawa",
-                            "salary": "3.700.000",
-                            "jabatan": "Supervisor",
-                            "jobdesk": "Menjadi leader disebuah toko retail (MR.DIY) bertanggungjawab atas segala kegiatan di toko, dpt mengcover pekerjaan staff yang lain, menggerjakan laporan harian, menghandle laporan sales dan keuangan toko, bekerja secara shift dan tim.",
-                            "thn_akhir": "2022",
-                            "thn_mulai": "2021",
+                            "nama": "PT. Astra Honda Motor",
+                            "reason": "Habis Kontrak",
+                            "salary": "5.400.000",
+                            "jabatan": "Operator Produksi",
+                            "jobdesk": "Bertanggung Jawab Sebagai operator produksi assembling motor beat (K1AA)",
+                            "thn_akhir": "2021",
+                            "thn_mulai": "2019",
                             "until_now": 0
                         }
                     ],
                     "tanggung_jawab_pada_pekerjaan_terakhir": "Tidak ada"
                 },
-                "screning_id": 90,
+                "screning_id": 101,
                 "keterampilan": {
                     "teknis": null,
                     "non_teknis": null
                 },
-                "nama_lengkap": "Vicky agata dwiana nurcahya",
+                "nama_lengkap": "M. Rizki Nurhidayah",
                 "screening_ai_check": 0,
                 "sertifikat_keahlian": null,
                 "jawaban_pertanyaan_skrining": {
                     "1": "-",
-                    "2": "2",
-                    "3": "Assistant Branch Manager",
-                    "4": "9",
-                    "5": "12",
+                    "2": "0",
+                    "3": "Foreman",
+                    "4": "0",
+                    "5": "1200",
                     "6": "-",
                     "7": "-",
                     "8": "3",
                     "9": "-",
                     "10": "0",
-                    "11": "-",
-                    "12": "-",
-                    "13": "-",
-                    "14": "Belum pernah",
-                    "15": "-",
-                    "16": "Komunikasi",
-                    "17": "Sering melakukan briefing dan evaluasi agar komunikasi tetap terjaga, menjaga lisan, memahami keadaan",
+                    "11": "0",
+                    "12": "0",
+                    "13": "0",
+                    "14": "0",
+                    "15": "assembling",
+                    "16": "0",
+                    "17": "0",
                     "18": "1",
                     "19": "-",
-                    "26": "Pangkalan Banteng",
-                    "27": "1 jam",
-                    "28": "Darat (Motor)",
-                    "29": "Desa Sungai Kuning, Pangkalan Banteng",
+                    "26": "-",
+                    "27": "-",
+                    "28": "darat",
+                    "29": "Kabupaten Sukabumi",
                     "30": "2",
-                    "31": "Roaster, Web",
-                    "32": "3400000",
-                    "33": "3700000",
+                    "31": "Spreadsheet",
+                    "32": "5400000",
+                    "33": "6000000",
                     "34": {
                         "option": "3",
                         "subInputs": []
                     },
                     "35": "12",
-                    "36": "Tunjangan jabatan, tunjanhan cuti, tunjangan hari raya, tunjangan hari tua, BPJS Kesehatan, BPJS ketenagakerjaan",
+                    "36": "Tunjangan kesehatan",
                     "37": "1",
-                    "38": "-",
+                    "38": "BPJS kesehatan",
                     "39": "1",
                     "40": "1",
                     "41": "1",

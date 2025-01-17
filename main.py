@@ -216,10 +216,16 @@ def process_pending_screenings(Testmode=False, limit=None):
                 lowongan_id = screening_data['data']['lowongan_pekerjaan']['id']
 
                 if Testmode:
-                    print(f"\nPrompt for screening {screening['screening_id']}:")
-                    messages = gas_ai.generate_prompt(lowongan_id, screening_data['data'], is_simplified=False)
+                    # Get system message
+                    system_message = gas_ai.load_prompt_ai(screening_data['data'])
                     
-                    # Simpan prompt ke file JSON dalam folder prompt
+                    # Prepare messages for AI
+                    messages = [
+                        {"role": "system", "content": json.dumps(system_message, ensure_ascii=False)},
+                        {"role": "user", "content": f"Evaluasi kandidat berikut untuk lowongan dengan ID {lowongan_id}:\n" + json.dumps(screening_data['data'], indent=2, ensure_ascii=False)}
+                    ]
+                    
+                    # Save prompt to JSON file
                     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
                     filename = f"prompt_screening_{screening['screening_id']}_{timestamp}.json"
                     filepath = os.path.join(prompt_dir, filename)
@@ -228,7 +234,8 @@ def process_pending_screenings(Testmode=False, limit=None):
                         json.dump(messages, f, indent=2, ensure_ascii=False)
                     
                     print(f"Prompt telah disimpan ke file: {filepath}")
-                    print(json.dumps(messages, indent=2))  # Tetap menampilkan di console
+                    print("Preview prompt yang akan dikirim ke AI:")
+                    print(json.dumps(messages, indent=2))
                     continue
                 
                 # Normal processing mode
@@ -238,12 +245,16 @@ def process_pending_screenings(Testmode=False, limit=None):
                     candidate = result['candidates'][0]
                     penilaian = {item['kategori']: item for item in candidate['penilaian']}
                     
-                    # Prepare summary of screening questions as JSON
-                    screening_summary = {
-                        'operasional_kebun': penilaian['jawaban_pertanyaan_skrining_operasional_kebun'],
-                        'general': penilaian['jawaban_pertanyaan_skrining_general'],
-                        'pernyataan': penilaian['jawaban_pertanyaan_skrining_pernyataan']
-                    }
+                    # Prepare screening summary dynamically based on the actual categories in the AI response
+                    screening_summary = {}
+                    for category in penilaian:
+                        if category.startswith('jawaban_pertanyaan_skrining_'):
+                            # Extract the key name (e.g., 'operasional_kebun' from 'jawaban_pertanyaan_skrining_operasional_kebun')
+                            key = category.replace('jawaban_pertanyaan_skrining_', '')
+                            screening_summary[key] = penilaian[category]
+                    
+                    # Debug print to see what categories were found
+                    print(f"Found screening categories: {list(screening_summary.keys())}")
                     
                     # Update query with all fields
                     update_query = """
@@ -274,8 +285,12 @@ def process_pending_screenings(Testmode=False, limit=None):
                         screening['id']
                     )
                     
-                    cursor.execute(update_query, update_values)
-                    conn.commit()
+                    try:
+                        cursor.execute(update_query, update_values)
+                        conn.commit()
+                    except Exception as e:
+                        print(f"Database error details: {type(e).__name__}: {str(e)}")
+                        print(f"Attempted values: {update_values}")
                     
                     # # Save to JSON file (keeping existing functionality)
                     # timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
@@ -300,7 +315,7 @@ def process_pending_screenings(Testmode=False, limit=None):
             conn.close()
 
 def run_scheduler():
-    # schedule.every(15).minutes.do(fetch_api_data)
+    schedule.every(15).minutes.do(fetch_api_data)
     schedule.every(5).minutes.do(process_pending_screenings)  # Add screening processing to scheduler
     
     while True:
@@ -309,7 +324,7 @@ def run_scheduler():
 
 if __name__ == "__main__":
     # Initial runs
-    # fetch_api_data()
+    fetch_api_data()
     # process_pending_screenings(Testmode=True, limit=1)
     process_pending_screenings(Testmode=False)
     

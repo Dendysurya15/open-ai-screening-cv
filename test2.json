@@ -1,0 +1,191 @@
+{
+    "data": {
+        "kandidat": [
+            {
+                "id": 35,
+                "pendidikan": {
+                    "formal": [
+                        {
+                            "jurusan": "Keperawatan",
+                            "nama_instansi": "Politeknik Kesehatan Kementerian Kesehatan Bengkulu",
+                            "tingkat_pendidikan": "D3"
+                        }
+                    ],
+                    "non_formal": [
+                        {
+                            "tahun": "2023",
+                            "training": "Pelatihan Manajemen Penanggulangan Krisis Kesehatan Bagi SDM Kesehatan",
+                            "ijazahNon": 0,
+                            "penyelenggara": "Balai Pelatihan Kesehatan Semarang"
+                        },
+                        {
+                            "tahun": "2024",
+                            "training": "Pelatihan Hiperkes dan Keselamatan Kerja",
+                            "ijazahNon": 0,
+                            "penyelenggara": "PT. Medigaf Okupasi Indonesia"
+                        },
+                        {
+                            "tahun": "2024",
+                            "training": "Pelatihan Ahli K3 Umum Kemnaker RI",
+                            "ijazahNon": 0,
+                            "penyelenggara": "PT. Garuda Systrain Indonesia"
+                        }
+                    ]
+                },
+                "pengalaman": {
+                    "pengalaman_pekerjaan": [
+                        {
+                            "nama": "PT. Palma Agro Lestari Jaya",
+                            "reason": "Ingin mencari peluang karier yang baik dan perubahan jalur karier",
+                            "salary": "5.600.000",
+                            "jabatan": "Staff Paramedis",
+                            "jobdesk": "1. Memberikan pelayanan kesehatan kepada karyawan dan keluarga\n2. Menyampaikan informasi kesehatan dalam upaya preventif dan promotif\n3. Memberikan pelayanan P3K pada kasus kecelakaan kerja\n4. Membuat Berita Acara kecelakaan kerja dan melaporkan ke departemen terkait\n5. Melakukan pencatatan dan dokumentasi penyakit bulanan\n6. Melakukan pencatatan dan dokumentasi penggunaan obat-obatan dan BHP\n7. Mencatat dan mengajukan permohonan pengadaan obat-obatan dan BHP\n8. Melakukan inspeksi lingkungan perumahan karyawan dalam upaya pencegahan penyakit berbasis lingkungan",
+                            "thn_akhir": null,
+                            "thn_mulai": "2023",
+                            "until_now": 1
+                        },
+                        {
+                            "nama": "Program Penugasan Khusus Nusantara Sehat, Puskesmas Merakai",
+                            "reason": "Kontrak Kerja Berakhir",
+                            "salary": "4.400.000",
+                            "jabatan": "Perawat",
+                            "jobdesk": "Memberikan Pelayanan Kesehatan di daerah DTPK (Daerah Terpencil, Perbatasan dan Kepulauan)",
+                            "thn_akhir": "2017",
+                            "thn_mulai": "2015",
+                            "until_now": 0
+                        },
+                        {
+                            "nama": "Program Penugasan Khusus Nusantara Sehat, Puskesmas Nanga Mau",
+                            "reason": "Kontrak Kerja Berakhir",
+                            "salary": "4.726.000",
+                            "jabatan": "Perawat",
+                            "jobdesk": "Memberikan pelayanan kesehatan di daerah DTPK (Daerah Terpencil, Perbatasan dan Kepulauan)",
+                            "thn_akhir": "2019",
+                            "thn_mulai": "2017",
+                            "until_now": 0
+                        },
+                        {
+                            "nama": "Program Penugasan Khusus Nusantara Sehat, Puskesmas Puring Kencana",
+                            "reason": "Kontrak Kerja Berakhir",
+                            "salary": "6.543.000",
+                            "jabatan": "Perawat",
+                            "jobdesk": "Memberikan pelayanan kesehatan di daerah DTPK (Daerah Terpencil, Perbatasan dan Kepulauan)",
+                            "thn_akhir": "2022",
+                            "thn_mulai": "2020",
+                            "until_now": 0
+                        },
+                        {
+                            "nama": "Rumah Sakit Umum Daerah Rupit",
+                            "reason": "Peluan karier yang lebih baik dan tawaran yang lebih baik",
+                            "salary": "1.000.000",
+                            "jabatan": "Perawat",
+                            "jobdesk": "Perawat pelaksana di Instalasi Gawat Darurat dan Poli Bedah",
+                            "thn_akhir": "2015",
+                            "thn_mulai": "2013",
+                            "until_now": 0
+                        }
+                    ],
+                    "tanggung_jawab_pada_pekerjaan_terakhir": "Tidak ada"
+                },
+                "screning_id": 11,
+                "keterampilan": {
+                    "teknis": null,
+                    "non_teknis": null
+                },
+                "nama_lengkap": "Hendi Kurniawan",
+                "screening_ai_check": 0,
+                "sertifikat_keahlian": null,
+                "jawaban_pertanyaan_skrining": {
+                    "20": "Staff Paramedis",
+                    "21": "Pelayanan kesehatan karyawan, pelayanan P3K kasus Kecelakaan Kerja, Upaya preventif dan promotif pencegahan penyakit",
+                    "22": "1",
+                    "23": "SEM (Senior Estate Manager) dan Dokter Perusahaan",
+                    "24": "0",
+                    "25": "760",
+                    "26": "Ketungau Tengah",
+                    "27": "90 Km",
+                    "28": "Darat dan air",
+                    "29": "Ketungau Tengah",
+                    "30": "0",
+                    "31": "Pencatatan dan pelaporan menggunakan Excel",
+                    "32": "2700000",
+                    "33": "5400000",
+                    "34": {
+                        "option": "3",
+                        "subInputs": []
+                    },
+                    "35": "12",
+                    "36": "0",
+                    "37": "0",
+                    "38": "Pacific Cross",
+                    "39": "1",
+                    "40": "1",
+                    "41": "1",
+                    "42": "1",
+                    "43": "0"
+                }
+            }
+        ],
+        "lowongan_pekerjaan": {
+            "id": 7,
+            "jabatan": {
+                "pendidikan": {
+                    "formal": {
+                        "jurusan": "Keperawatan",
+                        "tingkat_pendidikan": "D3"
+                    }
+                },
+                "keterampilan": {
+                    "teknis": [
+                        "Penanggulangan Penderita Gawat Darurat (PPGD)",
+                        "STR Keperawatan masih aktif.",
+                        "Dapat bekerja sama dalam tim.",
+                        "Teliti, memiliki kemampuan komunikasi & analisa yang baik."
+                    ],
+                    "non_teknis": null
+                },
+                "nama_jabatan": "Perawat",
+                "deskripsi_jabatan": "Memberikan pelayanan kesehatan, pertolongan pada pasien gawat daruratan dan ancaman kematian kepada karyawan, keluarga serta warga sekitar kebun dan melakukan adminstrasi pelayanan kesehatan dan pergantian shift kerja karyawan medis.",
+                "lainnya_requirement": "Bersedia penempatan di site perkebunan kelapa sawit",
+                "pertanyaan_skrining": {
+                    "General": {
+                        "26": "Dimana lokasi kerja saat ini?",
+                        "27": "Berapa jauh jarak tempuh dari lokasi kerja ke kota terdekat?",
+                        "28": "Transportasi apa yang dipergunakan menuju kota terdekat (darat/air/udara)?",
+                        "29": "Dimana lokasi asal domisili?",
+                        "30": "Silakan pilih salah satu metode kerja administrasi yang digunakan saat ini.",
+                        "31": "System apa yang dipergunakan?",
+                        "32": "Berapa nominal gaji pokok yang diterima?",
+                        "33": "Berapa nominal Take Home Pay (Nett total gaji dan benefit) yang diterima?",
+                        "34": "Silakan pilih salah satu pada bentuk tunjangan cuti yang diberikan saat ini dan cantumkan jumlahnya untuk tiap item sesuai plafon yang diterima.",
+                        "35": "Berapa jumlah hari cuti per tahun?",
+                        "36": "Tuliskan benefit/tunjangan lainnya yang diterima di tempat kerja terakhir dan besarannya.",
+                        "37": "Siapakah yang menanggung pajak penghasilan pribadi?",
+                        "38": "Apa saja jenis asuransi kesehatan yang diterima?"
+                    },
+                    "Pernyataan": {
+                        "39": "Apakah bersedia penempatan di Kalimantan Tengah?",
+                        "40": "Apakah bersedia penempatan sesuai kebutuhan Organisasi?",
+                        "41": "Apakah bersedia Bapak/Ibu dilakukan background and financial checking?",
+                        "42": "Apakah bersedia melanjutkan proses seleksi jika penawaran pendapatan bersifat gross?",
+                        "43": "Apakah bersedia melanjutkan proses seleksi jika paket benefit tidak sesuai dengan permintaan dan atau benefit yang sudah diterima?"
+                    },
+                    "Supporting": {
+                        "20": "Apa jabatan saat ini?",
+                        "21": "Tuliskan 3 (tiga) tugas dan tanggung jawab utama dalam pekerjaan terakhir.",
+                        "22": "Apa level jabatan pada tempat kerja terakhir?",
+                        "23": "Posisi jabatan apa yang menjadi atasan langsung?",
+                        "24": "Berapa jumlah Karyawan yang menjadi anak buah/bawahan?",
+                        "25": "Berapa total jumlah Karyawan di Perusahaan terakhir?"
+                    }
+                },
+                "sertifikat_keahlian": null,
+                "pengalaman_pekerjaan": "1 tahun sebagai perawat",
+                "uraian_tugas_tanggung_jawab": null
+            }
+        },
+        "key_pertanyaan_screening": "Supporting,General,Pernyataan"
+    },
+    "status": true,
+    "message": "Success"
+}
