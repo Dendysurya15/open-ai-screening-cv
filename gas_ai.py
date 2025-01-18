@@ -115,34 +115,18 @@ def evaluate_candidate(input_data):
             api_key="lm-studio"
         )
 
-        # Try with full input data first
-        try:
-            stream = client.chat.completions.create(
-                model="meta-llama-3.1-8b-instruct",
-                messages=[
-                    {"role": "system", "content": json.dumps(system_message, ensure_ascii=False)},
-                    {"role": "user", "content": f"Evaluasi kandidat berikut untuk lowongan dengan ID {lowongan_id}:\n" + json.dumps(processed_data, indent=2, ensure_ascii=False)}
-                ],
-                temperature=0.2,
-                max_completion_tokens=-1,
-                stream=True
-            )
-            result = process_streaming_response(stream)
-            
-        except Exception as e:
-            print(f"First attempt failed: {str(e)}")
-            # If failed, try with simplified input
-            simplified_input = simplify_input_data(processed_data)
-            stream = client.chat.completions.create(
-                model="meta-llama-3.1-8b-instruct",
-                messages=[
-                    {"role": "system", "content": json.dumps(system_message, ensure_ascii=False)},
-                    {"role": "user", "content": f"Evaluasi kandidat berikut untuk lowongan dengan ID {lowongan_id}:\n" + json.dumps(simplified_input, indent=2, ensure_ascii=False)}
-                ],
-                temperature=0.2,
-                stream=True
-            )
-            result = process_streaming_response(stream)
+        # Use simplified input by default
+        simplified_input = simplify_input_data(processed_data)
+        stream = client.chat.completions.create(
+            model="meta-llama-3.1-8b-instruct",
+            messages=[
+                {"role": "system", "content": json.dumps(system_message, ensure_ascii=False)},
+                {"role": "user", "content": f"Evaluasi kandidat berikut untuk lowongan dengan ID {lowongan_id}:\n" + json.dumps(simplified_input, indent=2, ensure_ascii=False)}
+            ],
+            temperature=0.2,
+            stream=True
+        )
+        result = process_streaming_response(stream)
 
         # Ensure lowongan_id is in the result
         if result and isinstance(result, dict):
@@ -153,7 +137,7 @@ def evaluate_candidate(input_data):
             raise ValueError("Invalid response format from AI")
 
     except Exception as e:
-        print(f"Both attempts failed:")
+        print(f"Evaluation failed:")
         print(f"Error in evaluate_candidate: {str(e)}")
         return None
 

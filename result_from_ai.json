@@ -1,0 +1,48 @@
+{
+    "candidates": [
+        {
+            "id_kandidat": 279,
+            "nama_kandidat": "Elpa Yulia",
+            "penilaian": [
+                {
+                    "kategori": "pendidikan",
+                    "nilai": "5",
+                    "uraian": "Pendidikan formal kandidat (S1 Keperawatan) melebihi requirement posisi (D3 Keperawatan). Ditambah dengan sertifikasi non-formal yang relevan."
+                },
+                {
+                    "kategori": "pengalaman",
+                    "nilai": "4",
+                    "uraian": "Penilaian komprehensif pengalaman dan riwayat pekerjaan."
+                },
+                {
+                    "kategori": "sertifikat_keahlian",
+                    "nilai": "4",
+                    "uraian": "Memiliki sertifikat relevan: Pelatihan basic trauma cardiac life support."
+                },
+                {
+                    "kategori": "keterampilan",
+                    "nilai": "1",
+                    "uraian": "Penilaian komprehensif keterampilan teknis dan non teknis."
+                },
+                {
+                    "kategori": "screening_supporting",
+                    "nilai": "4",
+                    "uraian": "Analisis Supporting: - Relevansi pengalaman dengan posisi\n- Kemampuan kepemimpinan\n- Kerja tim dan komunikasi\n- Pencapaian dalam peran support"
+                },
+                {
+                    "kategori": "screening_general",
+                    "nilai": "4",
+                    "uraian": "Analisis General: - Kesesuaian ekspektasi gaji\n- Kesediaan mobilitas\n- Adaptabilitas\n- Motivasi dan tujuan karir"
+                },
+                {
+                    "kategori": "screening_pernyataan",
+                    "nilai": "4",
+                    "uraian": "Analisis Pernyataan: - Komitmen terhadap posisi\n- Fleksibilitas\n- Integritas\n- Kesiapan mengikuti aturan"
+                }
+            ],
+            "rekomendasi": "Disarankan",
+            "ringkasan_penilaian": "Ringkasan komprehensif yang mencakup:\n- Kualifikasi utama: Pendidikan S1 Keperawatan, pengalaman pekerjaan sebagai perawat, dan sertifikat keahlian yang relevan.\n- Potensi kontribusi: Kemampuan kepemimpinan, kerja tim, dan komunikasi yang baik.\n- Area pengembangan: Keterampilan teknis dan non teknis yang perlu ditingkatkan.\n- Pertimbangan khusus: Kandidat ini memiliki potensi besar untuk berkembang dan menjadi salah satu kandidat yang disarankan."
+        }
+    ],
+    "lowongan_id": 7
+}
