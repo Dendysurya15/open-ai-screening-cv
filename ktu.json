@@ -2,84 +2,89 @@
     "data": {
         "kandidat": [
             {
-                "id": 193,
+                "id": 265,
                 "pendidikan": {
                     "formal": [
                         {
-                            "jurusan": "Geografi",
-                            "nama_instansi": "Universitas Lambung Mangkurat",
+                            "jurusan": "Akuntansi",
+                            "nama_instansi": "STIE Santa Ursula",
                             "tingkat_pendidikan": "S1"
                         }
                     ],
-                    "non_formal": null
+                    "non_formal": [
+                        {
+                            "tahun": "2022",
+                            "training": "Brevet Pajak AB",
+                            "ijazahNon": 1,
+                            "penyelenggara": "Universitas Gadjah Mada"
+                        }
+                    ]
                 },
                 "pengalaman": {
                     "pengalaman_pekerjaan": [
                         {
-                            "nama": "Bank Mandiri",
-                            "reason": "Kontrak",
-                            "salary": "4.000.000",
-                            "jabatan": "Teller",
-                            "jobdesk": "Melayani nasabah dalam transaksi tabungan baik setoran maupun penarikan dan transfer",
-                            "thn_akhir": "2013",
-                            "thn_mulai": "2012",
+                            "nama": "Minamas Plantation",
+                            "reason": "Mengejar karir dan tantangan baru",
+                            "salary": "15.200.000",
+                            "jabatan": "Kasie Administrasi",
+                            "jobdesk": "1. Bertanggung jawab atas pelaporan administrasi, asset perusahaan, cash opname, stok opname, persediaan gudang, dll\n2. Menjaga hubungan baik dengan toko masyarakat dan dinas terkait",
+                            "thn_akhir": "2023",
+                            "thn_mulai": "2013",
                             "until_now": 0
                         },
                         {
-                            "nama": "Bank Negara Indonesia",
-                            "reason": "Pensiun",
-                            "salary": "9.000.000",
-                            "jabatan": "Analis Kredir",
-                            "jobdesk": "Melakukan analisa pengajua  kredit",
+                            "nama": "PT Indo Partners Plantation Services",
+                            "reason": "Mengejar karir dan tantangan baru",
+                            "salary": "13.000.000",
+                            "jabatan": "Stay internal auditor",
+                            "jobdesk": "Pemeriksaan cash opname, gudang, lapangan di estate dan Mill",
                             "thn_akhir": null,
-                            "thn_mulai": "2013",
+                            "thn_mulai": "2024",
                             "until_now": 1
                         }
                     ],
-                    "tanggung_jawab_pada_pekerjaan_terakhir": "Teller Periode November 2013 -  November 2015(Bertanggung jawab dalam pelayanan kepada nasabah dengan transaki tunai maupun non tunai)\nManajemen Modal Manusia dan Logistik Periode Desember 2015 - April 2018 (Bertanggung jawab dalam proses Recruitmen, pengelolaan sumber daya manusia, pengadaan logistik barang dan jasa, pengelolaan premisis kantor)\nCollection Periode Mei 2018 - September 2019 (Bertanggung jawab terhadap perbaikan kualitas kredit)\nConsumer Business Risk Staff Periode Oktober 2019 - Sampai saat ini (Bertanggung jawab dalam analisa proses kredit)"
+                    "tanggung_jawab_pada_pekerjaan_terakhir": "Pemeriksaan cash & bank, inventory gudang, dan lapangan di estate dan Mill."
                 },
-                "screning_id": 25,
+                "screning_id": 35,
                 "keterampilan": {
                     "teknis": null,
                     "non_teknis": null
                 },
-                "nama_lengkap": "muhammad heriansyah",
+                "nama_lengkap": "Reinhard Sahala",
                 "screening_ai_check": 0,
                 "sertifikat_keahlian": null,
                 "jawaban_pertanyaan_skrining": {
-                    "1": "Analis",
-                    "2": "1",
-                    "3": "Supervisor",
-                    "4": "4",
-                    "5": "100",
-                    "6": "0",
-                    "7": "-",
-                    "8": "1",
-                    "9": "+",
+                    "1": "Staf internal auditor",
+                    "2": "2",
+                    "3": "Head Region",
+                    "4": "0",
+                    "5": "400",
+                    "6": "3200",
+                    "7": "3000",
+                    "8": "3",
+                    "9": "Administrasi",
                     "10": "0",
-                    "11": "-",
-                    "16": "-",
-                    "17": "Diskusi",
+                    "11": "2 tahun",
+                    "16": "Pengeluaran barang dari gudang, pemberian bantuan dana.",
+                    "17": "Berkoordinasi dengan pimpinan.",
                     "18": "0",
-                    "19": "Mobil",
-                    "26": "Tanah Bumbu",
-                    "27": "0KM",
-                    "28": "Mobil",
-                    "29": "Banjarmasin",
-                    "30": "2",
-                    "31": "MS",
-                    "32": "9600000",
-                    "33": "10000000",
+                    "19": "Sepeda motor",
+                    "26": "Pontianak",
+                    "27": "15km",
+                    "28": "Sepeda motor",
+                    "29": "Kalimantan Selatan",
+                    "30": "0",
+                    "31": "Oracle",
+                    "32": "10000000",
+                    "33": "13000000",
                     "34": {
-                        "option": "1",
-                        "subInputs": [
-                            "9600000"
-                        ]
+                        "option": "3",
+                        "subInputs": []
                     },
                     "35": "12",
-                    "36": "Tunjangan Kemahalan",
-                    "37": "1",
-                    "38": "BNI Life",
+                    "36": "Flexi 2000000, tempat tinggal 2000000, jabatan 110000",
+                    "37": "0",
+                    "38": "Prudential",
                     "39": "1",
                     "40": "1",
                     "41": "1",
@@ -105,7 +110,7 @@
                 "deskripsi_jabatan": "Melaksanakan dan mengelola seluruh administrasi perkebunan estate untuk memastikan seluruh administrasi perkebunan estate dilakukan sesuai dengan prosedur untuk mendukung pencapaian target perusahaan",
                 "lainnya_requirement": "Pelatihan Administrasi Perkebunan Kelapa Sawit",
                 "pertanyaan_skrining": {
-                    "General": {
+                    "general": {
                         "26": "Dimana lokasi kerja saat ini?",
                         "27": "Berapa jauh jarak tempuh dari lokasi kerja ke kota terdekat?",
                         "28": "Transportasi apa yang dipergunakan menuju kota terdekat (darat/air/udara)?",
@@ -120,14 +125,14 @@
                         "37": "Siapakah yang menanggung pajak penghasilan pribadi?",
                         "38": "Apa saja jenis asuransi kesehatan yang diterima?"
                     },
-                    "Pernyataan": {
+                    "pernyataan": {
                         "39": "Apakah bersedia penempatan di Kalimantan Tengah?",
                         "40": "Apakah bersedia penempatan sesuai kebutuhan Organisasi?",
                         "41": "Apakah bersedia Bapak/Ibu dilakukan background and financial checking?",
                         "42": "Apakah bersedia melanjutkan proses seleksi jika penawaran pendapatan bersifat gross?",
                         "43": "Apakah bersedia melanjutkan proses seleksi jika paket benefit tidak sesuai dengan permintaan dan atau benefit yang sudah diterima?"
                     },
-                    "Operasional Kebun": {
+                    "operasional_kebun": {
                         "1": "Apa jabatan saat ini?",
                         "2": "Apa level jabatan pada tempat kerja terakhir?",
                         "3": "Posisi jabatan apa yang menjadi atasan langsung?",
@@ -157,7 +162,7 @@
                 ]
             }
         },
-        "key_pertanyaan_screening": "Operasional Kebun,General,Pernyataan"
+        "key_pertanyaan_screening": "operasional_kebun,general,pernyataan"
     },
     "status": true,
     "message": "Success"

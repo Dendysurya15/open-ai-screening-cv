@@ -243,9 +243,18 @@ def process_pending_screenings(Testmode=False, limit=None):
                 
                 if result and 'candidates' in result and len(result['candidates']) > 0:
                     candidate = result['candidates'][0]
-                    penilaian = {item['kategori']: item for item in candidate['penilaian']}
+                    # Create penilaian dictionary with default values
+                    penilaian = {
+                        'pendidikan': {'nilai': '0', 'uraian': 'Tidak ada penilaian'},
+                        'pengalaman': {'nilai': '0', 'uraian': 'Tidak ada penilaian'},
+                        'sertifikat_keahlian': {'nilai': '0', 'uraian': 'Tidak ada penilaian'},
+                        'keterampilan': {'nilai': '0', 'uraian': 'Tidak ada penilaian'}
+                    }
                     
-                    # print(penilaian)
+                    # Update with actual values from result
+                    for item in candidate['penilaian']:
+                        penilaian[item['kategori']] = item
+                    
                     # Define mapping for screening question categories
                     screening_categories = {
                         'operasional_kebun': 'jawaban_pertanyaan_skrining_operasional_kebun',
@@ -279,6 +288,7 @@ def process_pending_screenings(Testmode=False, limit=None):
                         summary_sertifikat_keahlian = %s,
                         nilai_keterampilan = %s,
                         summary_keterampilan = %s,
+                        screening_key_kategori = %s,
                         summary_nilai_pertanyaan_screening = %s
                     WHERE id = %s
                     """
@@ -292,6 +302,7 @@ def process_pending_screenings(Testmode=False, limit=None):
                         penilaian['sertifikat_keahlian']['uraian'],
                         int(penilaian['keterampilan']['nilai']),
                         penilaian['keterampilan']['uraian'],
+                        screening_data['data']['key_pertanyaan_screening'],
                         json.dumps(screening_summary),
                         screening['id']
                     )
@@ -321,9 +332,132 @@ def process_pending_screenings(Testmode=False, limit=None):
             cursor.close()
             conn.close()
 
+def format_screening_result(screening_data, screening_id):
+    """Format screening data to match required API format"""
+    try:
+        key_screening = screening_data['screening_key_kategori'].split(',')
+        summary_screening = json.loads(screening_data['summary_nilai_pertanyaan_screening'])
+        
+        # Initialize result structure
+        result = {
+            "data": {
+                "identities": {
+                    "1": {
+                        "kategori": "pendidikan",
+                        "score": str(screening_data['nilai_pendidikan']),
+                        "comment": screening_data['summary_pendidikan']
+                    },
+                    "2": {
+                        "kategori": "pengalaman",
+                        "score": str(screening_data['nilai_pengalaman']),
+                        "comment": screening_data['sumarry_pengalaman']
+                    }
+                },
+                "screening": {}
+            },
+            "screening_id": str(screening_id)
+        }
+        
+        # Map category names to numbers
+        category_mapping = {
+            'supporting': '2',
+            'general': '3',
+            'pernyataan': '4',
+            'operasional_kebun': '5'
+        }
+        
+        # Add screening data with numbered keys
+        for category in key_screening:
+            category = category.strip()  # Remove any whitespace
+            if category in summary_screening:
+                category_data = summary_screening[category]
+                number = category_mapping.get(category, '0')
+                
+                result['data']['screening'][number] = {
+                    "kategori": category_data['kategori'],
+                    "score": str(category_data['nilai']),
+                    "comment": category_data['uraian']
+                }
+        
+        return result
+    except Exception as e:
+        print(f"Error formatting screening result: {str(e)}")
+        return None
+
+def send_to_api(formatted_data):
+    """Send formatted data to API endpoint"""
+    api_url = os.getenv('API_ENDPOINT', 'http://127.0.0.1:8000/api/result-screening-ai')
+    headers = {
+        'Authorization': f"Bearer {os.getenv('SACTUM_API_KEY')}",
+        'Content-Type': 'application/json'
+    }
+    
+    try:
+        # Save the request data to a JSON file
+        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+        filename = f"api_request_{formatted_data['screening_id']}_{timestamp}.json"
+        
+        # Create 'api_requests' directory if it doesn't exist
+        if not os.path.exists('api_requests'):
+            os.makedirs('api_requests')
+            
+        filepath = os.path.join('api_requests', filename)
+        with open(filepath, 'w', encoding='utf-8') as f:
+            json.dump(formatted_data, f, indent=2, ensure_ascii=False)
+        
+        print(f"API request data saved to: {filepath}")
+        
+        # Send the actual request
+        response = requests.post(api_url, json=formatted_data, headers=headers)
+        return response.status_code == 200, response.text
+    except Exception as e:
+        print(f"Error sending to API: {str(e)}")
+        return False, str(e)
+
+def process_completed_screenings():
+    """Process and send completed screening results"""
+    try:
+        conn = connect_to_mysql()
+        cursor = conn.cursor(dictionary=True)
+        
+        # Get screenings with status = 2 (completed but not sent)
+        query = "SELECT * FROM cronjob WHERE status = 1"
+        cursor.execute(query)
+        completed_screenings = cursor.fetchall()
+        
+        print(f"Found {len(completed_screenings)} completed screenings to send to API")
+        
+        for screening in completed_screenings:
+            try:
+                # Format the data for API
+                formatted_data = format_screening_result(screening['data'], screening['screening_id'])
+                if formatted_data:
+                    # Send to API
+                    success, response = send_to_api(formatted_data)
+                    if success:
+                        # # Update status to 3 (sent to API)
+                        # update_query = "UPDATE cronjob SET status = 2 WHERE screening_id = %s"
+                        # cursor.execute(update_query, (screening['screening_id'],))
+                        # conn.commit()
+                        print(f"Successfully sent screening {screening['screening_id']} to API")
+                    else:
+                        print(f"Failed to send screening {screening['screening_id']} to API: {response}")
+                else:
+                    print(f"Failed to format screening {screening['screening_id']} data")
+                
+            except Exception as e:
+                print(f"Error processing screening {screening['screening_id']}: {str(e)}")
+                continue
+                
+    except Exception as e:
+        print(f"Database error: {str(e)}")
+    finally:
+        if 'conn' in locals() and conn.is_connected():
+            cursor.close()
+            conn.close()
+
 def run_scheduler():
-    # schedule.every(15).minutes.do(fetch_api_data)
-    schedule.every(5).minutes.do(process_pending_screenings)  # Add screening processing to scheduler
+    schedule.every(1).minutes.do(process_completed_screenings)
     
     while True:
         schedule.run_pending()
@@ -332,7 +466,8 @@ def run_scheduler():
 if __name__ == "__main__":
     # Initial runs
     # fetch_api_data()
-    # process_pending_screenings(Testmode=True, limit=1)
+    # process_completed_screenings()
+    # # process_pending_screenings(Testmode=True, limit=1)
     process_pending_screenings(Testmode=False)
     
     # Setup and run pusher in separate thread
@@ -341,5 +476,5 @@ if __name__ == "__main__":
     pusher_thread.start()
     
     # Run scheduler in main thread
-    print("Starting scheduler - will fetch data every 15 minutes and process screenings every 5 minutes")
+    print("Starting scheduler - will process and send completed screenings every minute")
     run_scheduler()

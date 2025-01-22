@@ -1,0 +1,94 @@
+{
+    "type": "object",
+    "required": [
+        "candidates",
+        "lowongan_id",
+        "key_pertanyaan_screening"
+    ],
+    "properties": {
+        "lowongan_id": {
+            "type": "integer",
+            "description": "ID of the job position"
+        },
+        "key_pertanyaan_screening": {
+            "type": "string",
+            "description": "Key of the screening questions"
+        },
+        "candidates": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "required": [
+                    "id_kandidat",
+                    "nama_kandidat",
+                    "penilaian",
+                    "rekomendasi",
+                    "ringkasan_penilaian"
+                ],
+                "properties": {
+                    "id_kandidat": {
+                        "type": "integer",
+                        "description": "Unique identifier for the candidate"
+                    },
+                    "nama_kandidat": {
+                        "type": "string",
+                        "description": "The name of the candidate"
+                    },
+                    "penilaian": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "required": [
+                                "kategori",
+                                "nilai",
+                                "uraian"
+                            ],
+                            "properties": {
+                                "kategori": {
+                                    "type": "string",
+                                    "enum": [
+                                        "pendidikan",
+                                        "pengalaman",
+                                        "keterampilan",
+                                        "jawaban_pertanyaan_skrining_supporting",
+                                        "jawaban_pertanyaan_skrining_general",
+                                        "jawaban_pertanyaan_skrining_pernyataan"
+                                    ],
+                                    "description": "Category of assessment"
+                                },
+                                "nilai": {
+                                    "type": "string",
+                                    "enum": [
+                                        "1",
+                                        "2",
+                                        "3",
+                                        "4",
+                                        "5"
+                                    ],
+                                    "description": "Rating where:\n1: Does not meet requirements\n2: Partially meets\n3: Meets basic requirements\n4: Fully meets\n5: Exceeds requirements"
+                                },
+                                "uraian": {
+                                    "type": "string",
+                                    "description": "Detailed explanation of the assessment"
+                                }
+                            }
+                        }
+                    },
+                    "rekomendasi": {
+                        "type": "string",
+                        "enum": [
+                            "Disarankan",
+                            "Dipertimbangkan dengan Catatan",
+                            "Tidak Disarankan"
+                        ],
+                        "description": "Final recommendation based on strict evaluation rules"
+                    },
+                    "ringkasan_penilaian": {
+                        "type": "string",
+                        "description": "Summary explaining the scores and recommendation decision"
+                    }
+                }
+            }
+        }
+    }
+}

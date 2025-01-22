@@ -13,10 +13,16 @@ def process_streaming_response(stream):
     complete_response = ''.join(collected_messages)
     
     try:
-        return json.loads(complete_response)
+        result = json.loads(complete_response)
+        # Add validation for required fields
+        if not isinstance(result, dict):
+            raise ValueError("Response must be a JSON object")
+        if 'candidates' not in result:
+            raise ValueError("Response missing 'candidates' field")
+        return result
     except json.JSONDecodeError:
         print("Warning: Could not parse response as JSON")
-        return complete_response
+        return None  # Return None instead of unparsed response
 
 def load_prompt_ai(input_data):
     """Load and configure AI prompt based on input data"""
@@ -67,21 +73,29 @@ def load_prompt_ai(input_data):
     return prompts['default_system_message']
 
 def simplify_input_data(input_data):
-    """Create simplified version of input data"""
+    """Modify function to handle different formal education structures"""
+    kandidat = input_data["kandidat"][0]
+    pengalaman = kandidat.get("pengalaman", {})
+    # Handle work experience
+    work_experience = pengalaman.get("pengalaman_pekerjaan", [])
+    if work_experience:
+        # Take first 2 entries if available
+        work_experience = work_experience[:3]
+    elif work_experience is None:
+        work_experience = []
+        
     return {
         "lowongan_pekerjaan": input_data["lowongan_pekerjaan"],
+        "key_pertanyaan_screening": input_data.get("key_pertanyaan_screening", ""),
         "kandidat": [{
-            "id": input_data["kandidat"][0]["id"],
-            "nama_lengkap": input_data["kandidat"][0]["nama_lengkap"],
-            "pendidikan": {
-                "formal": input_data["kandidat"][0]["pendidikan"]["formal"][-2:],
-                "non_formal": input_data["kandidat"][0]["pendidikan"].get("non_formal", [])[:2]
-            },
+            "id": kandidat["id"],
+            "nama_lengkap": kandidat["nama_lengkap"],
+            "pendidikan": kandidat["pendidikan"],
             "pengalaman": {
-                "pengalaman_pekerjaan": input_data["kandidat"][0]["pengalaman"]["pengalaman_pekerjaan"][:2], 
-                "tanggung_jawab_pada_pekerjaan_terakhir": input_data["kandidat"][0]["pengalaman"]["tanggung_jawab_pada_pekerjaan_terakhir"]
+                "pengalaman_pekerjaan": work_experience,
+                "tanggung_jawab_pada_pekerjaan_terakhir": pengalaman.get("tanggung_jawab_pada_pekerjaan_terakhir", "")
             },
-            "jawaban_pertanyaan_skrining": input_data["kandidat"][0]["jawaban_pertanyaan_skrining"]
+            "jawaban_pertanyaan_skrining": kandidat.get("jawaban_pertanyaan_skrining", {})
         }]
     }
 
@@ -90,55 +104,87 @@ def evaluate_candidate(input_data):
     try:
         # Handle both direct JSON and database format
         if isinstance(input_data, dict):
+            print("Input data is a dictionary")
             if 'data' in input_data:
                 # Database format - data is nested
                 processed_data = input_data['data']
+                print("Using nested data format")
             else:
                 # Direct JSON format - data is at root level
                 processed_data = input_data
+                print("Using root level data format")
         else:
-            raise ValueError("Invalid input data format")
+            raise ValueError(f"Invalid input data format. Expected dict, got {type(input_data)}")
 
         # Get lowongan_id - handle both formats
-        if 'lowongan_pekerjaan' in processed_data:
-            lowongan_id = processed_data['lowongan_pekerjaan']['id']
-        elif 'data' in processed_data and 'lowongan_pekerjaan' in processed_data['data']:
-            lowongan_id = processed_data['data']['lowongan_pekerjaan']['id']
-        else:
-            raise ValueError("Missing lowongan_id in input data")
+        try:
+            if 'lowongan_pekerjaan' in processed_data:
+                lowongan_id = processed_data['lowongan_pekerjaan']['id']
+                screening_id = processed_data['kandidat'][0]['screning_id']
+            elif 'data' in processed_data and 'lowongan_pekerjaan' in processed_data['data']:
+                lowongan_id = processed_data['data']['lowongan_pekerjaan']['id']
+                screening_id = processed_data['data']['kandidat'][0]['screning_id']
+            else:
+                raise ValueError("Missing lowongan_id in input data")
+            print(f"Found lowongan_id: {lowongan_id}")
+            print(f"Found screening_id: {screening_id}")
+        except Exception as e:
+            print(f"Error extracting lowongan_id: {str(e)}")
+            # print("Processed data structure:", json.dumps(processed_data, indent=2))
+            raise
 
         # Get system message with all prompts configured based on input data
-        system_message = load_prompt_ai(processed_data)
+        try:
+            system_message = load_prompt_ai(processed_data)
+            print("Successfully loaded system message")
+        except Exception as e:
+            print(f"Error loading prompt_ai: {str(e)}")
+            raise
 
-        client = openai.OpenAI(
-            base_url="http://10.9.116.125:1234/v1", 
-            api_key="lm-studio"
-        )
+        try:
+            client = openai.OpenAI(
+                base_url="http://10.9.116.125:1234/v1", 
+                api_key="lm-studio"
+            )
+            print("OpenAI client initialized")
 
-        # Use simplified input by default
-        simplified_input = simplify_input_data(processed_data)
-        stream = client.chat.completions.create(
-            model="meta-llama-3.1-8b-instruct",
-            messages=[
-                {"role": "system", "content": json.dumps(system_message, ensure_ascii=False)},
-                {"role": "user", "content": f"Evaluasi kandidat berikut untuk lowongan dengan ID {lowongan_id}:\n" + json.dumps(simplified_input, indent=2, ensure_ascii=False)}
-            ],
-            temperature=0.2,
-            stream=True
-        )
-        result = process_streaming_response(stream)
+            # Use simplified input by default
+            simplified_input = simplify_input_data(processed_data)
+            print("Input data simplified successfully")
 
-        # Ensure lowongan_id is in the result
-        if result and isinstance(result, dict):
-            if 'lowongan_id' not in result:
-                result['lowongan_id'] = lowongan_id
-            return result
-        else:
-            raise ValueError("Invalid response format from AI")
+            print("Sending request to AI model...")
+            stream = client.chat.completions.create(
+                model="meta-llama-3.1-8b-instruct",
+                messages=[
+                    {"role": "system", "content": json.dumps(system_message, ensure_ascii=False)},
+                    {"role": "user", "content": f"Evaluasi kandidat berikut untuk lowongan dengan ID {lowongan_id}:\n" + json.dumps(simplified_input, indent=2, ensure_ascii=False)}
+                ],
+                temperature=0.1,
+                stream=True,
+                timeout=300  # Add 5 minute timeout
+            )
+            print("Request sent, processing response...")
+            result = process_streaming_response(stream)
+            print("Response processed")
+
+            # Ensure lowongan_id is in the result
+            if result and isinstance(result, dict):
+                if 'lowongan_id' not in result:
+                    result['lowongan_id'] = lowongan_id
+                return result
+            else:
+                raise ValueError(f"Invalid response format from AI. Got: {type(result)}")
+
+        except Exception as e:
+            print(f"Error in API call or response processing: {str(e)}")
+            raise
 
     except Exception as e:
-        print(f"Evaluation failed:")
-        print(f"Error in evaluate_candidate: {str(e)}")
+        print(f"Evaluation failed with error: {str(e)}")
+        print(f"Error type: {type(e).__name__}")
+        import traceback
+        print("Full traceback:")
+        print(traceback.format_exc())
         return None
 
 def main():
