@@ -1,26 +1,18 @@
-import requests
 import os
-import mysql.connector
 import json
 from dotenv import load_dotenv
 import schedule
 import time
 from threading import Thread
 from pysher import Pusher as PysherClient
-import gas_ai
+import utils.gas_ai as gas_ai
 from datetime import datetime
+from utils.send_data import process_completed_screenings
+from utils.database import connect_to_mysql  # Import dari file baru
+import requests
 # from process_result_ai import process_result_ai
 # Load environment variables
 load_dotenv()
-
-def connect_to_mysql():
-    return mysql.connector.connect(
-        host="localhost",
-        port=3306,
-        user="root",  # Sesuaikan dengan username MySQL Anda
-        password="",  # Sesuaikan dengan password MySQL Anda
-        database="jobvacancy_ai"
-    )
 
 def check_screening_exists(cursor, screening_id):
     query = "SELECT COUNT(*) FROM cronjob WHERE screening_id = %s"
@@ -184,28 +176,53 @@ def fetch_api_data():
     else:
         print("Invalid response format")
 
-def process_pending_screenings(Testmode=False, limit=None):
+def process_pending_screenings(Testmode=False, test_save=False):
     """
-    Process pending screenings in the MySQL database
+    Memproses screening yang tertunda di database MySQL
+    
+    Mode Testing:
+    1. Testmode=True, test_save=True
+       - Menghasilkan dan menyimpan prompt ke folder 'prompt'
+       - Menjalankan screening AI
+       - Menyimpan data input dan hasil ke folder 'screening_ai'
+       - Tidak mengubah status database
+    
+    2. Testmode=True, test_save=False
+       - Hanya menghasilkan dan menyimpan prompt ke folder 'prompt'
+       - Tidak menjalankan screening AI
+       - Tidak mengubah status database
+    
+    3. Testmode=False, test_save=True
+       - Menjalankan screening AI secara normal
+       - Menyimpan data input dan hasil ke folder 'screening_ai'
+       - Mengubah status database
+    
+    4. Testmode=False, test_save=False (Mode Produksi)
+       - Menjalankan screening AI secara normal
+       - Mengubah status database
+       - Tidak menyimpan file debug
+    
+    Alur Status Database:
+    - status = 0: Screening baru, belum diproses
+    - status = 1: Sudah diproses oleh AI
+    - status = 2: Sudah dikirim ke API
+    
     Args:
-        Testmode (bool): If True, only generate and save prompts without processing
-        limit (int): Maximum number of screenings to process. None for no limit
+        Testmode (bool): Jika True, menghasilkan dan menyimpan prompt
+        test_save (bool): Jika True, menyimpan data screening dan hasilnya
     """
     try:
         conn = connect_to_mysql()
         cursor = conn.cursor(dictionary=True)
         
-        # Modify query to include LIMIT if specified
+        # Ambil screening dengan status = 0 (belum diproses)
         query = "SELECT * FROM cronjob WHERE status = 0"
-        if limit:
-            query += f" LIMIT {limit}"
-        
         cursor.execute(query)
         pending_screenings = cursor.fetchall()
         
-        print(f"Found {len(pending_screenings)} pending screenings to process")
+        print(f"Ditemukan {len(pending_screenings)} screening yang menunggu untuk diproses")
         
-        # Create prompt directory if it doesn't exist
+        # Buat direktori prompt jika belum ada
         prompt_dir = "prompt"
         if not os.path.exists(prompt_dir):
             os.makedirs(prompt_dir)
@@ -216,10 +233,11 @@ def process_pending_screenings(Testmode=False, limit=None):
                 lowongan_id = screening_data['data']['lowongan_pekerjaan']['id']
 
                 if Testmode:
-                    print(f"\nPrompt for screening {screening['screening_id']}:")
+                    # Mode Test: Menghasilkan dan menyimpan prompt
+                    print(f"\nPrompt untuk screening {screening['screening_id']}:")
                     messages = gas_ai.generate_prompt(lowongan_id, screening_data['data'], is_simplified=False)
                     
-                    # Simpan prompt ke file JSON dalam folder prompt
+                    # Simpan prompt ke file JSON
                     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
                     filename = f"prompt_screening_{screening['screening_id']}_{timestamp}.json"
                     filepath = os.path.join(prompt_dir, filename)
@@ -227,20 +245,13 @@ def process_pending_screenings(Testmode=False, limit=None):
                     with open(filepath, 'w', encoding='utf-8') as f:
                         json.dump(messages, f, indent=2, ensure_ascii=False)
                     
-                    print(f"Prompt telah disimpan ke file: {filepath}")
-                    print(json.dumps(messages, indent=2))  # Tetap menampilkan di console
+                    print(f"Prompt disimpan ke: {filepath}")
+                    print(json.dumps(messages, indent=2))
                     continue
                 
-                # Normal processing mode
-                result = gas_ai.evaluate_candidate(screening_data['data'])
+                # Mode pemrosesan normal
+                result = gas_ai.evaluate_candidate(screening_data, test_mode=test_save)
 
-                # save result as json
-                # timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-                # filename = f"output_{screening['screening_id']}_{timestamp}.json"
-                # filepath = os.path.join(prompt_dir, filename)
-                # with open(filepath, 'w', encoding='utf-8') as f:
-                #     json.dump(result, f, indent=2, ensure_ascii=False)
-                
                 if result and 'candidates' in result and len(result['candidates']) > 0:
                     candidate = result['candidates'][0]
                     # Create penilaian dictionary with default values
@@ -310,12 +321,6 @@ def process_pending_screenings(Testmode=False, limit=None):
                     cursor.execute(update_query, update_values)
                     conn.commit()
                     
-                    # # Save to JSON file (keeping existing functionality)
-                    # timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-                    # output_filename = f"output_{screening['screening_id']}_{timestamp}.json"
-                    # with open(output_filename, 'w', encoding='utf-8') as f:
-                    #     json.dump(result, f, indent=2, ensure_ascii=False)
-                    
                     print(f"Successfully processed screening {screening['screening_id']}")
                 else:
                     print(f"Failed to process screening {screening['screening_id']}: Invalid result format")
@@ -332,131 +337,8 @@ def process_pending_screenings(Testmode=False, limit=None):
             cursor.close()
             conn.close()
 
-def format_screening_result(screening_data, screening_id):
-    """Format screening data to match required API format"""
-    try:
-        key_screening = screening_data['screening_key_kategori'].split(',')
-        summary_screening = json.loads(screening_data['summary_nilai_pertanyaan_screening'])
-        
-        # Initialize result structure
-        result = {
-            "data": {
-                "identities": {
-                    "1": {
-                        "kategori": "pendidikan",
-                        "score": str(screening_data['nilai_pendidikan']),
-                        "comment": screening_data['summary_pendidikan']
-                    },
-                    "2": {
-                        "kategori": "pengalaman",
-                        "score": str(screening_data['nilai_pengalaman']),
-                        "comment": screening_data['sumarry_pengalaman']
-                    }
-                },
-                "screening": {}
-            },
-            "screening_id": str(screening_id)
-        }
-        
-        # Map category names to numbers
-        category_mapping = {
-            'supporting': '2',
-            'general': '3',
-            'pernyataan': '4',
-            'operasional_kebun': '5'
-        }
-        
-        # Add screening data with numbered keys
-        for category in key_screening:
-            category = category.strip()  # Remove any whitespace
-            if category in summary_screening:
-                category_data = summary_screening[category]
-                number = category_mapping.get(category, '0')
-                
-                result['data']['screening'][number] = {
-                    "kategori": category_data['kategori'],
-                    "score": str(category_data['nilai']),
-                    "comment": category_data['uraian']
-                }
-        
-        return result
-    except Exception as e:
-        print(f"Error formatting screening result: {str(e)}")
-        return None
-
-def send_to_api(formatted_data):
-    """Send formatted data to API endpoint"""
-    api_url = os.getenv('API_ENDPOINT', 'http://127.0.0.1:8000/api/result-screening-ai')
-    headers = {
-        'Authorization': f"Bearer {os.getenv('SACTUM_API_KEY')}",
-        'Content-Type': 'application/json'
-    }
-    
-    try:
-        # Save the request data to a JSON file
-        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-        filename = f"api_request_{formatted_data['screening_id']}_{timestamp}.json"
-        
-        # Create 'api_requests' directory if it doesn't exist
-        if not os.path.exists('api_requests'):
-            os.makedirs('api_requests')
-            
-        filepath = os.path.join('api_requests', filename)
-        with open(filepath, 'w', encoding='utf-8') as f:
-            json.dump(formatted_data, f, indent=2, ensure_ascii=False)
-        
-        print(f"API request data saved to: {filepath}")
-        
-        # Send the actual request
-        response = requests.post(api_url, json=formatted_data, headers=headers)
-        return response.status_code == 200, response.text
-    except Exception as e:
-        print(f"Error sending to API: {str(e)}")
-        return False, str(e)
-
-def process_completed_screenings():
-    """Process and send completed screening results"""
-    try:
-        conn = connect_to_mysql()
-        cursor = conn.cursor(dictionary=True)
-        
-        # Get screenings with status = 2 (completed but not sent)
-        query = "SELECT * FROM cronjob WHERE status = 1"
-        cursor.execute(query)
-        completed_screenings = cursor.fetchall()
-        
-        print(f"Found {len(completed_screenings)} completed screenings to send to API")
-        
-        for screening in completed_screenings:
-            try:
-                # Format the data for API
-                formatted_data = format_screening_result(screening['data'], screening['screening_id'])
-                if formatted_data:
-                    # Send to API
-                    success, response = send_to_api(formatted_data)
-                    if success:
-                        # # Update status to 3 (sent to API)
-                        # update_query = "UPDATE cronjob SET status = 2 WHERE screening_id = %s"
-                        # cursor.execute(update_query, (screening['screening_id'],))
-                        # conn.commit()
-                        print(f"Successfully sent screening {screening['screening_id']} to API")
-                    else:
-                        print(f"Failed to send screening {screening['screening_id']} to API: {response}")
-                else:
-                    print(f"Failed to format screening {screening['screening_id']} data")
-                
-            except Exception as e:
-                print(f"Error processing screening {screening['screening_id']}: {str(e)}")
-                continue
-                
-    except Exception as e:
-        print(f"Database error: {str(e)}")
-    finally:
-        if 'conn' in locals() and conn.is_connected():
-            cursor.close()
-            conn.close()
-
 def run_scheduler():
+    # Add the process_completed_screenings to run every minute
     schedule.every(1).minutes.do(process_completed_screenings)
     
     while True:
@@ -464,17 +346,33 @@ def run_scheduler():
         time.sleep(1)
 
 if __name__ == "__main__":
-    # Initial runs
-    # fetch_api_data()
-    # process_completed_screenings()
-    # # process_pending_screenings(Testmode=True, limit=1)
-    process_pending_screenings(Testmode=False)
+    # Inisialisasi awal
+    fetch_api_data()  # Ambil screening baru dari API
+
+    # Pilih mode testing:
     
-    # Setup and run pusher in separate thread
+    # 1. Mode Testing Lengkap - Menghasilkan prompt dan menyimpan semua data
+    # process_pending_screenings(Testmode=True, test_save=True)
+    
+    # 2. Mode Testing Prompt Saja - Hanya menghasilkan dan menyimpan prompt
+    # process_pending_screenings(Testmode=True, test_save=False)
+    
+    # 3. Mode Produksi dengan Debug - Jalankan normal tapi simpan data
+    process_pending_screenings(Testmode=False, test_save=True)
+    
+    # 4. Mode Produksi - Operasi normal, tanpa data debug
+    # process_pending_screenings(Testmode=False, test_save=False)
+    
+    # Testing/Operasi Pengiriman API
+    # process_completed_screenings()  # Test/jalankan pengiriman API untuk screening status=1
+    
+    # Setup dan jalankan pusher di thread terpisah
     pusher_thread = Thread(target=setup_pusher)
     pusher_thread.daemon = True
     pusher_thread.start()
     
-    # Run scheduler in main thread
-    print("Starting scheduler - will process and send completed screenings every minute")
+    # Jalankan scheduler di thread utama
+    print("Memulai scheduler...")
+    print("- Akan memproses screening baru setiap menit")
+    print("- Akan mengirim screening yang sudah selesai ke API setiap menit")
     run_scheduler()

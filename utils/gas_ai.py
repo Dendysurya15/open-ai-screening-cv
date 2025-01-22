@@ -1,5 +1,6 @@
 import openai
 import json
+import os
 from datetime import datetime
 
 def process_streaming_response(stream):
@@ -26,7 +27,11 @@ def process_streaming_response(stream):
 
 def load_prompt_ai(input_data):
     """Load and configure AI prompt based on input data"""
-    with open('prompt_ai.json', 'r') as file:
+    # Get the directory where the current script (gas_ai.py) is located
+    current_dir = os.path.dirname(os.path.abspath(__file__))
+    prompt_path = os.path.join(current_dir, 'prompt_ai.json')
+    
+    with open(prompt_path, 'r') as file:
         prompts = json.load(file)
     
     # Define base penilaian categories
@@ -99,7 +104,39 @@ def simplify_input_data(input_data):
         }]
     }
 
-def evaluate_candidate(input_data):
+def save_screening_data(input_data, result, screening_id, test_mode=False):
+    """Save screening input and result data to JSON files"""
+    if not test_mode:
+        return
+        
+    try:
+        # Create screening_ai directory if it doesn't exist
+        screening_dir = "screening_ai"
+        if not os.path.exists(screening_dir):
+            os.makedirs(screening_dir)
+            
+        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+        
+        # Save input data
+        input_filename = f"input_screening_{screening_id}_{timestamp}.json"
+        input_filepath = os.path.join(screening_dir, input_filename)
+        with open(input_filepath, 'w', encoding='utf-8') as f:
+            json.dump(input_data, f, indent=2, ensure_ascii=False)
+            
+        # Save result data
+        result_filename = f"result_screening_{screening_id}_{timestamp}.json"
+        result_filepath = os.path.join(screening_dir, result_filename)
+        with open(result_filepath, 'w', encoding='utf-8') as f:
+            json.dump(result, f, indent=2, ensure_ascii=False)
+            
+        print(f"\nTest Mode - Saved screening data:")
+        print(f"Input: {input_filepath}")
+        print(f"Result: {result_filepath}")
+        
+    except Exception as e:
+        print(f"Error saving screening test data: {str(e)}")
+
+def evaluate_candidate(input_data, test_mode=False):
     """Evaluate candidate using the OpenAI API"""
     try:
         # Handle both direct JSON and database format
@@ -116,7 +153,7 @@ def evaluate_candidate(input_data):
         else:
             raise ValueError(f"Invalid input data format. Expected dict, got {type(input_data)}")
 
-        # Get lowongan_id - handle both formats
+        # Get lowongan_id and screening_id - handle both formats
         try:
             if 'lowongan_pekerjaan' in processed_data:
                 lowongan_id = processed_data['lowongan_pekerjaan']['id']
@@ -130,7 +167,6 @@ def evaluate_candidate(input_data):
             print(f"Found screening_id: {screening_id}")
         except Exception as e:
             print(f"Error extracting lowongan_id: {str(e)}")
-            # print("Processed data structure:", json.dumps(processed_data, indent=2))
             raise
 
         # Get system message with all prompts configured based on input data
@@ -161,7 +197,7 @@ def evaluate_candidate(input_data):
                 ],
                 temperature=0.1,
                 stream=True,
-                timeout=300  # Add 5 minute timeout
+                timeout = 600
             )
             print("Request sent, processing response...")
             result = process_streaming_response(stream)
@@ -171,6 +207,10 @@ def evaluate_candidate(input_data):
             if result and isinstance(result, dict):
                 if 'lowongan_id' not in result:
                     result['lowongan_id'] = lowongan_id
+                    
+                # Save test data if test_mode is enabled
+                save_screening_data(simplified_input, result, screening_id, test_mode)
+                    
                 return result
             else:
                 raise ValueError(f"Invalid response format from AI. Got: {type(result)}")
