@@ -74,8 +74,8 @@ def format_screening_result(screening_data, screening_id):
                     }
         
         # Debug print
-        print("Formatted result:")
-        print(json.dumps(result, indent=2))
+        # print("Formatted result:")
+        # print(json.dumps(result, indent=2))
         
         return result
     except Exception as e:

@@ -39,22 +39,22 @@ def load_prompt_ai(input_data):
         {
             "kategori": "pendidikan",
             "nilai": "1-5", 
-            "uraian": "Penilaian komprehensif latar belakang pendidikan"
+            "uraian": "Penilaian komprehensif latar belakang pendidikan mencakup:\n- Kesesuaian jurusan dengan posisi\n- Level pendidikan\n- Prestasi akademik\n- Akreditasi institusi"
         },
         {
             "kategori": "pengalaman",
             "nilai": "1-5",
-            "uraian": "Penilaian komprehensif pengalaman dan riwayat pekerjaan"
+            "uraian": "Penilaian komprehensif pengalaman kerja mencakup:\n- Relevansi pengalaman dengan posisi\n- Durasi pengalaman\n- Progress karir\n- Pencapaian dan kontribusi\n- Stabilitas kerja"
         },
         {
             "kategori": "sertifikat_keahlian", 
             "nilai": "1-5",
-            "uraian": "Penilaian komprehensif sertifikat keahlian"
+            "uraian": "Penilaian komprehensif sertifikasi mencakup:\n- Relevansi dengan posisi\n- Level sertifikasi\n- Reputasi lembaga sertifikasi\n- Masa berlaku sertifikat"
         },
         {
             "kategori": "keterampilan",
             "nilai": "1-5",
-            "uraian": "Penilaian komprehensif keterampilan teknis dan non teknis"
+            "uraian": "Penilaian komprehensif keterampilan mencakup:\n- Hard skills sesuai requirement\n- Soft skills (komunikasi, leadership, dll)\n- Tools & teknologi yang dikuasai\n- Bahasa yang dikuasai"
         }
     ]
     
@@ -67,9 +67,14 @@ def load_prompt_ai(input_data):
         category_snake = category_clean.lower().replace(' ', '_')
         
         penilaian_candidate.append({
-            "kategori": f"jawaban_pertanyaan_skrining_{category_snake}",  # Changed from jawaban_pertanyaan_skrining_
+            "kategori": f"jawaban_pertanyaan_skrining_{category_snake}",
             "nilai": "1-5",
-            "uraian": f"Penilaian komprehensif pertanyaan skrining untuk kategori {category_clean}"
+            "uraian": f"Penilaian komprehensif pertanyaan skrining untuk {category_clean} mencakup:\n"
+                      f"- Ketepatan dan relevansi jawaban\n"
+                      f"- Kedalaman pemahaman terhadap topik\n"
+                      f"- Kemampuan menjelaskan dengan terstruktur\n"
+                      f"- Pengalaman praktis terkait topik\n"
+                      f"- Kesesuaian dengan kebutuhan posisi"
         })
     
     # Add penilaian_candidate to system message
@@ -141,15 +146,15 @@ def evaluate_candidate(input_data, test_mode=False):
     try:
         # Handle both direct JSON and database format
         if isinstance(input_data, dict):
-            print("Input data is a dictionary")
+            # print("Input data is a dictionary")
             if 'data' in input_data:
                 # Database format - data is nested
                 processed_data = input_data['data']
-                print("Using nested data format")
+                # print("Using nested data format")
             else:
                 # Direct JSON format - data is at root level
                 processed_data = input_data
-                print("Using root level data format")
+                # print("Using root level data format")
         else:
             raise ValueError(f"Invalid input data format. Expected dict, got {type(input_data)}")
 
@@ -163,8 +168,8 @@ def evaluate_candidate(input_data, test_mode=False):
                 screening_id = processed_data['data']['kandidat'][0]['screning_id']
             else:
                 raise ValueError("Missing lowongan_id in input data")
-            print(f"Found lowongan_id: {lowongan_id}")
-            print(f"Found screening_id: {screening_id}")
+            # print(f"Found lowongan_id: {lowongan_id}")
+           
         except Exception as e:
             print(f"Error extracting lowongan_id: {str(e)}")
             raise
@@ -172,7 +177,7 @@ def evaluate_candidate(input_data, test_mode=False):
         # Get system message with all prompts configured based on input data
         try:
             system_message = load_prompt_ai(processed_data)
-            print("Successfully loaded system message")
+            # print("Successfully loaded system message")
         except Exception as e:
             print(f"Error loading prompt_ai: {str(e)}")
             raise
@@ -186,9 +191,9 @@ def evaluate_candidate(input_data, test_mode=False):
 
             # Use simplified input by default
             simplified_input = simplify_input_data(processed_data)
-            print("Input data simplified successfully")
-
-            print("Sending request to AI model...")
+            # print("Input data simplified successfully")
+            # print(f"Found screening_id: {screening_id}")
+            print(f"Sending request to AI model with screening_id: {screening_id}")
             stream = client.chat.completions.create(
                 model="meta-llama-3.1-8b-instruct",
                 messages=[
@@ -199,9 +204,9 @@ def evaluate_candidate(input_data, test_mode=False):
                 stream=True,
                 timeout = 600
             )
-            print("Request sent, processing response...")
+            # print("Request sent, processing response...")
             result = process_streaming_response(stream)
-            print("Response processed")
+            # print("Response processed")
 
             # Ensure lowongan_id is in the result
             if result and isinstance(result, dict):

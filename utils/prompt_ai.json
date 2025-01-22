@@ -88,7 +88,7 @@
                         {
                             "kategori": "nama_kategori",
                             "nilai": "1-5",
-                            "uraian": "Penjelasan detail mencakup:\n- Kesesuaian dengan requirement\n- Kelebihan dan kekurangan\n- Analisis gap kompetensi\n- Rekomendasi pengembangan"
+                            "uraian": "Penjelasan detail mencakup:\n- Kesesuaian dengan requirement posisi\n- Kelebihan yang menonjol:\n  * Pencapaian utama\n  * Kompetensi unggulan\n  * Nilai tambah kandidat\n- Kekurangan atau area pengembangan:\n  * Gap kompetensi teknis\n  * Gap kompetensi non-teknis\n  * Risiko potensial\n- Analisis gap kompetensi:\n  * Tingkat kesiapan\n  * Waktu yang dibutuhkan untuk closing gap\n  * Investasi pengembangan yang diperlukan\n- Rekomendasi pengembangan:\n  * Program training yang disarankan\n  * Mentoring yang dibutuhkan\n  * Timeline pengembangan\n- Catatan khusus lainnya"
                         }
                     ],
                     "rekomendasi": "Disarankan/Dipertimbangkan/Tidak Disarankan",

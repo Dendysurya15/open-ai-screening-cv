@@ -112,7 +112,7 @@ def get_screening_data():
     token = os.getenv('SACTUM_API_KEY')
     
     # Debug: print token (hapus ini nanti setelah debugging)
-    print(f"Using token: {token}")
+    # print(f"Using token: {token}")
     
     # Set up headers with bearer token
     headers = {
@@ -121,7 +121,7 @@ def get_screening_data():
     }
     
     # Debug: print headers (hapus ini nanti setelah debugging)
-    print(f"Headers: {headers}")
+    # print(f"Headers: {headers}")
     
     try:
         # Make GET request
@@ -147,22 +147,38 @@ def handle_screening_event(data):
     insert_to_cronjob(data)
 
 def setup_pusher():
-    client = PysherClient(
-        key=os.getenv('PUSHER_KEY'),
-        cluster=os.getenv('PUSHER_CLUSTER')
-    )
-
-    def connect_handler(data):
-        channel = client.subscribe('my-channel')
-        channel.bind('JobVacancy_notification_screening', handle_screening_event)
-        print("Pusher listener is active and listening for screening events...")
-
-    client.connection.bind('pusher:connection_established', connect_handler)
-    client.connect()
-    
-    # Keep the connection alive
+    """Setup Pusher client dengan error handling yang lebih baik"""
     while True:
-        time.sleep(1)
+        try:
+            client = PysherClient(
+                key=os.getenv('PUSHER_KEY'),
+                cluster=os.getenv('PUSHER_CLUSTER'),
+                secret=os.getenv('PUSHER_SECRET'),
+            )
+
+            def connect_handler(data):
+                try:
+                    channel = client.subscribe('my-channel')
+                    channel.bind('JobVacancy_notification_screening', handle_screening_event)
+                    print("Pusher listener is active and listening for screening events...")
+                except Exception as e:
+                    print(f"Error in connect_handler: {str(e)}")
+
+            client.connection.bind('pusher:connection_established', connect_handler)
+            client.connect()
+            
+            # Keep the connection alive with better error handling
+            while True:
+                try:
+                    time.sleep(1)
+                except Exception as e:
+                    print(f"Error in Pusher connection: {str(e)}")
+                    break  # Break inner loop to reconnect
+                
+        except Exception as e:
+            print(f"Pusher connection failed: {str(e)}")
+            time.sleep(5)  # Wait before retry
+            continue  # Retry connection
 
 def fetch_api_data():
     print("Fetching data from API...")
@@ -175,6 +191,49 @@ def fetch_api_data():
             insert_to_cronjob(result)
     else:
         print("Invalid response format")
+
+def process_screening_worker():
+    """Worker function untuk memproses screening di thread terpisah"""
+    print("Starting screening worker...")
+    while True:
+        try:
+            # Cek apakah ada screening yang perlu diproses
+            conn = connect_to_mysql()
+            cursor = conn.cursor(dictionary=True)
+            cursor.execute("SELECT COUNT(*) as count FROM cronjob WHERE status = 0")
+            result = cursor.fetchone()
+            pending_count = result['count']
+            
+            if pending_count > 0:
+                print(f"Found {pending_count} pending screenings to process")
+                 # process_completed_screenings
+                # Pilih mode testing:
+                
+                # 1. Mode Testing Lengkap - Menghasilkan prompt dan menyimpan semua data
+                # process_pending_screenings(Testmode=True, test_save=True)
+                
+                # 2. Mode Testing Prompt Saja - Hanya menghasilkan dan menyimpan prompt
+                # process_pending_screenings(Testmode=True, test_save=False)
+                
+                # 3. Mode Produksi dengan Debug - Jalankan normal tapi simpan data
+                # process_pending_screenings(Testmode=False, test_save=True)
+                
+                # 4. Mode Produksi - Operasi normal, tanpa data debug
+                process_pending_screenings(Testmode=False, test_save=False)
+                
+                # Testing/Operasi Pengiriman API
+                # process_completed_screenings()  # Test/jalankan pengiriman API untuk screening status=1
+                
+            else:
+                print("No pending screenings found")
+                
+            cursor.close()
+            conn.close()
+            
+        except Exception as e:
+            print(f"Error in screening worker: {str(e)}")
+        finally:
+            time.sleep(60)  # Check every minute
 
 def process_pending_screenings(Testmode=False, test_save=False):
     """
@@ -338,41 +397,52 @@ def process_pending_screenings(Testmode=False, test_save=False):
             conn.close()
 
 def run_scheduler():
-    # Add the process_completed_screenings to run every minute
-    schedule.every(1).minutes.do(process_completed_screenings)
+    """Fungsi untuk menjalankan tugas terjadwal dengan error handling"""
+    print("Starting scheduler...")
     
     while True:
-        schedule.run_pending()
-        time.sleep(1)
+        try:
+            schedule.run_pending()
+            time.sleep(1)
+        except Exception as e:
+            print(f"Error in scheduler: {str(e)}")
+            time.sleep(5)  # Wait before continuing
 
 if __name__ == "__main__":
-    # Inisialisasi awal
-    fetch_api_data()  # Ambil screening baru dari API
-
-    # Pilih mode testing:
-    
-    # 1. Mode Testing Lengkap - Menghasilkan prompt dan menyimpan semua data
-    # process_pending_screenings(Testmode=True, test_save=True)
-    
-    # 2. Mode Testing Prompt Saja - Hanya menghasilkan dan menyimpan prompt
-    # process_pending_screenings(Testmode=True, test_save=False)
-    
-    # 3. Mode Produksi dengan Debug - Jalankan normal tapi simpan data
-    process_pending_screenings(Testmode=False, test_save=True)
-    
-    # 4. Mode Produksi - Operasi normal, tanpa data debug
-    # process_pending_screenings(Testmode=False, test_save=False)
-    
-    # Testing/Operasi Pengiriman API
-    # process_completed_screenings()  # Test/jalankan pengiriman API untuk screening status=1
-    
-    # Setup dan jalankan pusher di thread terpisah
-    pusher_thread = Thread(target=setup_pusher)
-    pusher_thread.daemon = True
-    pusher_thread.start()
-    
-    # Jalankan scheduler di thread utama
-    print("Memulai scheduler...")
-    print("- Akan memproses screening baru setiap menit")
-    print("- Akan mengirim screening yang sudah selesai ke API setiap menit")
-    run_scheduler()
+    try:
+        # Inisialisasi awal
+        print("Starting application...")
+        fetch_api_data()  # Ambil screening baru dari API
+        
+        # Setup dan jalankan pusher di thread terpisah
+        print("Setting up Pusher...")
+        pusher_thread = Thread(target=setup_pusher, name="PusherThread")
+        pusher_thread.daemon = True
+        pusher_thread.start()
+        
+        # Jalankan worker screening di thread terpisah
+        print("Setting up screening worker...")
+        screening_thread = Thread(target=process_screening_worker, name="ScreeningThread")
+        screening_thread.daemon = True
+        screening_thread.start()
+        
+        # Setup scheduler
+        print("Setting up scheduler...")
+        schedule.every(1).minutes.do(process_completed_screenings)
+        schedule.every(5).minutes.do(fetch_api_data)
+        
+        # Jalankan scheduler di thread utama
+        print("\nApplication started successfully!")
+        print("- Screening worker is running in background")
+        print("- Pusher listener is active")
+        print("- Scheduler will process completed screenings every minute")
+        print("- Scheduler will fetch new data every 5 minutes")
+        
+        run_scheduler()
+        
+    except KeyboardInterrupt:
+        print("\nShutting down gracefully...")
+    except Exception as e:
+        print(f"\nApplication error: {str(e)}")
+    finally:
+        print("Application stopped")
