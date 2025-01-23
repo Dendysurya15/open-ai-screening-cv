@@ -39,7 +39,7 @@ def format_screening_result(screening_data, screening_id):
         # Map category names to numbers and their corresponding keys
         category_mapping = {
             'operasional_kebun': {
-                'number': '2',
+                'number': '1',
                 'key': 'jawaban_pertanyaan_skrining_operasional_kebun'
             },
             'general': {
