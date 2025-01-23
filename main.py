@@ -6,9 +6,10 @@ import time
 from threading import Thread
 from pysher import Pusher as PysherClient
 import utils.gas_ai as gas_ai
+# import utils.gas_ai_serveles as gas_ai
 from datetime import datetime
 from utils.send_data import process_completed_screenings
-from utils.database import connect_to_mysql  # Import dari file baru
+from utils.database import connect_to_mysql 
 import requests
 # from process_result_ai import process_result_ai
 # Load environment variables
@@ -92,11 +93,6 @@ def insert_to_cronjob(data):
                 inserted_screening_ids.append(screening_id)  # Track this screening
                 print(f"Data dengan screening_id {screening_id} berhasil disimpan ke tabel cronjob!")
         
-        # Process newly inserted screenings immediately
-        if inserted_screening_ids:
-            print("Processing newly inserted screenings...")
-            process_pending_screenings()
-            
     except Exception as e:
         print(f"Error: {e}")
     finally:
@@ -412,7 +408,7 @@ if __name__ == "__main__":
     try:
         # Inisialisasi awal
         print("Starting application...")
-        fetch_api_data()  # Ambil screening baru dari API
+        # fetch_api_data()  # Ambil screening baru dari API
         
         # Setup dan jalankan pusher di thread terpisah
         print("Setting up Pusher...")
@@ -429,7 +425,7 @@ if __name__ == "__main__":
         # Setup scheduler
         print("Setting up scheduler...")
         schedule.every(1).minutes.do(process_completed_screenings)
-        schedule.every(5).minutes.do(fetch_api_data)
+        # schedule.every(5).minutes.do(fetch_api_data)
         
         # Jalankan scheduler di thread utama
         print("\nApplication started successfully!")
