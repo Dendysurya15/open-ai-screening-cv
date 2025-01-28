@@ -102,8 +102,9 @@ def insert_to_cronjob(data):
 
 def get_screening_data():
     # URL endpoint
-    url = "http://127.0.0.1:8000/api/screening-ai"
-    
+    # url = "https://recruitment-ai.cbicareer.com/api/screening-ai"
+    url = "http://localhost:8000/api/screening-ai"
+
     # Get token from environment variable
     token = os.getenv('SACTUM_API_KEY')
     
@@ -125,6 +126,7 @@ def get_screening_data():
         
         # Check if request was successful
         if response.status_code == 200:
+            print('Successfully fetched screening data from API')
             return response.json()
         else:
             return {
@@ -139,8 +141,87 @@ def get_screening_data():
         }
 
 def handle_screening_event(data):
-    print("Received new screening data from Pusher!")
-    insert_to_cronjob(data)
+    print("Received new screening event from Pusher!")
+    print(f"Data received: {data}")
+    
+    try:
+        # Parse the JSON string if data is a string
+        if isinstance(data, str):
+            data = json.loads(data)
+        
+        # Extract jobId and userId
+        job_id = data['data']['jobId']
+        user_id = data['data']['userId']
+        
+        # API configuration
+        # url = "https://recruitment-ai.cbicareer.com/api/screening-ai-socket"
+        url = "http://localhost:8000/api/screening-ai-socket"
+        token = os.getenv('SACTUM_API_KEY')
+        headers = {
+            'Authorization': f'Bearer {token}',
+            'Accept': 'application/json'
+        }
+        params = {
+            'jobId': job_id,
+            'userId': user_id
+        }
+
+        # print(f"Sending request to API:")
+        # print(f"URL: {url}")
+        # print(f"Headers: {headers}")
+        # print(f"Params: {params}")
+
+        # Make API request
+        response = requests.get(url, headers=headers, params=params)
+        # print(f"API Response Status: {response.status_code}")
+        # print(f"API Response Body: {response.text}")
+
+        if response.status_code == 200:
+            response_data = response.json()
+            insert_to_cronjob(response_data)
+            
+            print(f"Screening data inserted into cronjob table")
+        else:
+            print(f"API request failed: {response.status_code}")
+            print(f"Error message: {response.text}")
+
+    except json.JSONDecodeError as e:
+        print(f"Error parsing JSON data: {str(e)}")
+    except KeyError as e:
+        print(f"Error accessing data fields: {str(e)}")
+    except requests.RequestException as e:
+        print(f"Network error occurred: {str(e)}")
+    except Exception as e:
+        print(f"Unexpected error: {str(e)}")
+        import traceback
+        print(f"Traceback: {traceback.format_exc()}")
+
+    return None
+
+def handle_screening_delete_event(data):
+    try:
+        # Parse the data if it's a string
+        if isinstance(data, str):
+            data = json.loads(data)
+            
+        screening_id = data.get('data', {}).get('jobId')
+        if not screening_id:
+            print("Error: No jobId found in delete event data")
+            return
+            
+        print(f"Received new screening delete data from Pusher! Screening ID: {screening_id}")
+
+        conn = connect_to_mysql()
+        cursor = conn.cursor()
+        query = "DELETE FROM cronjob WHERE screening_id = %s"
+        cursor.execute(query, (screening_id,))
+        conn.commit()
+        print(f"Successfully deleted screening with ID: {screening_id}")
+        cursor.close()
+        conn.close()
+    except Exception as e:
+        print(f"Error in handle_screening_delete_event: {str(e)}")
+        print(f"Received data: {data}")  # Log the received data for debugging
 
 def setup_pusher():
     """Setup Pusher client dengan error handling yang lebih baik"""
@@ -155,7 +236,9 @@ def setup_pusher():
             def connect_handler(data):
                 try:
                     channel = client.subscribe('my-channel')
-                    channel.bind('JobVacancy_notification_screening', handle_screening_event)
+                    # channel.bind('JobVacancy_notification_screening', handle_screening_event)
+                    channel.bind('JobVacancy_notification_screening_new', handle_screening_event)
+                    channel.bind('JobVacancy_notification_screening_delete', handle_screening_delete_event)
                     print("Pusher listener is active and listening for screening events...")
                 except Exception as e:
                     print(f"Error in connect_handler: {str(e)}")

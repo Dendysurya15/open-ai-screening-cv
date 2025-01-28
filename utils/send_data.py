@@ -51,7 +51,7 @@ def format_screening_result(screening_data, screening_id):
                 'key': 'jawaban_pertanyaan_skrining_pernyataan'
             },
             'supporting': {
-                'number': '5',
+                'number': '2',
                 'key': 'jawaban_pertanyaan_skrining_supporting'
             },
         }
@@ -121,7 +121,8 @@ def test_format_screening():
 
 def send_to_api(formatted_data):
     """Send formatted data to API endpoint"""
-    api_url = os.getenv('API_ENDPOINT', 'http://127.0.0.1:8000/api/result-screening-ai')
+    # api_url = os.getenv('API_ENDPOINT', 'https://recruitment-ai.cbicareer.com/api/result-screening-ai')
+    api_url = "http://localhost:8000/api/result-screening-ai"
     headers = {
         'Authorization': f"Bearer {os.getenv('SACTUM_API_KEY')}",
         'Content-Type': 'application/json'
