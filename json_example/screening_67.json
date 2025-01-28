@@ -2,89 +2,68 @@
     "data": {
         "kandidat": [
             {
-                "id": 265,
+                "id": 266,
                 "pendidikan": {
-                    "formal": [
-                        {
-                            "jurusan": "Akuntansi",
-                            "nama_instansi": "STIE Santa Ursula",
-                            "tingkat_pendidikan": "S1"
-                        }
-                    ],
-                    "non_formal": [
-                        {
-                            "tahun": "2022",
-                            "training": "Brevet Pajak AB",
-                            "ijazahNon": 1,
-                            "penyelenggara": "Universitas Gadjah Mada"
-                        }
-                    ]
+                    "formal": null,
+                    "non_formal": null
                 },
                 "pengalaman": {
                     "pengalaman_pekerjaan": [
                         {
-                            "nama": "Minamas Plantation",
-                            "reason": "Mengejar karir dan tantangan baru",
-                            "salary": "15.200.000",
-                            "jabatan": "Kasie Administrasi",
-                            "jobdesk": "1. Bertanggung jawab atas pelaporan administrasi, asset perusahaan, cash opname, stok opname, persediaan gudang, dll\n2. Menjaga hubungan baik dengan toko masyarakat dan dinas terkait",
-                            "thn_akhir": "2023",
-                            "thn_mulai": "2013",
+                            "nama": "Cargill Tropical Oils",
+                            "reason": "Job Title di Perusahaan saat ini ditiadakan sehingga terkena dampak restrukturisasi",
+                            "salary": "12.000.000",
+                            "jabatan": "Business Control Supervisor Region",
+                            "jobdesk": "Mengelola semua laporan Administrasi Perkebunan di Region 2 (4 PT, 6 Estates).\nBaik itu laporan Agronomy, VRA, Payroll, maupun Biaya.",
+                            "thn_akhir": "2024",
+                            "thn_mulai": "2011",
                             "until_now": 0
-                        },
-                        {
-                            "nama": "PT Indo Partners Plantation Services",
-                            "reason": "Mengejar karir dan tantangan baru",
-                            "salary": "13.000.000",
-                            "jabatan": "Stay internal auditor",
-                            "jobdesk": "Pemeriksaan cash opname, gudang, lapangan di estate dan Mill",
-                            "thn_akhir": null,
-                            "thn_mulai": "2024",
-                            "until_now": 1
                         }
                     ],
-                    "tanggung_jawab_pada_pekerjaan_terakhir": "Pemeriksaan cash & bank, inventory gudang, dan lapangan di estate dan Mill."
+                    "tanggung_jawab_pada_pekerjaan_terakhir": "Associate Professional - Office Level 2\n\nPosisi saya 1 level diatas KTU Estate.\n\nSaya handel 6 Estate, semua data-data dari Estate akan masuk ke saya sebelum di submit ke Stakeholder / Atasan.\nTugas dan tanggung jawab saya juga memastikan semua laporan dari Estate dapat terkirim tepat waktu, akurat dan dapat dipertanggungjawabkan"
                 },
-                "screning_id": 35,
+                "screning_id": 67,
                 "keterampilan": {
                     "teknis": null,
                     "non_teknis": null
                 },
-                "nama_lengkap": "Reinhard Sahala",
+                "nama_lengkap": "Sodikin",
                 "screening_ai_check": 0,
                 "sertifikat_keahlian": null,
                 "jawaban_pertanyaan_skrining": {
-                    "1": "Staf internal auditor",
+                    "1": "Business Control Supervisor Region",
                     "2": "2",
-                    "3": "Head Region",
-                    "4": "0",
-                    "5": "400",
-                    "6": "3200",
-                    "7": "3000",
-                    "8": "3",
-                    "9": "Administrasi",
+                    "3": "Business Control Manager",
+                    "4": "6 Orang",
+                    "5": "2000 Orang",
+                    "6": "17.900 Ha",
+                    "7": "17.900 Ha",
+                    "8": "0,1,2,3",
+                    "9": "TM",
                     "10": "0",
-                    "11": "2 tahun",
-                    "16": "Pengeluaran barang dari gudang, pemberian bantuan dana.",
-                    "17": "Berkoordinasi dengan pimpinan.",
+                    "11": "3 Tahun",
+                    "16": "1. Pemortalan lahan oleh masyarakat sekitar 2. Penutupan akses jalan 3. Output karyawan lokal yang tidak maksimal",
+                    "17": "Bekerja sama dengan departemen terkait untuk melakukan mediasi dengan masyarakat terkait",
                     "18": "0",
-                    "19": "Sepeda motor",
-                    "26": "Pontianak",
-                    "27": "15km",
-                    "28": "Sepeda motor",
-                    "29": "Kalimantan Selatan",
-                    "30": "0",
-                    "31": "Oracle",
-                    "32": "10000000",
-                    "33": "13000000",
+                    "19": "Sepeda Motor",
+                    "26": "Manismata, Kab. Ketapang, Kalbar",
+                    "27": "2 Jam",
+                    "28": "Darat",
+                    "29": "Manismata, Kab. Ketapang, Kalbar",
+                    "30": "2",
+                    "31": "Cargill Plantation System, OMP & PMS",
+                    "32": "9.790.000",
+                    "33": "11.884.000",
                     "34": {
-                        "option": "3",
-                        "subInputs": []
+                        "option": "1",
+                        "subInputs": [
+                            "8.000.000"
+                        ]
                     },
-                    "35": "12",
-                    "36": "Flexi 2000000, tempat tinggal 2000000, jabatan 110000",
-                    "37": "0",
-                    "38": "Prudential",
+                    "35": "20 Hari",
+                    "36": "Meal Allowance : 1.594.000 & Remote Allowances : 500.000",
+                    "37": "2",
+                    "38": "BPJS Kesehatan",
                     "39": "1",
                     "40": "1",
                     "41": "1",

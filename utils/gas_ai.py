@@ -86,24 +86,31 @@ def simplify_input_data(input_data):
     """Modify function to handle different formal education structures"""
     kandidat = input_data["kandidat"][0]
     pengalaman = kandidat.get("pengalaman", {})
-    # Handle work experience
+    
+    # Limit non-formal education entries
+    pendidikan = kandidat.get("pendidikan", {})
+    if pendidikan and pendidikan.get("non_formal"):
+        pendidikan["non_formal"] = pendidikan["non_formal"][:3]  # Take only first 3 entries
+        
+    # Simplify work experience descriptions
     work_experience = pengalaman.get("pengalaman_pekerjaan", [])
     if work_experience:
-        # Take first 2 entries if available
-        work_experience = work_experience[:3]
-    elif work_experience is None:
-        work_experience = []
-        
+        for exp in work_experience:
+            # Limit jobdesk length
+            if "jobdesk" in exp:
+                exp["jobdesk"] = "\n".join(exp["jobdesk"].split("\n")[:3])  # Take only first 3 lines
+        work_experience = work_experience[:2]  # Take only first 2 entries
+    
     return {
         "lowongan_pekerjaan": input_data["lowongan_pekerjaan"],
         "key_pertanyaan_screening": input_data.get("key_pertanyaan_screening", ""),
         "kandidat": [{
             "id": kandidat["id"],
             "nama_lengkap": kandidat["nama_lengkap"],
-            "pendidikan": kandidat["pendidikan"],
+            "pendidikan": pendidikan,
             "pengalaman": {
                 "pengalaman_pekerjaan": work_experience,
-                "tanggung_jawab_pada_pekerjaan_terakhir": pengalaman.get("tanggung_jawab_pada_pekerjaan_terakhir", "")
+                "tanggung_jawab_pada_pekerjaan_terakhir": pengalaman.get("tanggung_jawab_pada_pekerjaan_terakhir", "")[:200]  # Limit length
             },
             "jawaban_pertanyaan_skrining": kandidat.get("jawaban_pertanyaan_skrining", {})
         }]
