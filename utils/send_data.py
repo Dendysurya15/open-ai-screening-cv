@@ -165,7 +165,7 @@ def process_completed_screenings():
         cursor.execute(query)
         completed_screenings = cursor.fetchall()
         
-        print(f"Found {len(completed_screenings)} AI-screened results to send to API")
+        # print(f"Found {len(completed_screenings)} AI-screened results to send to API")
         
         for screening in completed_screenings:
             try:

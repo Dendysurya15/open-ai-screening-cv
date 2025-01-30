@@ -1,12 +1,13 @@
 import os
+import sys
 import json
 from dotenv import load_dotenv
 import schedule
 import time
 from threading import Thread
 from pysher import Pusher as PysherClient
-import utils.gas_ai as gas_ai
-# import utils.gas_ai_serveles as gas_ai
+# import utils.gas_ai as gas_ai
+import utils.ollama_ai as gas_ai
 from datetime import datetime
 from utils.send_data import process_completed_screenings
 from utils.database import connect_to_mysql 
@@ -14,6 +15,14 @@ import requests
 # from process_result_ai import process_result_ai
 # Load environment variables
 load_dotenv()
+
+# Add the project root directory to Python path
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+# Now we can import from utils
+import utils.ollama_ai as gas_ai
+from utils.send_data import process_completed_screenings
+from utils.database import connect_to_mysql 
 
 def check_screening_exists(cursor, screening_id):
     query = "SELECT COUNT(*) FROM cronjob WHERE screening_id = %s"
@@ -491,7 +500,7 @@ if __name__ == "__main__":
     try:
         # Inisialisasi awal
         print("Starting application...")
-        fetch_api_data()  # Ambil screening baru dari API
+        # fetch_api_data()  # Ambil screening baru dari API
         
         # Setup dan jalankan pusher di thread terpisah
         print("Setting up Pusher...")
@@ -507,8 +516,8 @@ if __name__ == "__main__":
         
         # Setup scheduler
         print("Setting up scheduler...")
-        schedule.every(1).minutes.do(process_completed_screenings)
-        schedule.every(5).minutes.do(fetch_api_data)
+        # schedule.every(1).minutes.do(process_completed_screenings)
+        # schedule.every(5).minutes.do(fetch_api_data)
         
         # Jalankan scheduler di thread utama
         print("\nApplication started successfully!")

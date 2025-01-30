@@ -191,7 +191,7 @@ def evaluate_candidate(input_data, test_mode=False):
 
         try:
             client = openai.OpenAI(
-                base_url="http://10.9.116.125:1234/v1", 
+                base_url="http://10.9.116.125:54696/v1", 
                 api_key="lm-studio"
             )
             print("OpenAI client initialized")

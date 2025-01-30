@@ -1,0 +1,49 @@
+{
+  "lowongan_id": 9,
+  "key_pertanyaan_screening": "operasional_kebun,general,pernyataan",
+  "candidates": [
+    {
+      "id_kandidat": 120,
+      "nama_kandidat": "Carnaval Rego Rio Sidabutar",
+      "penilaian": [
+        {
+          "kategori": "pendidikan",
+          "nilai": "3",
+          "uraian": "Kandidat memiliki latar belakang pendidikan yang relevan dengan posisi, yaitu S1 Pariwisata dari Sekolah Tinggi Pariwisata Ambarrukmo Yogyakarta. Namun, tidak ada informasi tentang prestasi akademik atau akreditasi institusi."
+        },
+        {
+          "kategori": "pengalaman",
+          "nilai": "2",
+          "uraian": "Kandidat memiliki pengalaman kerja sebagai Customer Service di PT. Fliptech Lentera Inspirasi Pertiwi (Flip.id) selama 3 tahun. Namun, pengalaman ini tidak relevan dengan posisi yang lowong."
+        },
+        {
+          "kategori": "sertifikat_keahlian",
+          "nilai": "1",
+          "uraian": "Tidak ada informasi tentang sertifikasi atau keahlian khusus yang dimiliki oleh kandidat."
+        },
+        {
+          "kategori": "keterampilan",
+          "nilai": "2",
+          "uraian": "Kandidat memiliki keterampilan dasar seperti Microsoft Office 2016 Course, namun tidak ada informasi tentang keterampilan teknis atau non-teknis yang relevan dengan posisi."
+        },
+        {
+          "kategori": "jawaban_pertanyaan_skrining_operasional_kebun",
+          "nilai": "1",
+          "uraian": "Kandidat memberikan jawaban yang tidak relevan dan tidak akurat untuk pertanyaan skrining operasional kebun."
+        },
+        {
+          "kategori": "jawaban_pertanyaan_skrining_general",
+          "nilai": "2",
+          "uraian": "Kandidat memberikan jawaban yang kurang relevan dan tidak akurat untuk pertanyaan skrining general."
+        },
+        {
+          "kategori": "jawaban_pertanyaan_skrining_pernyataan",
+          "nilai": "1",
+          "uraian": "Kandidat memberikan jawaban yang tidak relevan dan tidak akurat untuk pertanyaan skrining pernyataan."
+        }
+      ],
+      "rekomendasi": "Tidak Disarankan",
+      "ringkasan_penilaian": "Kandidat tidak memiliki latar belakang pendidikan, pengalaman kerja, sertifikasi, atau keterampilan yang relevan dengan posisi. Selain itu, jawaban pertanyaan skrining juga tidak akurat dan tidak relevan."
+    }
+  ]
+}
