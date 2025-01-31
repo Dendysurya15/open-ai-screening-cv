@@ -108,7 +108,7 @@ def evaluate_candidate(input_data, test_mode=False):
                 "http://localhost:11434/api/generate",
                 json={
                     "model": "llama3-8b-instruct",
-                    "prompt": f"""Kamu adalah {system_message['role']}. {system_message['task']}.
+                    "prompt": f"""Kamu adalah {system_message['role_definition']['posisi']} dengan kualifikasi {system_message['role_definition']['kualifikasi']} dan scope kerja {system_message['role_definition']['scope_kerja']} yang bertugas {system_message['role_definition']['task']}. 
 
 Berikan evaluasi dengan format JSON yang TEPAT seperti berikut:
 {json.dumps(system_message['output_format'], indent=2, ensure_ascii=False)}
@@ -116,8 +116,17 @@ Berikan evaluasi dengan format JSON yang TEPAT seperti berikut:
 Panduan Penilaian:
 {json.dumps(system_message['scoring_rules'], indent=2, ensure_ascii=False)}
 
+Panduan Evaluasi:
+{json.dumps(system_message['evaluation_steps'], indent=2, ensure_ascii=False)}
+
 Rekomendasi Rules:
 {json.dumps(system_message['rekomendasi_rules'], indent=2, ensure_ascii=False)}
+
+Strict Rules:
+{json.dumps(system_message['strict_rules'], indent=2, ensure_ascii=False)}
+
+Validation Rules:
+{json.dumps(system_message['validation_rules'], indent=2, ensure_ascii=False)}
 
 Input data untuk dievaluasi:
 {json.dumps(simplified_input, indent=2, ensure_ascii=False)}
