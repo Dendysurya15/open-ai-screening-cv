@@ -1,0 +1,169 @@
+{
+  "lowongan_pekerjaan": {
+    "id": 9,
+    "jabatan": {
+      "pendidikan": {
+        "formal": {
+          "jurusan": "Akuntansi, Perpajakan",
+          "tingkat_pendidikan": "S1"
+        }
+      },
+      "keterampilan": {
+        "teknis": null,
+        "non_teknis": null
+      },
+      "nama_jabatan": "KTU ESTATE",
+      "deskripsi_jabatan": "Melaksanakan dan mengelola seluruh administrasi perkebunan estate untuk memastikan seluruh administrasi perkebunan estate dilakukan sesuai dengan prosedur untuk mendukung pencapaian target perusahaan",
+      "lainnya_requirement": "Pelatihan Administrasi Perkebunan Kelapa Sawit",
+      "pertanyaan_skrining": {
+        "general": {
+          "26": "Dimana lokasi kerja saat ini?",
+          "27": "Berapa jauh jarak tempuh dari lokasi kerja ke kota terdekat?",
+          "28": "Transportasi apa yang dipergunakan menuju kota terdekat (darat/air/udara)?",
+          "29": "Dimana lokasi asal domisili?",
+          "30": "Silakan pilih salah satu metode kerja administrasi yang digunakan saat ini.",
+          "31": "System apa yang dipergunakan?",
+          "32": "Berapa nominal gaji pokok yang diterima?",
+          "33": "Berapa nominal Take Home Pay (Nett total gaji dan benefit) yang diterima?",
+          "34": "Silakan pilih salah satu pada bentuk tunjangan cuti yang diberikan saat ini dan cantumkan jumlahnya untuk tiap item sesuai plafon yang diterima.",
+          "35": "Berapa jumlah hari cuti per tahun?",
+          "36": "Tuliskan benefit/tunjangan lainnya yang diterima di tempat kerja terakhir dan besarannya.",
+          "37": "Siapakah yang menanggung pajak penghasilan pribadi?",
+          "38": "Apa saja jenis asuransi kesehatan yang diterima?"
+        },
+        "pernyataan": {
+          "39": "Apakah bersedia penempatan di Kalimantan Tengah?",
+          "40": "Apakah bersedia penempatan sesuai kebutuhan Organisasi?",
+          "41": "Apakah bersedia Bapak/Ibu dilakukan background and financial checking?",
+          "42": "Apakah bersedia melanjutkan proses seleksi jika penawaran pendapatan bersifat gross?",
+          "43": "Apakah bersedia melanjutkan proses seleksi jika paket benefit tidak sesuai dengan permintaan dan atau benefit yang sudah diterima?"
+        },
+        "operasional_kebun": {
+          "1": "Apa jabatan saat ini?",
+          "2": "Apa level jabatan pada tempat kerja terakhir?",
+          "3": "Posisi jabatan apa yang menjadi atasan langsung?",
+          "4": "Berapa jumlah Karyawan yang menjadi anak buah/bawahan?",
+          "5": "Berapa total jumlah Karyawan di Perusahaan terakhir?",
+          "6": "Berapa ha luas area kerja saat ini?",
+          "7": "Berapa ha luas area kerja terbesar yang pernah ditangani?",
+          "8": "Apa saja jenis area yang pernah ditangani?",
+          "9": "Jenis area apa yang paling dikuasai?",
+          "10": "Apakah memiliki pengalaman menangani Mekanisasi atau Water Management System?",
+          "11": "Berapa lama pengalaman menangani Mekanisasi atau Water Management System?",
+          "16": "Tuliskan paling banyak 3 (tiga) masalah/konflik sosial yang dihadapi di lingkungan kerja saat ini.",
+          "17": "Apa yang dilakukan untuk menghadapi permasalahan sosial tersebut?",
+          "18": "Apakah disediakan kendaraan operasional?",
+          "19": "Tuliskan jenis kendaraannya. (Isi '-' jika tidak disediakan)"
+        }
+      },
+      "sertifikat_keahlian": null,
+      "pengalaman_pekerjaan": "2 tahun sebagai KTU Estate",
+      "uraian_tugas_tanggung_jawab": [
+        "Membuat permohonan biaya / permintaan dana bulanan berdasarkan rencana kerja bulanan Afdeling",
+        "Melakukan verifikasi dan konsolidasi budget tahunan kebun hasil evaluasi",
+        "Mengelola dana kas kecil (petty cash) dan biaya umum",
+        "Memeriksa penjurnalan setiap transaksi agar seluruh transaksi estate tersedia di sistem",
+        "Memeriksa verifikasi rekap gaji, lembur dan tunjangan karyawan untuk memastikan seluruh gaji karyawan dibayarkan sesuai dengan ketentuan yang berlaku",
+        "Dll"
+      ]
+    }
+  },
+  "key_pertanyaan_screening": "operasional_kebun,general,pernyataan",
+  "kandidat": [
+    {
+      "id": 154,
+      "nama_lengkap": "Reinaldo Hand",
+      "pendidikan": {
+        "formal": [
+          {
+            "jurusan": "Akuntansi",
+            "nama_instansi": "Unika soegijapranata",
+            "tingkat_pendidikan": "S2"
+          },
+          {
+            "jurusan": "Management",
+            "nama_instansi": "Unika soegijparanata",
+            "tingkat_pendidikan": "S1"
+          }
+        ],
+        "non_formal": [
+          {
+            "tahun": "2015",
+            "training": "Tax",
+            "ijazahNon": 1,
+            "penyelenggara": "Ttc"
+          },
+          {
+            "tahun": "2006",
+            "training": "Java p",
+            "ijazahNon": 0,
+            "penyelenggara": "Binus center"
+          }
+        ]
+      },
+      "pengalaman": {
+        "pengalaman_pekerjaan": [
+          {
+            "nama": "PT Global Jet Ekspress",
+            "reason": "Status karyawan",
+            "salary": "6.000.000",
+            "jabatan": "Senior accounting",
+            "jobdesk": "Ar, ap, financial reporting, fixed asset, tax",
+            "thn_akhir": null,
+            "thn_mulai": "2021",
+            "until_now": 1
+          },
+          {
+            "nama": "Cv surya sakti p",
+            "reason": "Milik saudara",
+            "salary": "4.000.000",
+            "jabatan": "Auditor",
+            "jobdesk": "Stock opname, cash opname, target marketing dan juga cek kredit leasing",
+            "thn_akhir": "2021",
+            "thn_mulai": "2020",
+            "until_now": 0
+          }
+        ],
+        "tanggung_jawab_pada_pekerjaan_terakhir": "Memonitoring inputan dan juga kesesuaian account biaya di dalam laporan akuntansi, fixed asset, cek data finance, laporan ar dan ap"
+      },
+      "jawaban_pertanyaan_skrining": {
+        "1": "Accounting",
+        "2": "2",
+        "3": "Assistant manager",
+        "4": "2",
+        "5": "8",
+        "6": "1000",
+        "7": "1000",
+        "8": "1",
+        "9": "Sawit, krani",
+        "10": "1",
+        "11": "5",
+        "16": "Perubahan sistem, sistem yang berubah setiap tahun, kurangnya kompensasi diberikan",
+        "17": "Belajar, memahami alurnya, apa saja yang perlu diperbaiki dan apa saja yang perlu diubah",
+        "18": "1",
+        "19": "-",
+        "26": "Semarang",
+        "27": "5 km",
+        "28": "Darat",
+        "29": "Semarang",
+        "30": "2",
+        "31": "Sap",
+        "32": "6000000",
+        "33": "6500000",
+        "34": {
+          "option": "3",
+          "subInputs": []
+        },
+        "35": "0",
+        "36": "Tidak ada",
+        "37": "2",
+        "38": "BPJS",
+        "39": "1",
+        "40": "1",
+        "41": "1",
+        "42": "1",
+        "43": "1"
+      }
+    }
+  ]
+}

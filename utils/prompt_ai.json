@@ -9,7 +9,7 @@
         "evaluation_steps": [
             "1. Evaluasi kesesuaian dengan requirement utama (hard skills, soft skills, dan cultural fit)",
             "2. Hitung rata-rata nilai (maksimal 5) berdasarkan kriteria pengalaman, pendidikan, dan keterampilan",
-            "3. Evaluasi jawaban pertanyaan pernyataan (1 = Ya, 0 = Tidak) dan terapkan strict rules jika diperlukan",
+            "3. Terapkan strict rules untuk menghindari bias atau kesalahan evaluasi",
             "4. Tentukan rekomendasi final berdasarkan skor dan analisis mendalam",
             "5. Berikan justifikasi lengkap yang mencakup kelebihan, kekurangan, dan potensi kandidat",
             "6. Berikan uraian lengkap yang mencakup analisis gap kompetensi dan rekomendasi pengembangan"
@@ -38,30 +38,22 @@
                 "Nilai 4: Keterampilan lengkap sesuai requirement dengan bukti penerapan di lingkungan kerja",
                 "Nilai 5: Keterampilan melebihi requirement dengan kemampuan leadership atau inovasi yang terbukti",
                 "Note: Nilai maksimal adalah 5, bonus point hanya untuk pertimbangan internal"
-            ],
-            "pernyataan": [
-                "Nilai 1: Jawaban 'Ya' (1) pada pertanyaan dikategori dengan nama pernyataan",
-                "Nilai 0: Jawaban 'Tidak' (0) pada pertanyaan dikategori  dengan nama pernyataan",
-                "Note: Jawaban 1 = Ya, 0 = Tidak"
             ]
         },
         "rekomendasi_rules": {
             "Tidak Disarankan": [
                 "Rata-rata nilai < 2",
                 "Ada nilai 1 pada kriteria kritis (misalnya, pengalaman atau keterampilan wajib)",
-                "Ada jawaban 0 pada pertanyaan pernyataan kritis (misalnya, penolakan penempatan atau background check)",
                 "Gap kompetensi terlalu besar dan tidak dapat diatasi dalam waktu yang wajar"
             ],
             "Dipertimbangkan dengan Catatan": [
                 "Rata-rata nilai 2 - 3",
                 "Tidak ada nilai 1 pada kriteria kritis",
-                "Tidak ada jawaban 0 pada pertanyaan pernyataan kritis",
                 "Gap kompetensi dapat diatasi dengan training atau mentoring dalam 6-12 bulan"
             ],
             "Disarankan": [
                 "Rata-rata nilai ≥ 4",
                 "Minimal nilai 3 pada semua kriteria",
-                "Semua jawaban pertanyaan pernyataan adalah 1 (Ya)",
                 "Memiliki nilai 4-5 pada kriteria utama (pengalaman, pendidikan, atau keterampilan)"
             ]
         },
@@ -73,7 +65,7 @@
             ],
             "automatic_tidak_disarankan": [
                 "Rata-rata nilai < 2.0",
-                "Ada jawaban 0 pada pertanyaan pernyataan kritis (misalnya, penolakan penempatan atau background check)",
+                "Penolakan kondisi kerja wajib (misalnya, penolakan terhadap lokasi kerja atau jam kerja fleksibel)",
                 "Ketidaksesuaian kritis dengan requirement (misalnya, tidak memenuhi syarat pendidikan minimal)"
             ]
         },

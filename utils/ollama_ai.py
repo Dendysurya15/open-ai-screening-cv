@@ -3,8 +3,11 @@ import os
 from datetime import datetime
 import requests
 
-# Perbaiki import path
+# Path jika dari main.py
 from utils.gas_ai import load_prompt_ai, simplify_input_data, save_screening_data
+
+# Path jika langsung ollama_ai.py
+# from gas_ai import load_prompt_ai, simplify_input_data, save_screening_data
 
 
 OLLAMA_CONFIG = {
@@ -128,8 +131,11 @@ Strict Rules:
 Validation Rules:
 {json.dumps(system_message['validation_rules'], indent=2, ensure_ascii=False)}
 
+Untuk pertanyaan_skrining jika ada kategori pernyataan dan jawaban pernyataan dari kandidat adalah 1 berarti Ya dan 0 berarti tidak.
+
 Input data untuk dievaluasi:
 {json.dumps(simplified_input, indent=2, ensure_ascii=False)}
+
 
 PENTING: Response HARUS dalam format JSON yang valid dan TEPAT sesuai format di atas.
 """,

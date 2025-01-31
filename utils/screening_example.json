@@ -2,124 +2,99 @@
     "data": {
         "kandidat": [
             {
-                "id": 120,
+                "id": 154,
                 "pendidikan": {
                     "formal": [
                         {
-                            "jurusan": "Perhotelan",
-                            "nama_instansi": "Sekolah Tinggi Pariwisata Ambarrukmo Yogyakarta",
-                            "tingkat_pendidikan": "D3"
-                        },
-                        {
-                            "jurusan": "Pariwisata",
-                            "nama_instansi": "Sekolah Tinggi Pariwisata Ambarrukmo Yogyakarta",
-                            "tingkat_pendidikan": "S1"
-                        },
-                        {
-                            "jurusan": "Manajemen",
-                            "nama_instansi": "Sekolah Tinggi Ilmu Ekonomi YKPN Yogyakarta",
+                            "jurusan": "Akuntansi",
+                            "nama_instansi": "Unika soegijapranata",
                             "tingkat_pendidikan": "S2"
+                        },
+                        {
+                            "jurusan": "Management",
+                            "nama_instansi": "Unika soegijparanata",
+                            "tingkat_pendidikan": "S1"
                         }
                     ],
                     "non_formal": [
                         {
-                            "tahun": "2016",
-                            "training": "Basic English Training Program at Pare English Application Center",
+                            "tahun": "2015",
+                            "training": "Tax",
                             "ijazahNon": 1,
-                            "penyelenggara": "PEACE"
+                            "penyelenggara": "Ttc"
                         },
                         {
-                            "tahun": "2020",
-                            "training": "Short English Training",
-                            "ijazahNon": 1,
-                            "penyelenggara": "Gaza Pare English School"
-                        },
-                        {
-                            "tahun": "2020",
-                            "training": "Microsoft Office 2016 Course",
-                            "ijazahNon": 1,
-                            "penyelenggara": "ALFABANK JOGJA"
-                        },
-                        {
-                            "tahun": "2024",
-                            "training": "E-Trainig HR Generalist",
-                            "ijazahNon": 1,
-                            "penyelenggara": "ManajemenSDM.net"
-                        },
-                        {
-                            "tahun": "2024",
-                            "training": "Human Resource COMPETENCY Training",
-                            "ijazahNon": 1,
-                            "penyelenggara": "PT. Wahana Insan Prima"
-                        },
-                        {
-                            "tahun": "2024",
-                            "training": "E-Training Talent Acquisition",
-                            "ijazahNon": 1,
-                            "penyelenggara": "ManajemenSDM.net"
-                        },
-                        {
-                            "tahun": "2024",
-                            "training": "Certification Human Capital Staff",
-                            "ijazahNon": 1,
-                            "penyelenggara": "BNSP"
+                            "tahun": "2006",
+                            "training": "Java p",
+                            "ijazahNon": 0,
+                            "penyelenggara": "Binus center"
                         }
                     ]
                 },
                 "pengalaman": {
                     "pengalaman_pekerjaan": [
                         {
-                            "nama": "PT. Fliptech Lentera Inspirasi Pertiwi (Flip.id)",
-                            "reason": "Fokus mengerjakan tugas akhir Tesis",
-                            "salary": "2.363.000",
-                            "jabatan": "Customer Service",
-                            "jobdesk": "Problem-solving and creative problem-solving. \nHandling customer complaints. \nRepresenting the company effectively. \nBuilding strong relationships with users. \nCoordinating with supervisors and colleagues. \nPreparing daily chat ticket reports. \nAssisting new agents in understanding processes and becoming effective team members.",
-                            "thn_akhir": "2024",
+                            "nama": "PT Global Jet Ekspress",
+                            "reason": "Status karyawan",
+                            "salary": "6.000.000",
+                            "jabatan": "Senior accounting",
+                            "jobdesk": "Ar, ap, financial reporting, fixed asset, tax",
+                            "thn_akhir": null,
                             "thn_mulai": "2021",
+                            "until_now": 1
+                        },
+                        {
+                            "nama": "Cv surya sakti p",
+                            "reason": "Milik saudara",
+                            "salary": "4.000.000",
+                            "jabatan": "Auditor",
+                            "jobdesk": "Stock opname, cash opname, target marketing dan juga cek kredit leasing",
+                            "thn_akhir": "2021",
+                            "thn_mulai": "2020",
                             "until_now": 0
                         }
                     ],
-                    "tanggung_jawab_pada_pekerjaan_terakhir": "Tidak ada"
+                    "tanggung_jawab_pada_pekerjaan_terakhir": "Memonitoring inputan dan juga kesesuaian account biaya di dalam laporan akuntansi, fixed asset, cek data finance, laporan ar dan ap"
                 },
-                "screning_id": 21,
+                "screning_id": 27,
                 "keterampilan": {
                     "teknis": null,
                     "non_teknis": null
                 },
-                "nama_lengkap": "Carnaval Rego Rio Sidabutar",
+                "nama_lengkap": "Reinaldo Hand",
                 "screening_ai_check": 0,
                 "sertifikat_keahlian": null,
                 "jawaban_pertanyaan_skrining": {
-                    "1": "Customer Service",
-                    "2": "0",
-                    "3": "Team Leader",
-                    "4": "15 orang",
-                    "5": "70 orang",
-                    "6": "-",
-                    "7": "-",
-                    "8": "0",
-                    "9": "-",
-                    "10": "0",
-                    "11": "-",
-                    "16": "-",
-                    "17": "-",
+                    "1": "Accounting",
+                    "2": "2",
+                    "3": "Assistant manager",
+                    "4": "2",
+                    "5": "8",
+                    "6": "1000",
+                    "7": "1000",
+                    "8": "1",
+                    "9": "Sawit, krani",
+                    "10": "1",
+                    "11": "5",
+                    "16": "Perubahan sistem, sistem yang berubah setiap tahun, kurangnya kompensasi diberikan",
+                    "17": "Belajar, memahami alurnya, apa saja yang perlu diperbaiki dan apa saja yang perlu diubah",
                     "18": "1",
                     "19": "-",
-                    "26": "Yogyakarta",
-                    "27": "-",
-                    "28": "-",
-                    "29": "Sumatera Utara",
+                    "26": "Semarang",
+                    "27": "5 km",
+                    "28": "Darat",
+                    "29": "Semarang",
                     "30": "2",
-                    "31": "-",
-                    "32": "2.363.000",
-                    "33": "2.800.000",
+                    "31": "Sap",
+                    "32": "6000000",
+                    "33": "6500000",
                     "34": {
                         "option": "3",
                         "subInputs": []
                     },
-                    "35": "12",
-                    "36": "-",
-                    "37": "0",
+                    "35": "0",
+                    "36": "Tidak ada",
+                    "37": "2",
                     "38": "BPJS",
                     "39": "1",
                     "40": "1",
