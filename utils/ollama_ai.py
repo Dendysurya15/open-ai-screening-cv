@@ -100,10 +100,17 @@ def evaluate_candidate(input_data, test_mode=False):
             raise
 
         try:
+            current_dir = os.path.dirname(os.path.abspath(__file__))
+            prompt_path = os.path.join(current_dir, 'prompt_ai.json')
+    
+            with open(prompt_path, 'r') as file:
+                prompts = json.load(file)
             # Get system message and simplified input using gas_ai functions
-            system_message = load_prompt_ai(processed_data)
+            system_message = prompts['default_system_message']
             simplified_input = simplify_input_data(processed_data)
             
+
+
             print(f"Sending request to Ollama model with screening_id: {screening_id}")
 
             # Make request to Ollama API
@@ -111,31 +118,30 @@ def evaluate_candidate(input_data, test_mode=False):
                 "http://localhost:11434/api/generate",
                 json={
                     "model": "llama3-8b-instruct",
-                    "prompt": f"""Kamu adalah {system_message['role_definition']['posisi']} dengan kualifikasi {system_message['role_definition']['kualifikasi']} dan scope kerja {system_message['role_definition']['scope_kerja']} yang bertugas {system_message['role_definition']['task']}. 
+                    "prompt": f"""Kamu adalah {system_message['peran']['posisi']} dengan kualifikasi {system_message['peran']['kualifikasi']} dan cakupan {system_message['peran']['cakupan']} yang bertugas {system_message['peran']['tugas']}. 
 
 Berikan evaluasi dengan format JSON yang TEPAT seperti berikut:
 {json.dumps(system_message['output_format'], indent=2, ensure_ascii=False)}
 
 Panduan Penilaian:
-{json.dumps(system_message['scoring_rules'], indent=2, ensure_ascii=False)}
+{json.dumps(system_message['evaluasi'], indent=2, ensure_ascii=False)}
 
-Panduan Evaluasi:
-{json.dumps(system_message['evaluation_steps'], indent=2, ensure_ascii=False)}
-
-Rekomendasi Rules:
-{json.dumps(system_message['rekomendasi_rules'], indent=2, ensure_ascii=False)}
-
-Strict Rules:
-{json.dumps(system_message['strict_rules'], indent=2, ensure_ascii=False)}
-
-Validation Rules:
-{json.dumps(system_message['validation_rules'], indent=2, ensure_ascii=False)}
-
-Untuk pertanyaan_skrining jika ada kategori pernyataan dan jawaban pernyataan dari kandidat adalah 1 berarti Ya dan 0 berarti tidak.
+PENTING untuk penilaian candidates:
+1. Hanya nilai kategori yang ada dalam data kandidat
+2. Untuk pertanyaan skrining:
+   - HANYA nilai kategori yang ada di key_pertanyaan_screening input data
+   - Format kategori harus: "jawaban_pertanyaan_skrining_[nama_kategori]"
+   - Contoh jika key_pertanyaan_screening="supporting,general,pernyataan":
+     * jawaban_pertanyaan_skrining_supporting
+     * jawaban_pertanyaan_skrining_general
+     * jawaban_pertanyaan_skrining_pernyataan
+3. Khusus untuk jawaban pertanyaan kategori "pernyataan":
+   - Nilai 1 berarti "Ya"
+   - Nilai 0 berarti "Tidak"
+4. Format penilaian harus sesuai dengan output_format, tapi hanya mencakup kategori yang relevan dengan data kandidat
 
 Input data untuk dievaluasi:
 {json.dumps(simplified_input, indent=2, ensure_ascii=False)}
-
 
 PENTING: Response HARUS dalam format JSON yang valid dan TEPAT sesuai format di atas.
 """,

@@ -304,10 +304,10 @@ def process_screening_worker():
                 # process_pending_screenings(Testmode=True, test_save=False)
                 
                 # 3. Mode Produksi dengan Debug - Jalankan normal tapi simpan data
-                # process_pending_screenings(Testmode=False, test_save=True)
+                process_pending_screenings(Testmode=False, test_save=True)
                 
                 # 4. Mode Produksi - Operasi normal, tanpa data debug
-                process_pending_screenings(Testmode=False, test_save=False)
+                # process_pending_screenings(Testmode=False, test_save=False)
                 
                 # Testing/Operasi Pengiriman API
                 # process_completed_screenings()  # Test/jalankan pengiriman API untuk screening status=1
@@ -500,7 +500,7 @@ if __name__ == "__main__":
     try:
         # Inisialisasi awal
         print("Starting application...")
-        # fetch_api_data()  # Ambil screening baru dari API
+        fetch_api_data()  # Ambil screening baru dari API
         
         # Setup dan jalankan pusher di thread terpisah
         print("Setting up Pusher...")
@@ -516,7 +516,7 @@ if __name__ == "__main__":
         
         # Setup scheduler
         print("Setting up scheduler...")
-        schedule.every(2).minutes.do(process_completed_screenings)
+        # schedule.every(2).minutes.do(process_completed_screenings)
         # schedule.every(5).minutes.do(fetch_api_data)
         
         # Jalankan scheduler di thread utama
