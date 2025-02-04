@@ -167,42 +167,40 @@ def evaluate_candidate(input_data, test_mode=False):
 
             # Make request to Ollama API
             response = requests.post(
-                "http://localhost:11434/api/generate",
-                json={
-                    "model": "llama3-8b-instruct",
-                    "prompt": f"""Kamu adalah {system_message['peran']['posisi']} dengan kualifikasi {system_message['peran']['kualifikasi']} dan cakupan {system_message['peran']['cakupan']} yang bertugas {system_message['peran']['tugas']}. 
+            "http://localhost:11434/api/generate",
+            json={
+                "model": "llama3-8b-instruct",
+                "prompt": f"""Kamu adalah {system_message['peran']['posisi']} dengan kualifikasi {system_message['peran']['kualifikasi']}, cakupan {system_message['peran']['cakupan']}, dan bertugas {system_message['peran']['tugas']}.
+            Instruksi:
+            1. Jawab dalam bahasa Indonesia.
+            2. Evaluasi kandidat sesuai panduan dan format output berikut:
+            - Hanya nilai kategori yang tercantum di key_pertanyaan_screening.
+            - Format kategori: "jawaban_pertanyaan_skrining_[nama_kategori]".
+            - Contoh: Jika key_pertanyaan_screening="supporting,general,pernyataan", maka hanya nilai kategori tersebut.
+            3. Abaikan tag HTML (misal: <p>, <strong>, dll.) dalam teks evaluasi.
+            4. Untuk kategori "pernyataan":
+            - Jawaban "1" berarti setuju dan "0" berarti tidak setuju, namun jangan gunakan nilai mentah tersebut sebagai skor evaluasi.
+            - Berikan nilai evaluasi dalam skala 1-5 berdasarkan kesesuaian jawaban dengan requirement posisi.
+            - Contoh: Jika requirement mengharuskan kesediaan tinggi dan kandidat menjawab "1", berikan skor evaluasi 4 atau 5; jika kandidat menjawab "0", berikan skor rendah (misalnya 1 atau 2).
+            5. Response HARUS berupa JSON valid sesuai format di bawah, tanpa teks tambahan:
+            {json.dumps(system_message['output_format'], indent=2, ensure_ascii=False)}
 
-PENTING: Response HARUS berupa JSON object yang valid dan TEPAT mengikuti format berikut, tanpa teks tambahan sebelum atau sesudah JSON:
+            Panduan Penilaian:
+            {json.dumps(system_message['evaluasi'], indent=2, ensure_ascii=False)}
 
-{json.dumps(system_message['output_format'], indent=2, ensure_ascii=False)}
+            PERINGATAN: Jika ada kategori yang tidak ada di key_pertanyaan_screening, evaluasi dianggap GAGAL.
 
-Panduan Penilaian:
-{json.dumps(system_message['evaluasi'], indent=2, ensure_ascii=False)}
-
-PENTING untuk penilaian candidates:
-1. Hanya nilai kategori yang ada dalam data kandidat
-2. Untuk pertanyaan skrining:
-   - HANYA nilai kategori yang ada di key_pertanyaan_screening input data
-   - Format kategori harus: "jawaban_pertanyaan_skrining_[nama_kategori]"
-   - Contoh jika key_pertanyaan_screening="supporting,general,pernyataan":
-     * jawaban_pertanyaan_skrining_supporting
-     * jawaban_pertanyaan_skrining_general
-     * jawaban_pertanyaan_skrining_pernyataan
-3. Khusus untuk jawaban pertanyaan kategori "pernyataan":
-   - Nilai 1 berarti "Ya"
-   - Nilai 0 berarti "Tidak"
-4. Format penilaian harus sesuai dengan output_format, tapi hanya mencakup kategori yang relevan dengan data kandidat
-5. Response HARUS berupa single JSON object yang valid, tanpa teks tambahan
-
-Input data untuk dievaluasi:
-{json.dumps(simplified_input, indent=2, ensure_ascii=False)}
-""",
+            Input data:
+            {json.dumps(simplified_input, indent=2, ensure_ascii=False)}
+            """,
                     "stream": True,
                     "options": OLLAMA_CONFIG["high_quality"]
                 },
                 stream=True,
                 timeout=300
             )
+
+
 
             # Check response status
             if response.status_code != 200:
