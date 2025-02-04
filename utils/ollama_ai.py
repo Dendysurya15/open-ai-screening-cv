@@ -92,8 +92,8 @@ def process_streaming_response(response):
         return None
 
 def get_prompt_ai():
-    url = "http://localhost:8000/api/prompt-ai"
-    # url = "https://recruitment-ai.cbicareer.com/api/prompt-ai"
+    # url = "http://localhost:8000/api/prompt-ai"
+    url = "https://recruitment-ai.cbicareer.com/api/prompt-ai"
     token = os.getenv('SACTUM_API_KEY') 
     headers = {
         'Authorization': f'Bearer {token}',
@@ -146,19 +146,17 @@ def evaluate_candidate(input_data, test_mode=False):
 
         try:
 
-            # prompts = get_prompt_ai()
-    
-
-            # modal_version = prompts['data']['version']
-
-            # print(f"Model AI version: {modal_version}")
-            # system_message = prompts['data']['promptModel']['default_system_message']
-
-            current_dir = os.path.dirname(os.path.abspath(__file__))
-            prompt_path = os.path.join(current_dir, 'prompt_ai.json')
-            with open(prompt_path, 'r') as file:
-                prompts = json.load(file)
-            system_message = prompts['default_system_message']
+            # model ai by server
+            prompts = get_prompt_ai()
+            modal_version = prompts['data']['version']
+            print(f"Model AI version: {modal_version}")
+            system_message = prompts['data']['promptModel']['default_system_message']
+            # model ai by local
+            # current_dir = os.path.dirname(os.path.abspath(__file__))
+            # prompt_path = os.path.join(current_dir, 'prompt_ai.json')
+            # with open(prompt_path, 'r') as file:
+            #     prompts = json.load(file)
+            # system_message = prompts['default_system_message']
             simplified_input = simplify_input_data(processed_data)
     
 
