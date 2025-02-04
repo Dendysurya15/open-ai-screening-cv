@@ -111,8 +111,8 @@ def insert_to_cronjob(data):
 
 def get_screening_data():
     # URL endpoint
-    url = "https://recruitment-ai.cbicareer.com/api/screening-ai"
-    # url = "http://localhost:8000/api/screening-ai"
+    # url = "https://recruitment-ai.cbicareer.com/api/screening-ai"
+    url = "http://localhost:8000/api/screening-ai"
 
     # Get token from environment variable
     token = os.getenv('SACTUM_API_KEY')
@@ -163,8 +163,8 @@ def handle_screening_event(data):
         user_id = data['data']['userId']
         
         # API configuration
-        url = "https://recruitment-ai.cbicareer.com/api/screening-ai-socket"
-        # url = "http://localhost:8000/api/screening-ai-socket"
+        # url = "https://recruitment-ai.cbicareer.com/api/screening-ai-socket"
+        url = "http://localhost:8000/api/screening-ai-socket"
         token = os.getenv('SACTUM_API_KEY')
         headers = {
             'Authorization': f'Bearer {token}',
@@ -500,7 +500,7 @@ if __name__ == "__main__":
     try:
         # Inisialisasi awal
         print("Starting application...")
-        fetch_api_data()  # Ambil screening baru dari API
+        # fetch_api_data()  # Ambil screening baru dari API
         
         # Setup dan jalankan pusher di thread terpisah
         print("Setting up Pusher...")

@@ -57,25 +57,70 @@ def process_streaming_response(response):
         elapsed_total = datetime.now() - start_time
         print(f"\r✓ Processing completed in {elapsed_total.seconds}.{elapsed_total.microseconds//10000:02d}s [{'█' * bar_length}]")
         
+        # Join all collected messages
         complete_response = ''.join(collected_messages)
         
+        # Try to find the JSON object in the response
         try:
-            result = json.loads(complete_response)
-            if not isinstance(result, dict):
-                raise ValueError("Response must be a JSON object")
-            if 'candidates' not in result:
-                raise ValueError("Response missing 'candidates' field")
-            return result
+            # Look for the first { and last } to extract the JSON object
+            start_idx = complete_response.find('{')
+            end_idx = complete_response.rindex('}') + 1
+            if start_idx != -1 and end_idx != -1:
+                json_str = complete_response[start_idx:end_idx]
+                result = json.loads(json_str)
+                
+                # Validate the structure
+                if not isinstance(result, dict):
+                    raise ValueError("Response must be a JSON object")
+                if 'candidates' not in result:
+                    # Try to fix common formatting issues
+                    if 'lowongan_id' in result:
+                        return result  # Already in correct format
+                    else:
+                        raise ValueError("Response missing required fields")
+                return result
+            else:
+                raise ValueError("Could not find valid JSON object in response")
+                
         except (json.JSONDecodeError, ValueError) as e:
             print(f"\nError parsing response: {str(e)}")
+            print("Raw response:", complete_response[:500] + "..." if len(complete_response) > 500 else complete_response)
             return None
             
     except Exception as e:
         print(f"\nError in process_streaming_response: {str(e)}")
         return None
 
+def get_prompt_ai():
+    url = "http://localhost:8000/api/prompt-ai"
+    # url = "https://recruitment-ai.cbicareer.com/api/prompt-ai"
+    token = os.getenv('SACTUM_API_KEY') 
+    headers = {
+        'Authorization': f'Bearer {token}',
+        'Accept': 'application/json'
+    }
+
+    # print(f"Getting prompt AI from {url}")
+    try:
+        response = requests.get(url, headers=headers)
+        if response.status_code == 200:
+            print(f"Prompt AI received from {url}")
+
+            return response.json()
+        else:
+            print(f"Error getting prompt AI: {response.status_code}")
+            return None
+    except Exception as e:
+        print(f"Error getting prompt AI: {str(e)}")
+
+        return None
+
+
+
+
 def evaluate_candidate(input_data, test_mode=False):
     """Evaluate candidate using the Ollama API"""
+
     try:
         if isinstance(input_data, dict):
             if 'data' in input_data:
@@ -100,15 +145,22 @@ def evaluate_candidate(input_data, test_mode=False):
             raise
 
         try:
+
+            # prompts = get_prompt_ai()
+    
+
+            # modal_version = prompts['data']['version']
+
+            # print(f"Model AI version: {modal_version}")
+            # system_message = prompts['data']['promptModel']['default_system_message']
+
             current_dir = os.path.dirname(os.path.abspath(__file__))
             prompt_path = os.path.join(current_dir, 'prompt_ai.json')
-    
             with open(prompt_path, 'r') as file:
                 prompts = json.load(file)
-            # Get system message and simplified input using gas_ai functions
             system_message = prompts['default_system_message']
             simplified_input = simplify_input_data(processed_data)
-            
+    
 
 
             print(f"Sending request to Ollama model with screening_id: {screening_id}")
@@ -120,7 +172,8 @@ def evaluate_candidate(input_data, test_mode=False):
                     "model": "llama3-8b-instruct",
                     "prompt": f"""Kamu adalah {system_message['peran']['posisi']} dengan kualifikasi {system_message['peran']['kualifikasi']} dan cakupan {system_message['peran']['cakupan']} yang bertugas {system_message['peran']['tugas']}. 
 
-Berikan evaluasi dengan format JSON yang TEPAT seperti berikut:
+PENTING: Response HARUS berupa JSON object yang valid dan TEPAT mengikuti format berikut, tanpa teks tambahan sebelum atau sesudah JSON:
+
 {json.dumps(system_message['output_format'], indent=2, ensure_ascii=False)}
 
 Panduan Penilaian:
@@ -139,11 +192,10 @@ PENTING untuk penilaian candidates:
    - Nilai 1 berarti "Ya"
    - Nilai 0 berarti "Tidak"
 4. Format penilaian harus sesuai dengan output_format, tapi hanya mencakup kategori yang relevan dengan data kandidat
+5. Response HARUS berupa single JSON object yang valid, tanpa teks tambahan
 
 Input data untuk dievaluasi:
 {json.dumps(simplified_input, indent=2, ensure_ascii=False)}
-
-PENTING: Response HARUS dalam format JSON yang valid dan TEPAT sesuai format di atas.
 """,
                     "stream": True,
                     "options": OLLAMA_CONFIG["high_quality"]
@@ -228,30 +280,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
-# Tambahkan fungsi generate_prompt yang dibutuhkan main.py
-def generate_prompt(lowongan_id, data, is_simplified=True):
-    """Generate prompt for AI evaluation"""
-    system_message = load_prompt_ai(data)
-    if is_simplified:
-        data = simplify_input_data(data)
-    
-    return {
-        "model": "llama3-8b-instruct",
-        "prompt": f"""Kamu adalah {system_message['role']}. {system_message['task']}.
-
-Berikan evaluasi dengan format JSON yang TEPAT seperti berikut:
-{json.dumps(system_message['output_format'], indent=2, ensure_ascii=False)}
-
-Panduan Penilaian:
-{json.dumps(system_message['scoring_rules'], indent=2, ensure_ascii=False)}
-
-Rekomendasi Rules:
-{json.dumps(system_message['rekomendasi_rules'], indent=2, ensure_ascii=False)}
-
-Input data untuk dievaluasi:
-{json.dumps(data, indent=2, ensure_ascii=False)}
-
-PENTING: Response HARUS dalam format JSON yang valid dan TEPAT sesuai format di atas.
-"""
-    }
