@@ -55,9 +55,7 @@
                             "nilai": "1-5",
                             "uraian": "Penilaian komprehensif jawaban pertanyaan pernyataan mencakup:\n- Relevansi dengan posisi\n- Level sertifikasi\n- Reputasi lembaga sertifikasi\n- Masa berlaku sertifikat"
                         }
-                    ],
-                    "rekomendasi": "Disarankan/Dipertimbangkan/Tidak Disarankan",
-                    "ringkasan_penilaian": "Ringkasan komprehensif hasil penilaian seluruh aspek dan justifikasi rekomendasi. Contoh: Kandidat memiliki pengalaman yang sangat relevan dan keterampilan teknis yang kuat, tetapi membutuhkan peningkatan dalam kemampuan komunikasi. Rekomendasi: Dipertimbangkan dengan catatan untuk memberikan pelatihan komunikasi dalam 3 bulan pertama."
+                    ]
                 }
             ]
         }

@@ -518,6 +518,7 @@ if __name__ == "__main__":
         # Setup scheduler
         print("Setting up scheduler...")
         schedule.every(2).minutes.do(process_completed_screenings)
+        schedule.every(5).minutes.do(process_screening_worker)
         # schedule.every(5).minutes.do(fetch_api_data)
         
         # Jalankan scheduler di thread utama
@@ -525,6 +526,7 @@ if __name__ == "__main__":
         print("- Screening worker is running in background")
         print("- Pusher listener is active")
         print("- Scheduler will process completed screenings every minute")
+
         print("- Scheduler will fetch new data every 5 minutes")
         
         run_scheduler()
