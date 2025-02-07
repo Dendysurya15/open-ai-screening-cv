@@ -4,7 +4,7 @@ from datetime import datetime
 import requests
 
 # Path jika dari main.py
-from utils.gas_ai import load_prompt_ai, simplify_input_data, save_screening_data
+from utils.gas_ai import  simplify_input_data, save_screening_data
 
 # Path jika langsung ollama_ai.py
 # from gas_ai import load_prompt_ai, simplify_input_data, save_screening_data

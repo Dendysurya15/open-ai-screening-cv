@@ -311,7 +311,7 @@ def process_screening_worker():
                 process_pending_screenings(Testmode=False, test_save=False)
                 
                 # Testing/Operasi Pengiriman API
-                # process_completed_screenings()  # Test/jalankan pengiriman API untuk screening status=1
+                process_completed_screenings()  # Test/jalankan pengiriman API untuk screening status=1
                 
             else:
                 print("No pending screenings found")
@@ -518,7 +518,7 @@ if __name__ == "__main__":
         # Setup scheduler
         print("Setting up scheduler...")
         schedule.every(2).minutes.do(process_completed_screenings)
-        schedule.every(5).minutes.do(process_screening_worker)
+        # schedule.every(5).minutes.do(process_screening_worker)
         # schedule.every(5).minutes.do(fetch_api_data)
         
         # Jalankan scheduler di thread utama

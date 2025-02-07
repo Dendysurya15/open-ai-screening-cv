@@ -82,42 +82,6 @@ def format_screening_result(screening_data, screening_id):
         print(f"Error formatting screening result: {str(e)}")
         return None
 
-def test_format_screening():
-    """Test function to verify formatting"""
-    # Sample data matching your database structure
-    test_data = {
-        'screening_key_kategori': 'general,pernyataan,supporting,operasional_kebun',
-        'summary_nilai_pertanyaan_screening': json.dumps({
-            "general": {
-                "nilai": "2",
-                "uraian": "Pertanyaan skrining untuk kategori general",
-                "kategori": "jawaban_pertanyaan_skrining_general"
-            },
-            "pernyataan": {
-                "nilai": "5",
-                "uraian": "Pertanyaan skrining untuk kategori pernyataan",
-                "kategori": "jawaban_pertanyaan_skrining_pernyataan"
-            },
-            "supporting": {
-                "nilai": "2",
-                "uraian": "Pertanyaan skrining untuk kategori supporting",
-                "kategori": "jawaban_pertanyaan_skrining_supporting"
-            },
-            "operasional_kebun": {
-                "nilai": "0",
-                "uraian": "Tidak ada penilaian",
-                "kategori": "jawaban_pertanyaan_skrining_operasional_kebun"
-            }
-        }),
-        'nilai_pendidikan': 4,
-        'summary_pendidikan': "Kandidat memiliki latar belakang pendidikan yang baik",
-        'nilai_pengalaman': 3,
-        'sumarry_pengalaman': "Kandidat memiliki pengalaman yang cukup"
-    }
-    
-    result = format_screening_result(test_data, "123")
-    print("\nTest result:")
-    print(json.dumps(result, indent=2))
 
 def send_to_api(formatted_data):
     """Send formatted data to API endpoint"""
@@ -197,21 +161,3 @@ def process_completed_screenings():
             cursor.close()
             conn.close()
 
-if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description='Process and send screening results')
-    parser.add_argument('--test', action='store_true', help='Run in test mode')
-    parser.add_argument('--process', action='store_true', help='Process and send actual screenings')
-    
-    args = parser.parse_args()
-    
-    if args.test:
-        print("Running in test mode...")
-        test_format_screening()
-    elif args.process:
-        print("Processing actual screenings...")
-        process_completed_screenings()
-    else:
-        print("Please specify either --test or --process")
-        print("Example usage:")
-        print("  python send_data.py --test     # Run in test mode")
-        print("  python send_data.py --process  # Process actual screenings")
