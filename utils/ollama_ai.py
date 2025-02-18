@@ -93,7 +93,7 @@ def process_streaming_response(response):
 
 def get_prompt_ai():
     # url = "http://localhost:8000/api/prompt-ai"
-    url = "https://recruitment-ai.cbicareer.com/api/prompt-ai"
+    url = "https://cbicareer.com/api/prompt-ai"
     token = os.getenv('SACTUM_API_KEY') 
     headers = {
         'Authorization': f'Bearer {token}',
@@ -148,8 +148,9 @@ def evaluate_candidate(input_data, test_mode=False):
 
             # model ai by server
             prompts = get_prompt_ai()
+            # print(f"Model AI version: {prompts}")
             modal_version = prompts['data']['version']
-            print(f"Model AI version: {modal_version}")
+            # print(f"Model AI version: {modal_version}")
             system_message = prompts['data']['promptModel']['default_system_message']
             # model ai by local
             # current_dir = os.path.dirname(os.path.abspath(__file__))
@@ -175,6 +176,7 @@ def evaluate_candidate(input_data, test_mode=False):
             - Hanya nilai kategori yang tercantum di key_pertanyaan_screening.
             - Format kategori: "jawaban_pertanyaan_skrining_[nama_kategori]".
             - Contoh: Jika key_pertanyaan_screening="supporting,general,pernyataan", maka hanya nilai kategori tersebut.
+            - PENTING: Untuk kategori yang tidak ada datanya atau tidak relevan, berikan nilai "0" (bukan "-" atau nilai kosong).
             3. Abaikan tag HTML (misal: <p>, <strong>, dll.) dalam teks evaluasi.
             4. Untuk kategori "pernyataan":
             - Jawaban "1" berarti setuju dan "0" berarti tidak setuju, namun jangan gunakan nilai mentah tersebut sebagai skor evaluasi.
@@ -186,17 +188,19 @@ def evaluate_candidate(input_data, test_mode=False):
             Panduan Penilaian:
             {json.dumps(system_message['evaluasi'], indent=2, ensure_ascii=False)}
 
-            PERINGATAN: Jika ada kategori yang tidak ada di key_pertanyaan_screening, evaluasi dianggap GAGAL.
+            PERINGATAN: 
+            - Jika ada kategori yang tidak ada di key_pertanyaan_screening, evaluasi dianggap GAGAL.
+            - Semua nilai evaluasi HARUS berupa angka 0-5, TIDAK BOLEH menggunakan tanda "-" atau nilai kosong.
 
             Input data:
             {json.dumps(simplified_input, indent=2, ensure_ascii=False)}
             """,
-                    "stream": True,
-                    "options": OLLAMA_CONFIG["high_quality"]
-                },
-                stream=True,
-                timeout=300
-            )
+                "stream": True,
+                "options": OLLAMA_CONFIG["high_quality"]
+            },
+            stream=True,
+            timeout=300
+        )
 
 
 

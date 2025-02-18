@@ -85,7 +85,7 @@ def format_screening_result(screening_data, screening_id):
 
 def send_to_api(formatted_data):
     """Send formatted data to API endpoint"""
-    api_url = os.getenv('API_ENDPOINT', 'https://recruitment-ai.cbicareer.com/api/result-screening-ai')
+    api_url = os.getenv('API_ENDPOINT', 'https://cbicareer.com/api/result-screening-ai')
     # api_url = "http://localhost:8000/api/result-screening-ai"
 
     headers = {

@@ -111,7 +111,7 @@ def insert_to_cronjob(data):
 
 def get_screening_data():
     # URL endpoint
-    url = "https://recruitment-ai.cbicareer.com/api/screening-ai"
+    url = "https://cbicareer.com/api/screening-ai"
     # url = "http://localhost:8000/api/screening-ai"
 
     # Get token from environment variable
@@ -163,7 +163,7 @@ def handle_screening_event(data):
         user_id = data['data']['userId']
         
         # API configuration
-        url = "https://recruitment-ai.cbicareer.com/api/screening-ai-socket"
+        url = "https://cbicareer.com/api/screening-ai-socket"
         # url = "http://localhost:8000/api/screening-ai-socket"
         token = os.getenv('SACTUM_API_KEY')
 
@@ -311,7 +311,7 @@ def process_screening_worker():
                 process_pending_screenings(Testmode=False, test_save=False)
                 
                 # Testing/Operasi Pengiriman API
-                process_completed_screenings()  # Test/jalankan pengiriman API untuk screening status=1
+                process_completed_screenings() 
                 
             else:
                 print("No pending screenings found")
@@ -517,7 +517,7 @@ if __name__ == "__main__":
         
         # Setup scheduler
         print("Setting up scheduler...")
-        schedule.every(2).minutes.do(process_completed_screenings)
+        schedule.every(5).minutes.do(process_completed_screenings)
         # schedule.every(5).minutes.do(process_screening_worker)
         # schedule.every(5).minutes.do(fetch_api_data)
         
