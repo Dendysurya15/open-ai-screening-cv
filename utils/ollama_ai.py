@@ -149,7 +149,7 @@ def evaluate_candidate(input_data, test_mode=False):
             # model ai by server
             prompts = get_prompt_ai()
             # print(f"Model AI version: {prompts}")
-            modal_version = prompts['data']['version']
+            # modal_version = prompts['data']['version']
             # print(f"Model AI version: {modal_version}")
             system_message = prompts['data']['promptModel']['default_system_message']
             # model ai by local
@@ -168,6 +168,7 @@ def evaluate_candidate(input_data, test_mode=False):
             response = requests.post(
             "http://localhost:11434/api/generate",
             json={
+                # "model": "Llama-4-Scout",
                 "model": "llama3-8b-instruct",
                 "prompt": f"""Kamu adalah {system_message['peran']['posisi']} dengan kualifikasi {system_message['peran']['kualifikasi']}, cakupan {system_message['peran']['cakupan']}, dan bertugas {system_message['peran']['tugas']}.
             Instruksi:
@@ -263,7 +264,7 @@ def main():
             with open(args.o, 'w', encoding='utf-8') as f:
                 json.dump(result, f, indent=2, ensure_ascii=False)
             print(f"Successfully processed and saved results to {args.o}")
-            print(f"Using Ollama model: llama3-8b-instruct")
+            print(f"Using Ollama model: Llama-4-Scout")
         else:
             print("Processing failed - no result generated")
             sys.exit(1)

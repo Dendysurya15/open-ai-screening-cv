@@ -519,7 +519,7 @@ if __name__ == "__main__":
         print("Setting up scheduler...")
         schedule.every(5).minutes.do(process_completed_screenings)
         # schedule.every(5).minutes.do(process_screening_worker)
-        # schedule.every(5).minutes.do(fetch_api_data)
+        schedule.every(30).minutes.do(fetch_api_data)
         
         # Jalankan scheduler di thread utama
         print("\nApplication started successfully!")
