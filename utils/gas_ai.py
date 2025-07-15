@@ -90,7 +90,14 @@ def simplify_input_data(input_data):
     # Limit non-formal education entries
     pendidikan = kandidat.get("pendidikan", {})
     if pendidikan and pendidikan.get("non_formal"):
-        pendidikan["non_formal"] = pendidikan["non_formal"][:3]  # Take only first 3 entries
+        non_formal = pendidikan["non_formal"]
+        if isinstance(non_formal, dict):
+            # Take only first 3 entries from dictionary
+            limited_keys = list(non_formal.keys())[:3]
+            pendidikan["non_formal"] = {key: non_formal[key] for key in limited_keys}
+        elif isinstance(non_formal, list):
+            # If it's a list, take first 3 entries
+            pendidikan["non_formal"] = non_formal[:3]
         
     # Simplify work experience descriptions
     work_experience = pengalaman.get("pengalaman_pekerjaan", [])
