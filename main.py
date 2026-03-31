@@ -10,7 +10,7 @@ from pysher import Pusher as PysherClient
 import utils.ollama_ai as gas_ai
 from datetime import datetime
 from utils.send_data import process_completed_screenings
-from utils.database import connect_to_mysql 
+from utils.database import connect_to_mysql, init_database
 import requests
 # from process_result_ai import process_result_ai
 # Load environment variables
@@ -22,7 +22,7 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 # Now we can import from utils
 import utils.ollama_ai as gas_ai
 from utils.send_data import process_completed_screenings
-from utils.database import connect_to_mysql 
+from utils.database import connect_to_mysql, init_database
 
 def check_screening_exists(cursor, screening_id):
     query = "SELECT COUNT(*) FROM cronjob WHERE screening_id = %s"
@@ -398,7 +398,12 @@ def process_pending_screenings(Testmode=False, test_save=False):
                     continue
                 
                 # Mode pemrosesan normal
-                result = gas_ai.evaluate_candidate(screening_data, test_mode=test_save)
+                try:
+                    result = gas_ai.evaluate_candidate(screening_data, test_mode=test_save)
+                except Exception as e:
+                    print(f"Error evaluating candidate for screening {screening['screening_id']}: {str(e)}")
+                    # Continue to next screening instead of crashing
+                    continue
 
                 if result and 'candidates' in result and len(result['candidates']) > 0:
                     candidate = result['candidates'][0]
@@ -499,9 +504,15 @@ def run_scheduler():
 
 if __name__ == "__main__":
     try:
+        # Inisialisasi database (buat database & tabel jika belum ada)
+        print("Initializing database...")
+        if not init_database():
+            print("Failed to initialize database. Exiting...")
+            exit(1)
+
         # Inisialisasi awal
         print("Starting application...")
-        # fetch_api_data()  # Ambil screening baru dari API
+        fetch_api_data()  # Ambil screening baru dari API
         
         # Setup dan jalankan pusher di thread terpisah
         print("Setting up Pusher...")

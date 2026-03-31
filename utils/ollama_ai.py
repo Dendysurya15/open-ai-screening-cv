@@ -2,6 +2,8 @@ import json
 import os
 from datetime import datetime
 import requests
+import time
+import random
 
 # Path jika dari main.py
 from utils.gas_ai import  simplify_input_data, save_screening_data
@@ -14,8 +16,8 @@ OLLAMA_CONFIG = {
     "high_quality": {
         "temperature": 0.1,
         "top_p": 0.2,
-        "num_predict": 70000,
-        "num_ctx": 70000,
+        "num_predict": 35000,
+        "num_ctx": 35000,
         "num_gpu": 24,
         "num_thread": 7
     },
@@ -26,7 +28,23 @@ OLLAMA_CONFIG = {
         "num_ctx": 35000,
         "num_gpu": 12,
         "num_thread": 4
+    },
+    "conservative": {
+        "temperature": 0.1,
+        "top_p": 0.2,
+        "num_predict": 10000,
+        "num_ctx": 10000,
+        "num_gpu": 4,
+        "num_thread": 2
     }
+}
+
+# Timeout configuration
+TIMEOUT_CONFIG = {
+    "initial_timeout": 600,  # 10 minutes initial timeout
+    "max_timeout": 1800,     # 30 minutes maximum timeout
+    "retry_attempts": 3,     # Number of retry attempts
+    "backoff_factor": 2      # Exponential backoff factor
 }
 
 
@@ -90,6 +108,103 @@ def process_streaming_response(response):
     except Exception as e:
         print(f"\nError in process_streaming_response: {str(e)}")
         return None
+
+def check_ollama_health():
+    """Check if Ollama service is running and responsive"""
+    try:
+        response = requests.get("http://localhost:11434/api/tags", timeout=10)
+        return response.status_code == 200
+    except requests.exceptions.RequestException:
+        return False
+
+def make_ollama_request_with_retry(prompt, model="llama3-8b-instruct", max_retries=3):
+    """Make request to Ollama API with retry logic and adaptive timeout"""
+    
+    # Check Ollama health first
+    if not check_ollama_health():
+        raise Exception("Ollama service is not running or not accessible at http://localhost:11434")
+    
+    timeout = TIMEOUT_CONFIG["initial_timeout"]
+    
+    for attempt in range(max_retries):
+        try:
+            print(f"Attempt {attempt + 1}/{max_retries} - Timeout: {timeout}s")
+            
+            response = requests.post(
+                "http://localhost:11434/api/generate",
+                json={
+                    "model": model,
+                    "prompt": prompt,
+                    "stream": True,
+                    "options": OLLAMA_CONFIG["conservative"] if attempt > 1 else (OLLAMA_CONFIG["fast"] if attempt > 0 else OLLAMA_CONFIG["high_quality"])
+                },
+                stream=True,
+                timeout=timeout
+            )
+            
+            if response.status_code == 200:
+                return response
+            else:
+                print(f"Ollama API returned status code {response.status_code}: {response.text}")
+                
+                # Check for specific error types
+                if response.status_code == 500 and "llama runner process has terminated" in response.text:
+                    print("❌ Ollama runner process crashed - this usually indicates:")
+                    print("   1. Insufficient system memory (RAM)")
+                    print("   2. Model is too large for available resources")
+                    print("   3. GPU memory issues")
+                    print("   4. System resource exhaustion")
+                    
+                    if attempt < max_retries - 1:
+                        wait_time = (TIMEOUT_CONFIG["backoff_factor"] ** attempt) * 60  # Wait longer for crashes
+                        print(f"⏳ Waiting {wait_time} seconds for system to recover...")
+                        time.sleep(wait_time)
+                        print("🔄 Retrying with reduced resource requirements...")
+                    else:
+                        raise Exception("Ollama runner process keeps crashing. Please check system resources.")
+                        
+                elif response.status_code == 400:
+                    print("❌ Bad request - check model name and parameters")
+                    raise Exception(f"Bad request: {response.text}")
+                    
+                else:
+                    if attempt < max_retries - 1:
+                        wait_time = (TIMEOUT_CONFIG["backoff_factor"] ** attempt) * 30
+                        print(f"Retrying in {wait_time} seconds...")
+                        time.sleep(wait_time)
+                    else:
+                        raise Exception(f"Ollama API error: {response.status_code} - {response.text}")
+                
+        except requests.exceptions.Timeout:
+            print(f"Timeout on attempt {attempt + 1} (timeout: {timeout}s)")
+            if attempt < max_retries - 1:
+                # Increase timeout for next attempt
+                timeout = min(timeout * 2, TIMEOUT_CONFIG["max_timeout"])
+                wait_time = (TIMEOUT_CONFIG["backoff_factor"] ** attempt) * 30
+                print(f"Retrying with increased timeout ({timeout}s) in {wait_time} seconds...")
+                time.sleep(wait_time)
+            else:
+                raise requests.exceptions.Timeout(f"Request timed out after {max_retries} attempts")
+                
+        except requests.exceptions.ConnectionError as e:
+            print(f"Connection error on attempt {attempt + 1}: {str(e)}")
+            if attempt < max_retries - 1:
+                wait_time = (TIMEOUT_CONFIG["backoff_factor"] ** attempt) * 30
+                print(f"Retrying in {wait_time} seconds...")
+                time.sleep(wait_time)
+            else:
+                raise Exception(f"Failed to connect to Ollama after {max_retries} attempts: {str(e)}")
+                
+        except Exception as e:
+            print(f"Unexpected error on attempt {attempt + 1}: {str(e)}")
+            if attempt < max_retries - 1:
+                wait_time = (TIMEOUT_CONFIG["backoff_factor"] ** attempt) * 30
+                print(f"Retrying in {wait_time} seconds...")
+                time.sleep(wait_time)
+            else:
+                raise e
+    
+    raise Exception(f"Failed to get response from Ollama after {max_retries} attempts")
 
 def get_prompt_ai():
     # url = "http://localhost:8000/api/prompt-ai"
@@ -164,44 +279,36 @@ def evaluate_candidate(input_data, test_mode=False):
 
             print(f"Sending request to Ollama model with screening_id: {screening_id}")
 
-            # Make request to Ollama API
-            response = requests.post(
-            "http://localhost:11434/api/generate",
-            json={
-                # "model": "Llama-4-Scout",
-                "model": "llama3-8b-instruct",
-                "prompt": f"""Kamu adalah {system_message['peran']['posisi']} dengan kualifikasi {system_message['peran']['kualifikasi']}, cakupan {system_message['peran']['cakupan']}, dan bertugas {system_message['peran']['tugas']}.
-            Instruksi:
-            1. Jawab dalam bahasa Indonesia.
-            2. Evaluasi kandidat sesuai panduan dan format output berikut:
-            - Hanya nilai kategori yang tercantum di key_pertanyaan_screening.
-            - Format kategori: "jawaban_pertanyaan_skrining_[nama_kategori]".
-            - Contoh: Jika key_pertanyaan_screening="supporting,general,pernyataan", maka hanya nilai kategori tersebut.
-            - PENTING: Untuk kategori yang tidak ada datanya atau tidak relevan, berikan nilai "0" (bukan "-" atau nilai kosong).
-            3. Abaikan tag HTML (misal: <p>, <strong>, dll.) dalam teks evaluasi.
-            4. Untuk kategori "pernyataan":
-            - Jawaban "1" berarti setuju dan "0" berarti tidak setuju, namun jangan gunakan nilai mentah tersebut sebagai skor evaluasi.
-            - Berikan nilai evaluasi dalam skala 1-5 berdasarkan kesesuaian jawaban dengan requirement posisi.
-            - Contoh: Jika requirement mengharuskan kesediaan tinggi dan kandidat menjawab "1", berikan skor evaluasi 4 atau 5; jika kandidat menjawab "0", berikan skor rendah (misalnya 1 atau 2).
-            5. Response HARUS berupa JSON valid sesuai format di bawah, tanpa teks tambahan:
-            {json.dumps(system_message['output_format'], indent=2, ensure_ascii=False)}
+            # Prepare the prompt
+            prompt_text = f"""Kamu adalah {system_message['peran']['posisi']} dengan kualifikasi {system_message['peran']['kualifikasi']}, cakupan {system_message['peran']['cakupan']}, dan bertugas {system_message['peran']['tugas']}.
+Instruksi:
+1. Jawab dalam bahasa Indonesia.
+2. Evaluasi kandidat sesuai panduan dan format output berikut:
+- Hanya nilai kategori yang tercantum di key_pertanyaan_screening.
+- Format kategori: "jawaban_pertanyaan_skrining_[nama_kategori]".
+- Contoh: Jika key_pertanyaan_screening="supporting,general,pernyataan", maka hanya nilai kategori tersebut.
+- PENTING: Untuk kategori yang tidak ada datanya atau tidak relevan, berikan nilai "0" (bukan "-" atau nilai kosong).
+3. Abaikan tag HTML (misal: <p>, <strong>, dll.) dalam teks evaluasi.
+4. Untuk kategori "pernyataan":
+- Jawaban "1" berarti setuju dan "0" berarti tidak setuju, namun jangan gunakan nilai mentah tersebut sebagai skor evaluasi.
+- Berikan nilai evaluasi dalam skala 1-5 berdasarkan kesesuaian jawaban dengan requirement posisi.
+- Contoh: Jika requirement mengharuskan kesediaan tinggi dan kandidat menjawab "1", berikan skor evaluasi 4 atau 5; jika kandidat menjawab "0", berikan skor rendah (misalnya 1 atau 2).
+5. Response HARUS berupa JSON valid sesuai format di bawah, tanpa teks tambahan:
+{json.dumps(system_message['output_format'], indent=2, ensure_ascii=False)}
 
-            Panduan Penilaian:
-            {json.dumps(system_message['evaluasi'], indent=2, ensure_ascii=False)}
+Panduan Penilaian:
+{json.dumps(system_message['evaluasi'], indent=2, ensure_ascii=False)}
 
-            PERINGATAN: 
-            - Jika ada kategori yang tidak ada di key_pertanyaan_screening, evaluasi dianggap GAGAL.
-            - Semua nilai evaluasi HARUS berupa angka 0-5, TIDAK BOLEH menggunakan tanda "-" atau nilai kosong.
+PERINGATAN: 
+- Jika ada kategori yang tidak ada di key_pertanyaan_screening, evaluasi dianggap GAGAL.
+- Semua nilai evaluasi HARUS berupa angka 0-5, TIDAK BOLEH menggunakan tanda "-" atau nilai kosong.
 
-            Input data:
-            {json.dumps(simplified_input, indent=2, ensure_ascii=False)}
-            """,
-                "stream": True,
-                "options": OLLAMA_CONFIG["high_quality"]
-            },
-            stream=True,
-            timeout=300
-        )
+Input data:
+{json.dumps(simplified_input, indent=2, ensure_ascii=False)}
+"""
+
+            # Make request to Ollama API with retry logic
+            response = make_ollama_request_with_retry(prompt_text)
 
 
 
@@ -223,6 +330,20 @@ def evaluate_candidate(input_data, test_mode=False):
             else:
                 raise ValueError(f"Invalid response format from AI. Got: {type(result)}")
 
+        except requests.exceptions.Timeout as e:
+            print(f"\nTimeout error connecting to Ollama API: {str(e)}")
+            print("This may be due to:")
+            print("1. The model is taking too long to process the request")
+            print("2. Ollama service is overloaded or not responding")
+            print("3. Network connectivity issues")
+            print("Please check if Ollama is running and accessible at http://localhost:11434")
+            raise
+            
+        except requests.exceptions.ConnectionError as e:
+            print(f"\nConnection error to Ollama API: {str(e)}")
+            print("Please check if Ollama is running and accessible at http://localhost:11434")
+            raise
+            
         except requests.exceptions.RequestException as e:
             print(f"\nError connecting to Ollama API: {str(e)}")
             print("Please check if Ollama is running and accessible at http://localhost:11434")
