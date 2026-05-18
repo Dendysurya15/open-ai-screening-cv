@@ -2,4 +2,4 @@ mysql-connector-python
 python-dotenv
 requests
 schedule
-pysher 
+pysher

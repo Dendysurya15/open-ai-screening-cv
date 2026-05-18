@@ -263,16 +263,17 @@ def evaluate_candidate(input_data, test_mode=False):
 
             # model ai by server
             prompts = get_prompt_ai()
-            # print(f"Model AI version: {prompts}")
-            # modal_version = prompts['data']['version']
-            # print(f"Model AI version: {modal_version}")
-            system_message = prompts['data']['promptModel']['default_system_message']
-            # model ai by local
-            # current_dir = os.path.dirname(os.path.abspath(__file__))
-            # prompt_path = os.path.join(current_dir, 'prompt_ai.json')
-            # with open(prompt_path, 'r') as file:
-            #     prompts = json.load(file)
-            # system_message = prompts['default_system_message']
+            if prompts and prompts.get('data') and prompts['data'].get('promptModel'):
+                system_message = prompts['data']['promptModel']['default_system_message']
+                print("Using prompt from server")
+            else:
+                # Fallback to local prompt if server unavailable
+                print("Server prompt unavailable, using local fallback prompt")
+                current_dir = os.path.dirname(os.path.abspath(__file__))
+                prompt_path = os.path.join(current_dir, 'prompt_ai.json')
+                with open(prompt_path, 'r') as file:
+                    local_prompts = json.load(file)
+                system_message = local_prompts['default_system_message']
             simplified_input = simplify_input_data(processed_data)
     
 
