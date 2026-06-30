@@ -4,18 +4,39 @@ import schedule
 from threading import Thread
 from services.database import connect_to_mysql
 from services.ai_evaluator import evaluate_candidate
-from services.api_client import fetch_screening_data, send_screening_result
-from services.pusher_listener import insert_to_cronjob, setup_pusher
+from services.api_client import (
+    fetch_screening_data,
+    send_screening_result,
+    report_screening_failed,
+)
+from services.screening_intake import insert_to_cronjob, run_webhook_server
 from utils.data_processor import format_screening_result
 from config.settings import (
     SCHEDULER_SEND_INTERVAL,
-    SCHEDULER_FETCH_INTERVAL,
     WORKER_SLEEP_INTERVAL,
 )
 
 
+def mark_screening_failed(cursor, conn, screening, error):
+    """Lapor ke web (status Gagal) + tandai cronjob failed (status 9) biar tak diulang."""
+    sid = screening["screening_id"]
+    print(f"  ✗ Screening {sid} GAGAL: {error}")
+    report_screening_failed(sid, error)
+    try:
+        cursor.execute("UPDATE cronjob SET status = 9 WHERE id = %s", (screening["id"],))
+        conn.commit()
+    except Exception as e:
+        print(f"  Gagal update cronjob failed: {e}")
+
+
 def fetch_api_data():
-    """Fetch new screening data from API and insert into database."""
+    """Fetch new screening data from API and insert into database.
+
+    ponytail: NOT auto-run. The bulk /api/screening-ai endpoint marks ALL
+    pending candidates as 'proses' on the web as a side effect, so calling it
+    on every start nuked everyone to 'proses'. Push (webhook) is the source now.
+    Call manually only if you need a backstop sweep for missed webhooks.
+    """
     print("Fetching data from API...")
     result = fetch_screening_data()
     if isinstance(result, dict):
@@ -97,9 +118,7 @@ def process_pending_screenings(test_mode=False, test_save=False):
                 try:
                     result = evaluate_candidate(screening_data, test_mode=test_save)
                 except Exception as e:
-                    print(
-                        f"Error evaluating screening {screening['screening_id']}: {e}"
-                    )
+                    mark_screening_failed(cursor, conn, screening, f"AI error: {e}")
                     continue
 
                 if result and "candidates" in result and len(result["candidates"]) > 0:
@@ -177,13 +196,19 @@ def process_pending_screenings(test_mode=False, test_save=False):
                     print(
                         f"Successfully processed screening {screening['screening_id']}"
                     )
+                    print("  --- Hasil AI ---")
+                    for kat in ("pendidikan", "pengalaman", "sertifikat_keahlian", "keterampilan"):
+                        print(f"  {kat:20s}: {penilaian[kat]['nilai']:>3} | {penilaian[kat]['uraian']}")
+                    for kat, val in screening_summary.items():
+                        print(f"  [skrining] {kat:12s}: {val['nilai']:>3} | {val['uraian']}")
+                    print("  ----------------")
                 else:
-                    print(
-                        f"Failed to process screening {screening['screening_id']}: Invalid result"
+                    mark_screening_failed(
+                        cursor, conn, screening, "AI mengembalikan hasil tidak valid"
                     )
 
             except Exception as e:
-                print(f"Error processing screening {screening['screening_id']}: {e}")
+                mark_screening_failed(cursor, conn, screening, f"Processing error: {e}")
                 continue
 
     except Exception as e:
@@ -242,12 +267,11 @@ def start_application():
         exit(1)
 
     print("Starting application...")
-    fetch_api_data()
 
-    # Pusher thread
-    print("Setting up Pusher...")
-    pusher_thread = Thread(target=setup_pusher, name="PusherThread", daemon=True)
-    pusher_thread.start()
+    # Webhook server thread (Laravel pushes new/delete screening here)
+    print("Setting up webhook server...")
+    webhook_thread = Thread(target=run_webhook_server, name="WebhookServer", daemon=True)
+    webhook_thread.start()
 
     # Screening worker thread
     print("Setting up screening worker...")
@@ -257,11 +281,10 @@ def start_application():
     # Scheduler setup (worker already runs in its own thread, don't duplicate)
     print("Setting up scheduler...")
     schedule.every(SCHEDULER_SEND_INTERVAL).minutes.do(process_completed_screenings)
-    schedule.every(SCHEDULER_FETCH_INTERVAL).minutes.do(fetch_api_data)
 
     print("\nApplication started successfully!")
     print("- Screening worker is running in background")
-    print("- Pusher listener is active")
-    print(f"- Scheduler: send every {SCHEDULER_SEND_INTERVAL}min, fetch every {SCHEDULER_FETCH_INTERVAL}min")
+    print("- Webhook server is active (push-only)")
+    print(f"- Scheduler: resend results every {SCHEDULER_SEND_INTERVAL}min")
 
     run_scheduler()

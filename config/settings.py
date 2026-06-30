@@ -7,11 +7,10 @@ load_dotenv()
 API_BASE_URL = os.getenv("API_BASE_URL", "https://cbicareer.com")
 SANCTUM_API_KEY = os.getenv("SACTUM_API_KEY", "")
 
-# Pusher Configuration
-PUSHER_APP_ID = os.getenv("PUSHER_APP_ID", "")
-PUSHER_KEY = os.getenv("PUSHER_KEY", "")
-PUSHER_SECRET = os.getenv("PUSHER_SECRET", "")
-PUSHER_CLUSTER = os.getenv("PUSHER_CLUSTER", "ap1")
+# Webhook server — Laravel pushes new/delete screening here (replaces Pusher)
+WEBHOOK_HOST = os.getenv("WEBHOOK_HOST", "0.0.0.0")
+WEBHOOK_PORT = int(os.getenv("WEBHOOK_PORT", "8500"))
+WEBHOOK_TOKEN = os.getenv("WEBHOOK_TOKEN", "")
 
 # Ollama Configuration
 OLLAMA_URL = os.getenv("OLLAMA_URL", "http://localhost:11434")

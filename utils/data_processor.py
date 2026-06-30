@@ -3,6 +3,39 @@ import os
 from datetime import datetime
 
 
+def _label_answers(input_data, kandidat):
+    """Gabung teks pertanyaan + jawaban per kategori.
+
+    Pertanyaan ada di lowongan_pekerjaan/jabatan/pertanyaan_skrining/{kat}/{no},
+    jawaban di kandidat/jawaban_pertanyaan_skrining/{no} — terpisah & cuma
+    nyambung lewat nomor. Model kecil gagal nyambungin sendiri, jadi kita
+    zip jadi {teks_pertanyaan: jawaban} biar input self-contained.
+    """
+    questions = (
+        input_data.get("lowongan_pekerjaan", {})
+        .get("jabatan", {})
+        .get("pertanyaan_skrining", {})
+    )
+    answers = kandidat.get("jawaban_pertanyaan_skrining", {})
+    if not questions:
+        return answers  # ponytail: tak ada peta pertanyaan, kirim apa adanya
+
+    labeled = {}
+    for kategori, qmap in questions.items():
+        if not isinstance(qmap, dict):
+            continue
+        pairs = {}
+        for no, teks in qmap.items():
+            ans = answers.get(no)
+            if isinstance(ans, dict):  # bentuk {"option": "3", "subInputs": [...]}
+                ans = ans.get("option", "") or json.dumps(ans, ensure_ascii=False)
+            if ans not in (None, "", "_"):
+                pairs[teks] = ans
+        if pairs:
+            labeled[kategori] = pairs
+    return labeled
+
+
 def simplify_input_data(input_data):
     """Simplify candidate data to reduce token usage for AI evaluation."""
     kandidat = input_data["kandidat"][0]
@@ -40,9 +73,7 @@ def simplify_input_data(input_data):
                         "tanggung_jawab_pada_pekerjaan_terakhir", ""
                     )[:200],
                 },
-                "jawaban_pertanyaan_skrining": kandidat.get(
-                    "jawaban_pertanyaan_skrining", {}
-                ),
+                "jawaban_pertanyaan_skrining": _label_answers(input_data, kandidat),
             }
         ],
     }

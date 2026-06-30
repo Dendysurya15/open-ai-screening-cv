@@ -52,6 +52,27 @@ def fetch_screening_by_socket(job_id, user_id):
         return None
 
 
+def report_screening_failed(screening_id, error):
+    """Report a failed screening to the API so it can be marked 'Gagal'."""
+    url = f"{API_BASE_URL}/api/screening-ai-failed"
+    headers = {
+        "Authorization": get_api_headers()["Authorization"],
+        "Accept": "application/json",
+        "Content-Type": "application/json",
+    }
+    try:
+        response = requests.post(
+            url,
+            json={"screening_id": screening_id, "error": str(error)[:500]},
+            headers=headers,
+            timeout=30,
+        )
+        return response.status_code == 200
+    except requests.exceptions.RequestException as e:
+        print(f"Failed to report screening failure: {e}")
+        return False
+
+
 def send_screening_result(formatted_data):
     """Send formatted screening result to the API."""
     url = os.getenv("API_ENDPOINT", f"{API_BASE_URL}/api/result-screening-ai")

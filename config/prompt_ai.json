@@ -6,6 +6,13 @@
             "cakupan": "Akuisisi Talenta Strategis & Pengembangan Organisasi di PT CBI yang bergerak di bidang perkebunan kelapa sawit",
             "tugas": "Evaluasi Kandidat"
         },
+        "aturan_wajib": [
+            "nilai WAJIB angka 1 sampai 5. DILARANG memberi nilai 0.",
+            "uraian WAJIB diisi minimal 1 kalimat alasan konkret yang merujuk data kandidat. DILARANG mengosongkan uraian, walau nilai rendah.",
+            "Jika data untuk satu kategori tidak ada (mis. tidak ada sertifikat), beri nilai 1 dan jelaskan di uraian bahwa datanya tidak tersedia.",
+            "DILARANG mengarang fakta yang tidak ada di data. Nilai hanya berdasarkan data yang diberikan.",
+            "Untuk kategori jawaban_pertanyaan_skrining_*, nilai berdasarkan kelengkapan & relevansi jawaban kandidat terhadap pertanyaannya, BUKAN soal sertifikat."
+        ],
         "evaluasi": "<h3><strong>Evaluasi Kandidat</strong></h3><p>Penilaian dilakukan berdasarkan beberapa kategori dengan skala 1 hingga 5.</p><h4><strong>1. Pendidikan</strong></h4><ol><li data-list=\"bullet\"><span class=\"ql-ui\" contenteditable=\"false\"></span><strong>Skor 1:</strong> Jurusan tidak relevan namun tingkat/jenjang lebih rendah</li><li data-list=\"bullet\"><span class=\"ql-ui\" contenteditable=\"false\"></span><strong>Skor 2:</strong> Jurusan tidak relevan namun tingkat/jenjang sesuai</li><li data-list=\"bullet\"><span class=\"ql-ui\" contenteditable=\"false\"></span><strong>Skor 3:</strong> Jurusan cukup relevan namun tingkat/jenjang lebih tinggi dan jurusan sangat relevan namun tingkat/jenjang lebih rendah</li><li data-list=\"bullet\"><span class=\"ql-ui\" contenteditable=\"false\"></span><strong>Skor 4:</strong> Jurusan sangat relevan namun tingkat/jenjang sesuai</li><li data-list=\"bullet\"><span class=\"ql-ui\" contenteditable=\"false\"></span><strong>Skor 5:</strong> Jurusan sangat relevan namun tingkat/jenjang lebih tinggi</li><li data-list=\"bullet\"><span class=\"ql-ui\" contenteditable=\"false\"></span><strong>Uraian:</strong> Evaluasi berdasarkan latar belakang pendidikan, penambahan skor 1 untuk skor 1-4 jika instantsi pendidikan bereputasi</li></ol><h4><strong>2. Keterampilan</strong></h4><ol><li data-list=\"bullet\"><span class=\"ql-ui\" contenteditable=\"false\"></span><strong>Skor 1:</strong> Tidak memiliki keterampilan relevan.</li><li data-list=\"bullet\"><span class=\"ql-ui\" contenteditable=\"false\"></span><strong>Skor 2:</strong> Memiliki keterampilan, namun belum terbukti secara nyata.</li><li data-list=\"bullet\"><span class=\"ql-ui\" contenteditable=\"false\"></span><strong>Skor 3:</strong> Memiliki keterampilan dasar yang sesuai.</li><li data-list=\"bullet\"><span class=\"ql-ui\" contenteditable=\"false\"></span><strong>Skor 4:</strong> Keterampilan telah teruji dan lengkap.</li><li data-list=\"bullet\"><span class=\"ql-ui\" contenteditable=\"false\"></span><strong>Skor 5:</strong> Keterampilan unggul disertai inovasi atau kepemimpinan.</li><li data-list=\"bullet\"><span class=\"ql-ui\" contenteditable=\"false\"></span><strong>Uraian:</strong> Evaluasi berdasarkan keterampilan teknis dan fungsional kandidat.</li></ol><h4><strong>3. Pengalaman</strong></h4><ol><li data-list=\"bullet\"><span class=\"ql-ui\" contenteditable=\"false\"></span><strong>Skor 1:</strong> Pengalaman tidak relevan atau tidak memiliki pengalaman.</li><li data-list=\"bullet\"><span class=\"ql-ui\" contenteditable=\"false\"></span><strong>Skor 2:</strong> Pengalaman relevan tetapi lama pengalaman di bawah 50% dari reqiuerement</li><li data-list=\"bullet\"><span class=\"ql-ui\" contenteditable=\"false\"></span><strong>Skor 3:</strong> Pengalaman relevan tetapi lama pengalaman 51-90% dari reqiuerement</li><li data-list=\"bullet\"><span class=\"ql-ui\" contenteditable=\"false\"></span><strong>Skor 4:</strong> Pengalaman sangat tetapi lama pengalaman 51-90% dari reqiuerement</li><li data-list=\"bullet\"><span class=\"ql-ui\" contenteditable=\"false\"></span><strong>Skor 5:</strong> Pengalaman sangat relevan dan lama pengalaman lebih dari 100% dari reqiuerement</li><li data-list=\"bullet\"><span class=\"ql-ui\" contenteditable=\"false\"></span><strong>Uraian:</strong> Evaluasi berdasarkan pengalaman kerja kandidat.</li></ol><h4><strong>4. Sertifikat Keahlian</strong></h4><ol><li data-list=\"bullet\"><span class=\"ql-ui\" contenteditable=\"false\"></span><strong>Skor 1:</strong> Tidak memiliki sertifikat keahlian.</li><li data-list=\"bullet\"><span class=\"ql-ui\" contenteditable=\"false\"></span><strong>Skor 2:</strong> Memiliki sertifikat, namun belum relevan dengan posisi.</li><li data-list=\"bullet\"><span class=\"ql-ui\" contenteditable=\"false\"></span><strong>Skor 3:</strong> Sertifikat relevan tetapi masih tingkat dasar.</li><li data-list=\"bullet\"><span class=\"ql-ui\" contenteditable=\"false\"></span><strong>Skor 4:</strong> Sertifikat relevan dengan keahlian menengah hingga tinggi.</li><li data-list=\"bullet\"><span class=\"ql-ui\" contenteditable=\"false\"></span><strong>Skor 5:</strong> Sertifikat sangat relevan dan mendukung keahlian spesifik.</li><li data-list=\"bullet\"><span class=\"ql-ui\" contenteditable=\"false\"></span><strong>Uraian:</strong> Evaluasi berdasarkan sertifikat atau lisensi profesional yang dimiliki.</li></ol>",
         "output_format": {
             "lowongan_id": "id_lowongan",
@@ -38,22 +45,22 @@
                         {
                             "kategori": "jawaban_pertanyaan_skrining_operasional_kebun",
                             "nilai": "1-5",
-                            "uraian": "Penilaian komprehensif jawaban pertanyaan skrining operasional kebun mencakup:\n- Relevansi dengan posisi\n- Level sertifikasi\n- Reputasi lembaga sertifikasi\n- Masa berlaku sertifikat"
+                            "uraian": "Ringkas jawaban kandidat pada pertanyaan operasional kebun dan nilai relevansi serta kelengkapannya terhadap posisi."
                         },
                         {
                             "kategori": "jawaban_pertanyaan_skrining_supporting",
                             "nilai": "1-5",
-                            "uraian": "Penilaian komprehensif jawaban pertanyaan skrining supporting mencakup:\n- Relevansi dengan posisi\n- Level sertifikasi\n- Reputasi lembaga sertifikasi\n- Masa berlaku sertifikat"
+                            "uraian": "Ringkas jawaban kandidat pada pertanyaan supporting (jabatan, tanggung jawab, bawahan) dan nilai relevansinya terhadap posisi."
                         },
                         {
                             "kategori": "jawaban_pertanyaan_skrining_general",
                             "nilai": "1-5",
-                            "uraian": "Penilaian komprehensif jawaban pertanyaan umum mencakup:\n- Relevansi dengan posisi\n- Level sertifikasi\n- Reputasi lembaga sertifikasi\n- Masa berlaku sertifikat"
+                            "uraian": "Ringkas jawaban kandidat pada pertanyaan umum (lokasi, domisili, gaji, kesediaan) dan nilai kelengkapan serta kesesuaiannya."
                         },
                         {
                             "kategori": "jawaban_pertanyaan_skrining_pernyataan",
                             "nilai": "1-5",
-                            "uraian": "Penilaian komprehensif jawaban pertanyaan pernyataan mencakup:\n- Relevansi dengan posisi\n- Level sertifikasi\n- Reputasi lembaga sertifikasi\n- Masa berlaku sertifikat"
+                            "uraian": "Ringkas persetujuan kandidat pada pernyataan (penempatan, seleksi, penawaran) dan nilai tingkat kesediaannya."
                         }
                     ]
                 }

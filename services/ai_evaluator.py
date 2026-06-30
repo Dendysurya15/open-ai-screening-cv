@@ -109,6 +109,11 @@ def make_ollama_request(prompt, max_retries=None):
 def build_prompt(system_message, simplified_input):
     """Build the evaluation prompt from system message and input data."""
     output_format_str = json.dumps(system_message['output_format'], indent=2, ensure_ascii=False)
+    aturan = system_message.get('aturan_wajib', [])
+    aturan_wajib_str = (
+        "\nATURAN WAJIB (utama, kalahkan instruksi lain bila bentrok):\n"
+        + "\n".join(f"- {a}" for a in aturan)
+    ) if aturan else ""
     return f"""Kamu adalah {system_message['peran']['posisi']} dengan kualifikasi {system_message['peran']['kualifikasi']}, cakupan {system_message['peran']['cakupan']}, dan bertugas {system_message['peran']['tugas']}.
 
 Panduan Penilaian:
@@ -117,14 +122,17 @@ Panduan Penilaian:
 Instruksi:
 1. Jawab dalam bahasa Indonesia.
 2. Evaluasi kandidat sesuai panduan penilaian di atas.
-3. Hanya nilai kategori yang tercantum di key_pertanyaan_screening.
-   - Format kategori: "jawaban_pertanyaan_skrining_[nama_kategori]".
-   - Contoh: Jika key_pertanyaan_screening="supporting,general,pernyataan", maka hanya nilai kategori tersebut.
-   - Untuk kategori yang tidak ada datanya atau tidak relevan, berikan nilai "0".
-4. Abaikan tag HTML (misal: <p>, <strong>, dll.) dalam teks evaluasi.
-5. Untuk kategori "pernyataan":
+3. Kategori INTI (pendidikan, pengalaman, sertifikat_keahlian, keterampilan) WAJIB selalu dinilai 1-5.
+   - DILARANG memberi nilai 0 pada kategori inti.
+   - Jika data kategori inti tidak ada (mis. sertifikat null), beri nilai 1 dan jelaskan di uraian bahwa datanya tidak tersedia.
+   - uraian kategori inti WAJIB diisi alasan konkret merujuk data. DILARANG kosong.
+4. Kategori skrining ("jawaban_pertanyaan_skrining_[nama]"): hanya yang tercantum di key_pertanyaan_screening yang dinilai 1-5.
+   - Yang TIDAK tercantum di key_pertanyaan_screening: beri nilai "0".
+5. Abaikan tag HTML (misal: <p>, <strong>, dll.) dalam teks evaluasi.
+6. Untuk kategori "pernyataan":
    - Jawaban "1" berarti setuju dan "0" berarti tidak setuju.
    - Berikan nilai evaluasi dalam skala 1-5 berdasarkan kesesuaian dengan requirement posisi.
+{aturan_wajib_str}
 
 Input data:
 {json.dumps(simplified_input, indent=2, ensure_ascii=False)}
@@ -138,8 +146,8 @@ PERINGATAN KRITIS:
 - Output HANYA JSON di atas. Mulai dengan karakter `{{` dan akhiri dengan `}}`.
 - DILARANG menambahkan key tambahan seperti "response_type", "encoding", "root_fields", "scoring", atau key apapun yang tidak ada di format di atas.
 - DILARANG menambahkan teks apapun sebelum atau sesudah JSON (tidak ada penjelasan, tidak ada markdown ```json).
-- Semua nilai "nilai" HARUS berupa string angka 0-5. DILARANG menggunakan tanda "-" atau nilai kosong.
-- Jika ada kategori yang tidak ada di key_pertanyaan_screening, tetap sertakan dengan nilai "0".
+- Semua nilai "nilai" HARUS berupa string angka. Kategori inti 1-5 (jangan 0). Kategori skrining 0 hanya jika tak ada di key_pertanyaan_screening.
+- DILARANG nilai kosong, tanda "-", atau uraian kosong pada kategori inti.
 """
 
 
